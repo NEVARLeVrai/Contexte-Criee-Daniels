@@ -1,0 +1,879 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Kanit', sans-serif;
+
+}
+
+
+
+#navbar {
+    position: fixed;
+    background-color: #206e40;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%; /* Ajuster la largeur */
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    border-radius: 50px;
+    box-shadow: 0 0 15px #105a2f;
+    z-index: 2;
+    display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+    justify-content: space-around; /* Espacer les éléments horizontalement */
+    align-items: center; /* Centrer verticalement les éléments */
+    transition: 1s;
+}
+
+#navbar img {
+    width: 100px;
+    height: 60px;
+    margin-top: 5px;
+    transition: 1s;
+}
+
+
+.nav-link {
+    font-size: medium;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    padding: 20px 20px; /* Ajuster les marges pour plus d'espace autour du texte */
+    text-decoration: none;
+    transition: 1s;
+    border-radius: 10px;
+    background-color: #206e40;
+    border: none;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.nav-link:hover {
+
+
+    background-color: #ffffff;
+    border: 2px solid #419b69;
+    box-shadow:0 0 15px #0cc559;
+    color: rgb(17, 16, 16);
+    text-align: center;
+    font-size: 25px;
+    transition: 1s;
+}
+
+
+
+.accueil {
+
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+    
+
+}
+
+
+/* From Uiverse.io by kennyotsu */ 
+.card {
+    /* Center the card in the middle of the page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color); /* Add this to use the same background color */
+    height: 100px;
+    font-size: x-large;
+}
+
+.loader {
+    box-sizing: content-box;
+    display: flex;
+
+}
+  
+.words {
+    overflow: hidden;
+    position: relative;
+    height: 40px; /* Adjusted height to match the text height */
+}
+.words::after {
+    content: "";
+    inset: 0;
+    background: linear-gradient(
+      var(--bg-color) 10%,
+      transparent 30%,
+      transparent 70%,
+      var(--bg-color) 90%
+    );
+    z-index: 20;
+}
+  
+@keyframes spin_4991 {
+    0% {
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+
+    10% {
+        -webkit-transform: translateY(-102%);
+        transform: translateY(-102%);
+    }
+
+    25% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+    35% {
+        -webkit-transform: translateY(-202%);
+        transform: translateY(-202%);
+    }
+
+    50% {
+        -webkit-transform: translateY(-200%);
+        transform: translateY(-200%);
+    }
+
+    60% {
+        -webkit-transform: translateY(-302%);
+        transform: translateY(-302%);
+    }
+
+    75% {
+        -webkit-transform: translateY(-300%);
+        transform: translateY(-300%);
+    }
+
+    85% {
+        -webkit-transform: translateY(-402%);
+        transform: translateY(-402%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-400%);
+        transform: translateY(-400%);
+    }
+}
+
+.word {
+    display: block;
+    height: 100%;
+    color: #419b69;
+    animation: spin_4991 5s ease-in-out infinite;
+}
+
+
+
+
+  
+
+.Noir {
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.specialites {
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.viennoiseries{
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.pains{
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.pains img{
+    width : 300px;
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.viennoiseries img{
+    width : 300px;
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.specialites img{
+    width : 300px;
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.accueil {
+    padding-top: 300px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+
+}
+
+
+.connexion_et_inscription {
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column; /* Alignement vertical */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    transition: 1s;
+}
+
+.connexion_et_inscription form{
+    width: 50%; /* Largeur du formulaire */
+    text-align: center; /* Centrer le contenu du formulaire */
+    transition: 0.5s;
+    align-content: center;
+}
+
+.commandes {
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.traitement{
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.traitement2{
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.form1 {
+    width: 50%; /* Largeur du formulaire */
+    text-align: center; /* Centrer le contenu du formulaire */
+    transition: 0.5s;
+    align-content: center;
+}
+
+#produit {
+    text-align: center; /* Centrer le contenu du formulaire */
+    height: 30px;
+    margin-bottom:10px ;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+ 
+
+.form1 label, form input {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+    text-align: center;
+}
+
+
+footer {
+    background-color: #206e40;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1; 
+    box-shadow: 0 0 15px #419b69; /* Ombre */
+    color: white;
+    transition: 0.5s;
+    
+}
+
+footer a {
+    color: #becac8; /* Couleur des liens dans le footer */
+    text-decoration: none; /* Supprimer la soulignement par défaut */
+    transition: 1s;
+}
+
+.footer1 {
+    font-size: medium;
+    background-color: transparent; /* Rend le fond transparent */
+    border: none; /* Supprime les bordures du bouton */
+    cursor: pointer; /* Affiche un curseur au survol du bouton */
+    padding: 0; /* Supprime le rembourrage autour du texte */
+    text-decoration: none; /* Supprime la décoration du texte */
+    transition: 1s;
+    color: #becac8; /* Couleur des liens dans le footer */
+}
+
+
+
+footer a:hover {
+    color: #419b69; /* Couleur des liens au survol */
+    transition: 1s;
+}
+
+table {
+    width: 80%; /* Ajuster la largeur du tableau selon vos besoins */
+    margin: 20px auto; /* Centrer horizontalement le tableau */
+    border-collapse: collapse;
+    transition: 1s;
+  
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    transition: 1s;
+}
+
+th {
+    background-color: #c5dfd0;
+    transition: 1s;
+    border-radius: 100px;
+    text-justify: center;
+}
+
+td img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centrer l'image à l'intérieur de la cellule */
+    transition: 1s;
+}
+
+.mentions {
+
+    text-align: center; /* Centrer le contenu */
+    padding-top: 250px;
+    transition: 1s;
+}
+
+.mentions p, h2, h3 {
+    
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.contact {
+
+    text-align: center; /* Centrer le contenu */
+    padding-top: 200px;
+    transition: 1s;
+}
+
+
+.contact p, h2, h3 {
+    
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.traitement {
+
+    text-align: center; /* Centrer le contenu */
+    padding-top: 200px;
+    transition: 1s;
+}
+
+
+.traitement p, h2, h3 {
+    
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.btn {
+    padding: 1.1em 2em;
+    background: none;
+    border: 2px solid #fff;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    border-radius: 12px;
+    background-color: #206e40;
+    font-weight: bolder;
+    box-shadow: 0 2px 0 2px #01bd55;
+    transition: 1s;
+}
+   
+.btn:before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: white;
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+}
+   
+.btn:hover {
+    background-color: #17a823;
+    color: #fff;
+    box-shadow: 0 2px 0 2px #206e40;
+    transition: 1s;
+}
+   
+.btn:hover::before {
+    transform: skewX(30deg) translate(220%, -50%);
+    transition-delay: 0.1s;
+}
+   
+.btn:active {
+    transform: scale(0.9);
+    transition: 1s;
+}
+
+
+#commandeForm {
+    text-align: center; /* Centrer les boutons */
+    transition: 1s;
+}
+
+
+/* Personnalisation de l'apparence de la barre de défilement */
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(255, 255, 255, 0); /* Couleur totalement transparente */
+}
+
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: #206e40;
+    border-radius: 20px;
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: #419b69;
+    border-radius: 20px;
+  }
+
+
+@media screen and (max-width: 1300px) {
+
+    .accueil {
+        padding-top: 200px;
+        transition: 1s;
+    
+    }
+}
+
+@media screen and (max-width: 1100px) {
+
+    .contact {
+        padding-top: 150px;
+        transition: 1s;
+    }
+    
+    .mentions {
+        padding-top: 200px;
+        transition: 1s;
+    }
+    #navbar {
+        position: fixed;
+        background-color: #206e40;
+        overflow: hidden;
+        color: white;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%; /* Ajuster la largeur */
+        margin-top: 20px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+        border-radius: 50px;
+        box-shadow: 0 0 15px #105a2f;
+        z-index: 2;
+        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+        justify-content: space-around; /* Espacer les éléments horizontalement */
+        align-items: center; /* Centrer verticalement les éléments */
+        transition: 1s;
+    }
+    
+    #navbar img {
+        width: 100px;
+        height: 50px;
+        margin-top: 5px;
+        transition: 1s;
+    }
+    
+    
+    .nav-link {
+        font-size: small;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+        text-decoration: none;
+        transition: 1s;
+        border-radius: 10px;
+        background-color: #206e40;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .nav-link:hover {
+    
+    
+        background-color: #ffffff;
+        border: 2px solid #419b69;
+        box-shadow:0 0 15px #0cc559;
+        color: rgb(17, 16, 16);
+        text-align: center;
+        font-size: 20px;
+    }    
+
+    footer {
+        background-color: #206e40;
+        color: white;
+        text-align: center;
+        padding: 3px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 1; 
+        box-shadow: 0 0 10px #419b69; /* Ombre */
+        color: white;
+        transition: 0.5s;
+        
+    }
+    
+    footer a {
+        font-size: small;
+        color: #becac8; /* Couleur des liens dans le footer */
+        text-decoration: none; /* Supprimer la soulignement par défaut */
+        transition: 1s;
+    }
+    
+  
+    
+    footer a:hover {
+        color: #419b69; /* Couleur des liens au survol */
+        transition: 1s;
+    }
+    
+    .accueil {
+        padding-top: 200px;
+        transition: 1s;
+    
+    }
+    
+    .commandes {
+        padding-top: 200px;
+        transition: 1s;
+    }
+    .pains{
+        padding-top: 100px;
+        transition: 1s;
+    }
+    
+    
+    .pains img{
+        width : 200px;
+        height : 100px;
+        transition: 1s;
+    }
+
+    .viennoiseries{
+        padding-top: 100px;
+        transition: 1s;
+    }
+    
+    
+    .viennoiseries img{
+        width : 200px;
+        height : 100px;
+        transition: 1s;
+    }
+
+    .specialites{
+        padding-top: 100px;
+        transition: 1s;
+    }   
+    
+    
+    .specialites img{
+        width : 200px;
+        height : 100px;
+        transition: 1s;
+    }
+
+    th, td {
+        padding: 5px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        transition: 1s;
+        font-size: small;
+    
+    }
+    
+    th {
+        background-color: #c5dfd0;
+        transition: 1s;
+    }
+    
+}
+
+
+@media screen and (max-width: 900px) {
+    #navbar {
+        position: fixed;
+        background-color: #206e40;
+        overflow: hidden;
+        color: white;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%; /* Ajuster la largeur */
+        margin-top: 20px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+        border-radius: 50px;
+        box-shadow: 0 0 15px #105a2f;
+        z-index: 2;
+        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+        justify-content: space-around; /* Espacer les éléments horizontalement */
+        align-items: center; /* Centrer verticalement les éléments */
+        transition: 1s;
+    }
+    
+    #navbar img {
+        width: 90px;
+        height: 54px;
+        margin-top: 5px;
+        transition: 1s;
+    }
+    
+    
+    .nav-link {
+        font-size: small;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+        text-decoration: none;
+        transition: 1s;
+        border-radius: 10px;
+        background-color: #206e40;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .nav-link:hover {
+    
+    
+        background-color: #ffffff;
+        border: 2px solid #419b69;
+        box-shadow:0 0 15px #0cc559;
+        color: rgb(17, 16, 16);
+        text-align: center;
+        font-size: 20px;
+    }    
+
+    .form1 label, form input {
+        width: 30%;
+        transition: 1s;
+    }
+
+    .commandes {
+        padding-top: 180px;
+        transition: 1s;
+    }
+
+    
+    .pains img{
+        width : 50px;
+        height : 50px;
+        transition: 1s;
+    }
+    .viennoiseries img{
+        width : 50px;
+        height : 50px;
+        transition: 1s;
+    }
+    .specialites img{
+        width : 50px;
+        height : 50px;
+        transition: 1s;
+    }
+}
+
+
+
+
+@media screen and (max-width: 700px) {
+    #navbar {
+        position: fixed;
+        background-color: #206e40;
+        overflow: hidden;
+        color: white;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%; /* Ajuster la largeur */
+        margin-top: 20px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+        border-radius: 50px;
+        box-shadow: 0 0 15px #105a2f;
+        z-index: 2;
+        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+        justify-content: space-around; /* Espacer les éléments horizontalement */
+        align-items: center; /* Centrer verticalement les éléments */
+        transition: 1s;
+    }
+    
+    #navbar img {
+        width: 70px;
+        height: 42px;
+        margin-top: 5px;
+        transition: 1s;
+    }
+    
+    
+    .nav-link {
+        font-size: small;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+        text-decoration: none;
+        transition: 1s;
+        border-radius: 10px;
+        background-color: #206e40;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .nav-link:hover {
+    
+    
+        background-color: #ffffff;
+        border: 2px solid #419b69;
+        box-shadow:0 0 15px #0cc559;
+        color: rgb(17, 16, 16);
+        text-align: center;
+        font-size: 20px;
+    }    
+
+    .btn {
+        padding: 1.1em 2em;
+        background: none;
+        border: 2px solid #fff;
+        font-size: 10px;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s;
+        border-radius: 12px;
+        background-color: #206e40;
+        font-weight: bolder;
+        box-shadow: 0 2px 0 2px #01bd55;
+        transition: 1s;
+    }
+
+    #annuler,#ValiderLaCommande {
+        padding: 0.8em 1.5em; /* Réduire le rembourrage */
+        font-size: 8px; /* Réduire la taille de la police */
+        border-radius: 8px; /* Réduire le rayon de bordure */
+        margin: 0.5em; /* Ajouter une marge pour l'espace entre les boutons */
+        transition: 1s;
+    }
+
+    .mentions {
+        padding-top: 100px;
+        transition: 1s;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    #navbar {
+        position: fixed;
+        background-color: #206e40;
+        overflow: hidden;
+        color: white;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%; /* Ajuster la largeur */
+        margin-top: 20px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+        border-radius: 50px;
+        box-shadow: 0 0 15px #105a2f;
+        z-index: 2;
+        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+        justify-content: space-around; /* Espacer les éléments horizontalement */
+        align-items: center; /* Centrer verticalement les éléments */
+        transition: 1s;
+    }
+    
+    #navbar img {
+        width: 50px;
+        height: 30px;
+        margin-top: 5px;
+        transition: 1s;
+    }
+    
+    
+    .nav-link {
+        font-size: smaller;
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+        padding: 2px 2px; /* Ajuster les marges pour plus d'espace autour du texte */
+        text-decoration: none;
+        transition: 1s;
+        border-radius: 10px;
+        background-color: #206e40;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .nav-link:hover {
+    
+    
+        background-color: #ffffff;
+        border: 2px solid #419b69;
+        box-shadow:0 0 15px #0cc559;
+        color: rgb(17, 16, 16);
+        text-align: center;
+        font-size: 20px;
+    }    
+
+    .form1 label, form input {
+        width: 50%;
+        transition: 1s;
+    }
+
+    th, td {
+        padding: 3px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        transition: 1s;
+        font-size:smaller;
+    
+    }
+
+    .commandes {
+        padding-top: 100px;
+        text-align: center; /* Centrer le texte */
+        transition: 1s;
+    }
+}
