@@ -23,7 +23,7 @@
   --button-shadow: 0 2px 0 2px var(--accent-light);
 
   /* Dimensions */
-  --sidebar-width: 300px;
+  --sidebar-width: 400px;
   --sidebar-bg: var(--primary-color);
   --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -44,57 +44,50 @@
     position: fixed;
     background-color: var(--primary-color);
     overflow: hidden;
-    color: var(--white);
+    color: white;
     text-align: center;
     left: 50%;
     transform: translateX(-50%);
-    width: 400px;
+    width: 25%; /* Réduit la largeur de la barre de navigation à 50% de la largeur de la sidebar */
+    height: 10%;
     margin-top: 20px;
-    padding: 15px 25px;
+    padding-top: 8px; /* Ajuste le rembourrage supérieur */ 
+    padding-bottom: 10px; /* Ajuste le rembourrage inférieur */
     border-radius: 50px;
     box-shadow: var(--nav-shadow);
-    z-index: 30;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    z-index: 2;
+    display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+    justify-content: space-around; /* Espacer les éléments horizontalement */
+    align-items: center; /* Centrer verticalement les éléments */
     transition: 1s;
 }
 
-#navForm {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px; /* Espace entre les boutons */
-}
+
 
 .nav-link {
     font-size: 16px;
-    color: var(--white);
+    background-color: var(--primary-color); /* Utilise la couleur primaire pour le fond des liens */
+    color: var(--white); /* Utilise la couleur blanche pour le texte */
     text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
+    margin: 10px;
+    gap: 8px;
+    padding: 10px 10px;
+    text-decoration: none; /* Supprime la décoration de texte */
+    transition: 1s;
     border-radius: 10px;
-    background-color: var(--primary-color);
     border: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
 }
 
-.nav-link i {
-    font-size: 16px; /* Taille de l'icône */
-    display: flex;
-    align-items: center;
-}
+
 
 .nav-link:hover {
-    transform: scale(1.1);
+    transform: scale(1.3);
     background-color: var(--primary-light);
     box-shadow: var(--hover-shadow);
+    position: relative;
 }
+
 
 /* Style spécial pour le bouton menu */
 .menu-btn {
@@ -516,225 +509,54 @@ body::-webkit-scrollbar {
 
 
 @media screen and (max-width: 1300px) {
-
+    #navbar {
+        width: 80%; /* Ajuster la largeur */
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+    
     .accueil {
         padding-top: 200px;
         transition: 1s;
-    
     }
 }
 
 @media screen and (max-width: 1100px) {
-
-    .contact {
-        padding-top: 150px;
-        transition: 1s;
-    }
-    
-    .mentions {
-        padding-top: 200px;
-        transition: 1s;
-    }
     #navbar {
-        position: fixed;
-        background-color: var(--primary-color);
-        overflow: hidden;
-        color: var(--white);
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
         width: 80%; /* Ajuster la largeur */
-        margin-top: 20px;
-        padding-top: 10px;
-        padding-bottom: 15px;
-        border-radius: 50px;
-        box-shadow: 0 0 15px var(--primary-dark);
-        z-index: 2;
-        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
-        justify-content: space-around; /* Espacer les éléments horizontalement */
-        align-items: center; /* Centrer verticalement les éléments */
-        transition: 1s;
     }
-    
-    #navbar img {
-        width: 100px;
-        height: 50px;
-        margin-top: 5px;
-        transition: 1s;
-    }
-    
     
     .nav-link {
         font-size: small;
-        color: var(--white);
-        text-align: center;
         margin-top: 10px;
         padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
-        text-decoration: none;
-        transition: 1s;
-        border-radius: 10px;
-        background-color: var(--primary-color);
-        border: none;
-        cursor: pointer;
     }
-    
-    .nav-link:hover {
-    
-    
-        background-color: var(--white);
-        border: 2px solid var(--primary-light);
-        box-shadow:0 0 15px var(--accent-color);
-        color: var(--black);
-        text-align: center;
-        font-size: 20px;
-    }    
 
     footer {
-        background-color: var(--primary-color);
-        color: var(--white);
-        text-align: center;
         padding: 3px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 1; 
-        box-shadow: 0 0 10px var(--primary-light); /* Ombre */
-        color: var(--white);
-        transition: 0.5s;
-        
-    }
-    
-    footer a {
-        font-size: small;
-        color: var(--gray-light); /* Couleur des liens dans le footer */
-        text-decoration: none; /* Supprimer la soulignement par défaut */
-        transition: 1s;
-    }
-    
-  
-    
-    footer a:hover {
-        color: var(--primary-light); /* Couleur des liens au survol */
-        transition: 1s;
     }
     
     .accueil {
         padding-top: 200px;
         transition: 1s;
-    
     }
     
     .commandes {
         padding-top: 200px;
         transition: 1s;
     }
-    .pains{
-        padding-top: 100px;
-        transition: 1s;
-    }
-    
-    
-    .pains img{
-        width : 200px;
-        height : 100px;
-        transition: 1s;
-    }
-
-    .viennoiseries{
-        padding-top: 100px;
-        transition: 1s;
-    }
-    
-    
-    .viennoiseries img{
-        width : 200px;
-        height : 100px;
-        transition: 1s;
-    }
-
-    .specialites{
-        padding-top: 100px;
-        transition: 1s;
-    }   
-    
-    
-    .specialites img{
-        width : 200px;
-        height : 100px;
-        transition: 1s;
-    }
-
-    th, td {
-        padding: 5px;
-        text-align: left;
-        border-bottom: 1px solid var(--gray-border);
-        transition: 1s;
-        font-size: small;
-    
-    }
-    
-    th {
-        background-color: var(--gray-lighter);
-        transition: 1s;
-    }
-    
 }
-
 
 @media screen and (max-width: 900px) {
     #navbar {
-        position: fixed;
-        background-color: var(--primary-color);
-        overflow: hidden;
-        color: var(--white);
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
         width: 80%; /* Ajuster la largeur */
-        margin-top: 20px;
-        padding-top: 10px;
-        padding-bottom: 15px;
-        border-radius: 50px;
-        box-shadow: 0 0 15px var(--primary-dark);
-        z-index: 2;
-        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
-        justify-content: space-around; /* Espacer les éléments horizontalement */
-        align-items: center; /* Centrer verticalement les éléments */
-        transition: 1s;
     }
-    
-    #navbar img {
-        width: 90px;
-        height: 54px;
-        margin-top: 5px;
-        transition: 1s;
-    }
-    
     
     .nav-link {
         font-size: small;
-        color: var(--white);
-        text-align: center;
         margin-top: 10px;
         padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
-        text-decoration: none;
-        transition: 1s;
-        border-radius: 10px;
-        background-color: var(--primary-color);
-        border: none;
-        cursor: pointer;
     }
-    
-    .nav-link:hover {
-    
-    
-        background-color: var(--white);
-        border: 2px solid var(--primary-light);
-        box-shadow:0 0 15px var(--accent-color);
-        color: var(--black);
-        text-align: center;
-        font-size: 20px;
-    }    
 
     .form1 label, form input {
         width: 30%;
@@ -745,187 +567,32 @@ body::-webkit-scrollbar {
         padding-top: 180px;
         transition: 1s;
     }
-
-    
-    .pains img{
-        width : 50px;
-        height : 50px;
-        transition: 1s;
-    }
-    .viennoiseries img{
-        width : 50px;
-        height : 50px;
-        transition: 1s;
-    }
-    .specialites img{
-        width : 50px;
-        height : 50px;
-        transition: 1s;
-    }
 }
-
-
-
 
 @media screen and (max-width: 700px) {
     #navbar {
-        position: fixed;
-        background-color: var(--primary-color);
-        overflow: hidden;
-        color: var(--white);
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
         width: 90%; /* Ajuster la largeur */
-        margin-top: 20px;
-        padding-top: 10px;
-        padding-bottom: 15px;
-        border-radius: 50px;
-        box-shadow: 0 0 15px var(--primary-dark);
-        z-index: 2;
-        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
-        justify-content: space-around; /* Espacer les éléments horizontalement */
-        align-items: center; /* Centrer verticalement les éléments */
-        transition: 1s;
     }
-    
-    #navbar img {
-        width: 70px;
-        height: 42px;
-        margin-top: 5px;
-        transition: 1s;
-    }
-    
     
     .nav-link {
         font-size: small;
-        color: var(--white);
-        text-align: center;
         margin-top: 10px;
         padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
-        text-decoration: none;
-        transition: 1s;
-        border-radius: 10px;
-        background-color: var(--primary-color);
-        border: none;
-        cursor: pointer;
-    }
-    
-    .nav-link:hover {
-    
-    
-        background-color: var(--white);
-        border: 2px solid var(--primary-light);
-        box-shadow:0 0 15px var(--accent-color);
-        color: var(--black);
-        text-align: center;
-        font-size: 20px;
-    }    
-
-    .btn {
-        padding: 1.1em 2em;
-        background: none;
-        border: 2px solid var(--white);
-        font-size: 10px;
-        color: var(--white);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s;
-        border-radius: 12px;
-        background-color: var(--primary-color);
-        font-weight: bolder;
-        box-shadow: 0 2px 0 2px var(--accent-light);
-        transition: 1s;
-    }
-
-    #annuler,#ValiderLaCommande {
-        padding: 0.8em 1.5em; /* Réduire le rembourrage */
-        font-size: 8px; /* Réduire la taille de la police */
-        border-radius: 8px; /* Réduire le rayon de bordure */
-        margin: 0.5em; /* Ajouter une marge pour l'espace entre les boutons */
-        transition: 1s;
-    }
-
-    .mentions {
-        padding-top: 100px;
-        transition: 1s;
     }
 }
 
-
 @media screen and (max-width: 500px) {
     #navbar {
-        position: fixed;
-        background-color: var(--primary-color);
-        overflow: hidden;
-        color: var(--white);
-        text-align: center;
-        left: 50%;
-        transform: translateX(-50%);
         width: 90%; /* Ajuster la largeur */
-        margin-top: 20px;
-        padding-top: 10px;
-        padding-bottom: 15px;
-        border-radius: 50px;
-        box-shadow: 0 0 15px var(--primary-dark);
-        z-index: 2;
-        display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
-        justify-content: space-around; /* Espacer les éléments horizontalement */
-        align-items: center; /* Centrer verticalement les éléments */
-        transition: 1s;
     }
-    
-    #navbar img {
-        width: 50px;
-        height: 30px;
-        margin-top: 5px;
-        transition: 1s;
-    }
-    
     
     .nav-link {
         font-size: smaller;
-        color: var(--white);
-        text-align: center;
-        margin-top: 10px;
         padding: 2px 2px; /* Ajuster les marges pour plus d'espace autour du texte */
-        text-decoration: none;
-        transition: 1s;
-        border-radius: 10px;
-        background-color: var(--primary-color);
-        border: none;
-        cursor: pointer;
     }
-    
-    .nav-link:hover {
-    
-    
-        background-color: var(--white);
-        border: 2px solid var(--primary-light);
-        box-shadow:0 0 15px var(--accent-color);
-        color: var(--black);
-        text-align: center;
-        font-size: 20px;
-    }    
 
     .form1 label, form input {
         width: 50%;
-        transition: 1s;
-    }
-
-    th, td {
-        padding: 3px;
-        text-align: left;
-        border-bottom: 1px solid var(--gray-border);
-        transition: 1s;
-        font-size:smaller;
-    
-    }
-
-    .commandes {
-        padding-top: 100px;
-        text-align: center; /* Centrer le texte */
         transition: 1s;
     }
 }
@@ -934,7 +601,7 @@ body::-webkit-scrollbar {
 .sidebar {
     position: fixed;
     top: 0;
-    left: 20px; /* Décalage par rapport au bord */
+    left: 20px; /* D��calage par rapport au bord */
     width: var(--sidebar-width);
     height: calc(100% - 40px); /* Hauteur réduite pour créer un espace en haut et en bas */
     background: var(--white);
@@ -994,27 +661,20 @@ body::-webkit-scrollbar {
     display: flex;
     align-items: center;
     gap: 10px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
 }
 
 .sidebar-item:hover {
-    background-color: var(--gray-lighter);
     transform: translateX(10px);
+    background-color: transparent;
     box-shadow: var(--hover-shadow);
+    position: relative;
+    text-decoration: none;
 }
 
 /* Pour les liens dans la sidebar */
 .sidebar a {
     text-decoration: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 /* Overlay amélioré */
@@ -1041,16 +701,7 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/* Empêcher le surlignement du texte */
-.sidebar, .sidebar *, .nav-link, .menu-btn {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
 
-/* Enlever le surlignement au clic sur mobile */
-.sidebar-item, .nav-link, .menu-btn {
-    -webkit-tap-highlight-color: transparent;
+#navForm, a {
+    text-decoration: none; /* Supprime la décoration des liens */
 }
-
