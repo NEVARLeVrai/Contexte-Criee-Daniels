@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="icon" href="<?php echo base_url('assets/img/Accueil.png');?>">
         <title>Criée de Poulgoazec</title>
 
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee.css');?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee copy 3.css');?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <script src="<?php echo base_url('assets/js/Criee.js');?>"></script>
     </head>
@@ -32,22 +32,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </button>
             </div>
             <nav class="sidebar-nav">
-                <a href="<?php echo site_url('welcome/contenu/Pains');?>">
-                    <button class="sidebar-item">
-                        <i class="fas fa-bread-slice"></i> Pains
-                    </button>
-                </a>
-                <a href="<?php echo site_url('welcome/contenu/Viennoiseries');?>">
-                    <button class="sidebar-item">
-                        <i class="fas fa-croissant"></i> Viennoiseries
-                    </button>
-                </a>
-                <a href="<?php echo site_url('welcome/contenu/Specialites');?>">
-                    <button class="sidebar-item">
-                        <i class="fas fa-star"></i> Spécialités
-                    </button>
-                </a>
-                <hr>
                 <a href="<?php echo site_url('welcome/contenu/Commandes');?>">
                     <button class="sidebar-item">
                         <i class="fas fa-shopping-cart"></i> Commandes
@@ -64,16 +48,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         Menu
                     </button>
 
+
                     <a href="<?php echo site_url('welcome/contenu/Accueil');?>">
                         <button type="button" class="nav-link">
                             <i class="fas fa-home"></i> Accueil
-                        </button>
-                    </a>
+                    </button>
+     
+                
+
+
                     <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                         <button type="button" class="nav-link">
                             <i class="fas fa-user"></i> Compte
-                        </button>
-                    </a>   
+                    </button>
+                    </a>
+              
+                      
                 </form>
             </nav>   
         </header>
