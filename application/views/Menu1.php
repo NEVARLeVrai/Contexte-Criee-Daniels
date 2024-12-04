@@ -12,8 +12,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <meta property="og:title" content="&#x26CA; Criée de Poulgoazec">
         <meta property="og:description" content="Criée de Poulgoazec">
         <meta property="og:url" content="https://www.lyceecassin-strasbourg.eu/">
-        <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil1.png');?>">
-        <link rel="icon" href="<?php echo base_url('assets/img/Accueil1.png');?>">
+        <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil.png');?>">
+        <link rel="icon" href="<?php echo base_url('assets/img/Accueil.png');?>">
         <title>Criée de Poulgoazec</title>
 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee.css');?>">
