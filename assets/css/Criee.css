@@ -1,0 +1,707 @@
+:root {
+  /* Couleurs principales */
+  --primary-color: #20326e;
+  --primary-light: #41519b;
+  --primary-dark: #10275a;
+  
+  /* Couleurs d'accentuation */
+  --accent-color: #0c18c5;
+  --accent-light: #0123bd;
+  
+  /* Couleurs neutres */
+  --white: #ffffff;
+  --black: rgb(17, 16, 16);
+  --gray-light: #bec1ca;
+  --gray-lighter: #c5cfdf;
+  --gray-border: #dddddd;
+
+
+  /* Couleurs d'état */
+  --hover-shadow: 0 0 15px var(--accent-color);
+  --nav-shadow: 0 0 15px var(--primary-dark);
+  --footer-shadow: 0 0 15px var(--primary-light);
+  --button-shadow: 0 2px 0 2px var(--accent-light);
+
+  /* Dimensions */
+  --sidebar-width: 400px;
+  --sidebar-bg: var(--primary-color);
+  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Kanit', sans-serif;
+
+}
+
+
+
+#navbar {
+    position: fixed;
+    background-color: var(--primary-color);
+    overflow: hidden;
+    color: white;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25%; /* Réduit la largeur de la barre de navigation à 50% de la largeur de la sidebar */
+    height: 10%;
+    margin-top: 20px;
+    padding-top: 8px; /* Ajuste le rembourrage supérieur */ 
+    padding-bottom: 10px; /* Ajuste le rembourrage inférieur */
+    border-radius: 50px;
+    box-shadow: var(--nav-shadow);
+    z-index: 2;
+    display: flex; /* Utiliser flexbox pour aligner les éléments au centre */
+    justify-content: space-around; /* Espacer les éléments horizontalement */
+    align-items: center; /* Centrer verticalement les éléments */
+    transition: 1s;
+}
+
+
+
+.nav-link {
+    font-size: 16px;
+    background-color: var(--primary-color); /* Utilise la couleur primaire pour le fond des liens */
+    color: var(--white); /* Utilise la couleur blanche pour le texte */
+    text-align: center;
+    margin: 10px;
+    gap: 8px;
+    padding: 10px 10px;
+    text-decoration: none; /* Supprime la décoration de texte */
+    transition: 1s;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.nav-link:hover {
+    transform: scale(1.3);
+    background-color: var(--primary-light);
+    box-shadow: var(--hover-shadow);
+    position: relative;
+}
+
+
+/* Style spécial pour le bouton menu */
+.menu-btn {
+    background-color: var(--accent-color);
+    background: none;
+    border: none ;
+    padding: 0.5rem ;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    #navbar {
+        width: 90%;
+        padding: 12px 20px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+
+
+.accueil {
+
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+    
+
+}
+
+
+/* From Uiverse.io by kennyotsu */ 
+.card {
+    /* Center the card in the middle of the page */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    height: 100px;
+    font-size: x-large;
+}
+
+.loader {
+    box-sizing: content-box;
+    display: flex;
+
+}
+  
+.words {
+    overflow: hidden;
+    position: relative;
+    height: 40px; /* Adjusted height to match the text height */
+}
+.words::after {
+    content: "";
+    inset: 0;
+    background: linear-gradient(
+      var(--white) 10%,
+      transparent 30%,
+      transparent 70%,
+      var(--white) 90%
+    );
+    z-index: 20;
+}
+  
+@keyframes spin_4991 {
+    0% {
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+
+    10% {
+        -webkit-transform: translateY(-102%);
+        transform: translateY(-102%);
+    }
+
+    25% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+    35% {
+        -webkit-transform: translateY(-202%);
+        transform: translateY(-202%);
+    }
+
+    50% {
+        -webkit-transform: translateY(-200%);
+        transform: translateY(-200%);
+    }
+
+    60% {
+        -webkit-transform: translateY(-302%);
+        transform: translateY(-302%);
+    }
+
+    75% {
+        -webkit-transform: translateY(-300%);
+        transform: translateY(-300%);
+    }
+
+    85% {
+        -webkit-transform: translateY(-402%);
+        transform: translateY(-402%);
+    }
+
+    100% {
+        -webkit-transform: translateY(-400%);
+        transform: translateY(-400%);
+    }
+}
+
+.word {
+    display: block;
+    height: 100%;
+    color: var(--primary-light);
+    animation: spin_4991 5s ease-in-out infinite;
+}
+
+
+
+
+  
+
+.Noir {
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.specialites {
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.viennoiseries{
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.pains{
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.pains img{
+    width : 300px;
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.viennoiseries img{
+    width : 300px;
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.specialites img{
+    width : 300px;
+    height : 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.accueil {
+    padding-top: 300px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+
+}
+
+
+.connexion_et_inscription {
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column; /* Alignement vertical */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    transition: 1s;
+}
+
+.connexion_et_inscription form{
+    width: 50%; /* Largeur du formulaire */
+    text-align: center; /* Centrer le contenu du formulaire */
+    transition: 0.5s;
+    align-content: center;
+}
+
+.commandes {
+    padding-top: 150px;
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.traitement{
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.traitement2{
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.form1 {
+    width: 50%; /* Largeur du formulaire */
+    text-align: center; /* Centrer le contenu du formulaire */
+    transition: 0.5s;
+    align-content: center;
+}
+
+#produit {
+    text-align: center; /* Centrer le contenu du formulaire */
+    height: 30px;
+    margin-bottom:10px ;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+ 
+
+.form1 label, form input {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+    text-align: center;
+}
+
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1; 
+    box-shadow: 0 0 15px var(--primary-light); /* Ombre */
+    color: var(--white);
+    transition: 0.5s;
+}
+
+footer a {
+    color: var(--gray-light); /* Couleur des liens dans le footer */
+    text-decoration: none; /* Supprimer la soulignement par défaut */
+    transition: 1s;
+}
+
+.footer1 {
+    font-size: large;
+    background-color: transparent; /* Rend le fond transparent */
+    border: none; /* Supprime les bordures du bouton */
+    cursor: pointer; /* Affiche un curseur au survol du bouton */
+    padding: 5px; /* Supprime le rembourrage autour du texte */
+    text-decoration: none; /* Supprime la décoration du texte */
+    transition: 1s;
+    color: var(--gray-light); /* Couleur des liens dans le footer */
+}
+
+
+
+.footer1:hover {
+    color: var(--primary-light); /* Couleur des liens au survol */
+    transition: 1s;
+}
+
+table {
+    width: 80%; /* Ajuster la largeur du tableau selon vos besoins */
+    margin: 20px auto; /* Centrer horizontalement le tableau */
+    border-collapse: collapse;
+    transition: 1s;
+  
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-border);
+    transition: 1s;
+}
+
+th {
+    background-color: var(--gray-lighter);
+    transition: 1s;
+    border-radius: 100px;
+    text-justify: center;
+}
+
+td img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centrer l'image à l'intérieur de la cellule */
+    transition: 1s;
+}
+
+.mentions {
+
+    text-align: center; /* Centrer le contenu */
+    padding-top: 250px;
+    transition: 1s;
+}
+
+.mentions p, h2, h3 {
+    
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.contact {
+
+    text-align: center; /* Centrer le contenu */
+    padding-top: 200px;
+    transition: 1s;
+}
+
+
+.contact p, h2, h3 {
+    
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+
+.traitement {
+
+    text-align: center; /* Centrer le contenu */
+    padding-top: 200px;
+    transition: 1s;
+}
+
+
+.traitement p, h2, h3 {
+    
+    text-align: center; /* Centrer le texte */
+    transition: 1s;
+}
+
+.btn {
+    padding: 1.1em 2em;
+    background: none;
+    border: 2px solid var(--white);
+    font-size: 15px;
+    color: var(--white);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    border-radius: 12px;
+    background-color: var(--primary-color);
+    font-weight: bolder;
+    box-shadow: 0 2px 0 2px var(--accent-light);
+    transition: 1s;
+}
+   
+.btn:before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 120%;
+    background-color: var(--white);
+    top: 50%;
+    transform: skewX(30deg) translate(-150%, -50%);
+    transition: all 0.5s;
+}
+   
+.btn:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+    box-shadow: 0 2px 0 2px var(--primary-color);
+    transition: 1s;
+}
+   
+.btn:hover::before {
+    transform: skewX(30deg) translate(220%, -50%);
+    transition-delay: 0.1s;
+}
+   
+.btn:active {
+    transform: scale(0.9);
+    transition: 1s;
+}
+
+
+#commandeForm {
+    text-align: center; /* Centrer les boutons */
+    transition: 1s;
+}
+
+
+/* Personnalisation de l'apparence de la barre de défilement */
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 20px;
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-light);
+    border-radius: 20px;
+  }
+
+
+@media screen and (max-width: 1300px) {
+    #navbar {
+        width: 80%; /* Ajuster la largeur */
+        padding-top: 10px;
+        padding-bottom: 15px;
+    }
+    
+    .accueil {
+        padding-top: 200px;
+        transition: 1s;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    #navbar {
+        width: 80%; /* Ajuster la largeur */
+    }
+    
+    .nav-link {
+        font-size: small;
+        margin-top: 10px;
+        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+    }
+
+    footer {
+        padding: 3px;
+    }
+    
+    .accueil {
+        padding-top: 200px;
+        transition: 1s;
+    }
+    
+    .commandes {
+        padding-top: 200px;
+        transition: 1s;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #navbar {
+        width: 80%; /* Ajuster la largeur */
+    }
+    
+    .nav-link {
+        font-size: small;
+        margin-top: 10px;
+        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+    }
+
+    .form1 label, form input {
+        width: 30%;
+        transition: 1s;
+    }
+
+    .commandes {
+        padding-top: 180px;
+        transition: 1s;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #navbar {
+        width: 90%; /* Ajuster la largeur */
+    }
+    
+    .nav-link {
+        font-size: small;
+        margin-top: 10px;
+        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #navbar {
+        width: 90%; /* Ajuster la largeur */
+    }
+    
+    .nav-link {
+        font-size: smaller;
+        padding: 2px 2px; /* Ajuster les marges pour plus d'espace autour du texte */
+    }
+
+    .form1 label, form input {
+        width: 50%;
+        transition: 1s;
+    }
+}
+
+/* Styles pour le menu latéral */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 20px; /* D��calage par rapport au bord */
+    width: var(--sidebar-width);
+    height: calc(100% - 40px); /* Hauteur réduite pour créer un espace en haut et en bas */
+    background: var(--white);
+    z-index: 50;
+    transform: translateX(-120%); /* Déplacé plus loin pour voir l'animation */
+    transition: all 0.4s ease;
+    box-shadow: var(--nav-shadow);
+    padding: 1.5rem;
+    margin-top: 20px; /* Espace en haut */
+    border-radius: 20px;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--primary-light);
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-header h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+    color: var(--primary-light);
+}
+
+.sidebar-item {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.sidebar-item:hover {
+    transform: translateX(10px);
+    background-color: transparent;
+    box-shadow: var(--hover-shadow);
+    position: relative;
+    text-decoration: none;
+}
+
+/* Pour les liens dans la sidebar */
+.sidebar a {
+    text-decoration: none;
+}
+
+/* Overlay amélioré */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    z-index: 40;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#overlay {
+    display: none;
+}
+
+
+#navForm, a {
+    text-decoration: none; /* Supprime la décoration des liens */
+}
