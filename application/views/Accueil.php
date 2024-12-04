@@ -20,10 +20,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <span class="word">Добро пожало</span>  <!-- pour l'espacement -->
                 </div>
-                <p>sur le site du fournil alsacien</p>
+                <p>sur le site de la Criee de Poulgoazec</p>
             </div>
         </div>
-        <h1>Découvrez notre sélection de pains, viennoiseries et spécialités artisanales.</h1>
+        <h1>Découvrez notre sélection de de ventes de poissons</h1>
         
 
 

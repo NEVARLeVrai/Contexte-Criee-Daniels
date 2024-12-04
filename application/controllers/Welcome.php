@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('Menu'); // créer un fichier menu.php dans le répertoire views
+		$this->load->view('Menu1'); // créer un fichier menu.php dans le répertoire views
 		$this->load->view('Accueil'); // créer affichage.php dans le répertoire views
 		$data['clients']= $this->requetes->getClients(); 
 		$this->load->view('piedPage',$data); // Vue piedPage à créer dans le dossier VIEWS
@@ -37,7 +37,7 @@ class Welcome extends CI_Controller {
 	}
     public function contenu($id) 
     {
-        $this->load->view('Menu'); // Chargement de la vue du menu
+        $this->load->view('Menu1'); // Chargement de la vue du menu
     
         switch($id) {
             case "Accueil":
@@ -75,7 +75,7 @@ class Welcome extends CI_Controller {
     
     public function traitement_inscription() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu'); // Chargement de la vue du menu
+        $this->load->view('Menu1'); // Chargement de la vue du menu
         $this->load->view('piedPage');
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
@@ -90,7 +90,7 @@ class Welcome extends CI_Controller {
     
     public function traitement_connexion() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu'); // Chargement de la vue du menu
+        $this->load->view('Menu1'); // Chargement de la vue du menu
         $this->load->view('piedPage');
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
@@ -105,7 +105,7 @@ class Welcome extends CI_Controller {
 
     public function commandes() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu'); // Chargement de la vue du menu
+        $this->load->view('Menu1'); // Chargement de la vue du menu
         $this->load->view('piedPage'); // Chargement de la vue du pied de page
         
         // Récupérer l'ID du compte depuis la requête POST
@@ -120,7 +120,7 @@ class Welcome extends CI_Controller {
     
     public function traitement() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu'); // Chargement de la vue du menu
+        $this->load->view('Menu1'); // Chargement de la vue du menu
         $this->load->view('piedPage'); // Chargement de la vue du pied de page
         
         // Récupérer l'ID du compte depuis la requête POST
