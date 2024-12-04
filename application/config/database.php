@@ -74,11 +74,11 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-    'dsn'    => 'mysql:host=mysql; dbname=Fournil; charset=utf8;',
+    'dsn'    => 'mysql:host=mysql; dbname=LaCriee; charset=utf8;',
     'hostname' => 'mysql',
     'username' => 'root',
     'password' => 'root',
-    'database' => 'Fournil',
+    'database' => 'LaCriee',
     'dbdriver' => 'pdo',//mysqli',
     'dbprefix' => '',
     'pconnect' => TRUE,

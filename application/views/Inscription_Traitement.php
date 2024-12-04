@@ -52,7 +52,7 @@
 					else
 					{
 						// Hash le mot de passe avant de l'insérer dans la base de données
-						$mdpCrypte = crypterMotDePasse($mdp);
+						$mdpCrypte = crypterMotDePasse($mdpCompte);
 						// Insérer le nouvel utilisateur dans la base de données
 						$ajouteUtilisateur = "INSERT INTO COMPTE (idCompte, mdpCompte) VALUES (:idCompte, :mdpCompte)";
 						$stmt = $pdo->prepare($ajouteUtilisateur);

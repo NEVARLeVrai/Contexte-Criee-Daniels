@@ -67,7 +67,9 @@ class Welcome extends CI_Controller {
             case "Inscription":
                 $this->load->view('Inscription');
                 break;
-    
+            case "Deconnexion":
+                $this->load->view('Deconnexion');
+                break;
         }
     
         $this->load->view('piedPage', NULL); // Chargement de la vue pied de page
