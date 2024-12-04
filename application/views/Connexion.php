@@ -1,32 +1,22 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
+<html>
+	<body>
+		<section id="accueil" class="accueil">
+			<h2>Connectez vous à votre compte :</h2>
+			<?php echo validation_errors(); ?>
+			<form method="POST" action="<?php echo site_url('welcome/traitement_connexion'); ?>">
+				<label for="id">Identifiant :</label>
+				<input type="text" id="idCompte" name="idCompte" required><br> 
 
-<body>
-    <section id="connexion_et_inscription" class="connexion_et_inscription">
-        <h2>Connectez-vous</h2>
-        <p>Connectez vous à votre compte :</p>
-        
-        <form method="POST" action="<?php echo site_url('welcome/traitement_connexion'); ?>">
-
-            <label for="idCompte">Id :</label><br>
-            <input type="text" id="idCompte" name="idCompte" required><br>
-
-            <label for="mdpCompte">Mot de passe :</label><br>
-            <input type="password" id="mdpCompte" name="mdpCompte" required><br>
-
-   
-            <button type="submit" class="btn">Connexion</button>
-
-        </form>
-
-    
-
-        <br>
-        <form method="POST" action="<?php echo site_url('welcome/contenu/Inscription'); ?>">
-            <p>Vous n'avez pas de compte ?</p>
-            <button type="submit" class="btn">Inscription</button>
-        </form>
-        
-    </section>
-</body>
+				<label for="mdp">Mot de passe :</label>
+				<input type="password" id="mdpCompte" name="mdpCompte" required><br>
+				<br>
+				<button type='submit' name='page' class='btn' value='traitement_connexion'>Valider</button> 
+				<button type='reset' class='btn'>Effacer</button> 
+			</form>
+			<form method="POST" action="<?php echo site_url('welcome/contenu/Inscription'); ?>">
+				<p>Vous n'avez pas de compte ?</p>	
+				<button type="submit" class="btn">Créer un compte</button>
+			</form>
+		</section>
+	</body>
+</html>
