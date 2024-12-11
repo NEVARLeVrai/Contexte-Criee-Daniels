@@ -18,7 +18,7 @@
 
 				if (empty($idCompte) || empty($mdpCompte)) // si id OU mdp est vide (rempli par des espaces)
 				{ 
-					echo "<section id='connexion' class='connexion'>
+					echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 						Veuillez remplir tous les champs.
 						<form>
 							<a href='" . site_url('welcome/contenu/Inscription') . "'>
@@ -39,9 +39,11 @@
 					if (count($rows) > 0) 
 					{
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-							L'identifiant est déjà utilisé. 
+							<h2>L'identifiant est déjà utilisé.</h2>
 							<br>
 							Veuillez en choisir un autre.
+							<br>
+							<br>
 							<form>
 								<a href='" . site_url('welcome/contenu/Inscription') . "'>
 									<button type='button' class='btn'>Retour</button>
@@ -61,7 +63,7 @@
 					
 						if ($stmt->execute())
 						{
-							echo "<section id='connexion' class='connexion'>
+							echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 								<h2>Inscription réussie avec l'id ".htmlspecialchars($idCompte)."</h2>
 								<br>
 								<form>
