@@ -515,6 +515,7 @@ body::-webkit-scrollbar {
     }
 }
 
+
 /* Styles pour le menu latéral */
 .sidebar {
     position: fixed;
@@ -545,6 +546,11 @@ body::-webkit-scrollbar {
     margin-bottom: 1.5rem;
 }
 
+.sidebar-header i {
+    color: var(--primary-color); /* Appliquer la même couleur à l'icône de menu */
+    font-size: 1.5rem;
+}
+
 .sidebar-header h2 {
     color: var(--primary-color);
     font-size: 1.5rem;
@@ -571,16 +577,18 @@ body::-webkit-scrollbar {
     background: none;
     border: none;
     color: var(--primary-color);
-    text-align: left;
+    text-align: left; /* Garder le texte à gauche */
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 10px;
     font-size: 1.1rem; /* Garder la taille de la police inchangée */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    margin-bottom: 15px; /* Espacement entre les boutons */
+    display: flex; /* Utiliser flexbox pour centrer le contenu */
+    justify-content: center; /* Centrer horizontalement le contenu */
+    margin: 10px auto; /* Centrer le bouton avec une marge automatique */
+}
+
+.sidebar-item > i {
+    margin-right: 10px; /* Espacement entre l'icône et le texte */
 }
 
 .sidebar-item:hover {
@@ -747,5 +755,14 @@ body::-webkit-scrollbar {
 #navForm img {
     height: 60px; /* Ajuster la hauteur du logo */
     margin-left: 10px; /* Espacement à droite du logo */
+}
+
+.sidebar-footer {
+    position: absolute; /* Positionner le footer en bas de la sidebar */
+    bottom: 20px; /* Espacement du bas */
+    left: 0;
+    right: 0; /* Prendre toute la largeur */
+    text-align: center; /* Centrer le texte */
+    color: var(--primary-color); /* Optionnel : couleur du texte */
 }
 

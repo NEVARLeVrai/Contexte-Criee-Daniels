@@ -81,6 +81,9 @@ session_start();
                     </button>
                 </a>
             </nav>
+            <div class="sidebar-footer">
+                <p>Merci de visiter la Criée de Poulgoazec</p>
+            </div>
         </div>
         <header>
             <nav id="navbar">
