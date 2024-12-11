@@ -222,45 +222,7 @@
 }
 
 
-.specialites {
-    padding-top: 150px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
 
-.viennoiseries{
-    padding-top: 150px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
-
-.pains{
-    padding-top: 150px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
-
-
-.pains img{
-    width : 300px;
-    height : 150px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
-
-.viennoiseries img{
-    width : 300px;
-    height : 150px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
-
-.specialites img{
-    width : 300px;
-    height : 150px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
 
 .accueil {
     padding-top: 300px;
@@ -510,7 +472,7 @@ body::-webkit-scrollbar {
 
 @media screen and (max-width: 1300px) {
     #navbar {
-        width: 80%; /* Ajuster la largeur */
+        width: 80%;
         padding-top: 10px;
         padding-bottom: 15px;
     }
@@ -519,17 +481,21 @@ body::-webkit-scrollbar {
         padding-top: 200px;
         transition: 1s;
     }
+
+    .horaires {
+        padding-top: 180px;
+    }
 }
 
 @media screen and (max-width: 1100px) {
     #navbar {
-        width: 80%; /* Ajuster la largeur */
+        width: 80%;
     }
     
     .nav-link {
         font-size: small;
         margin-top: 10px;
-        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+        padding: 5px 5px;
     }
 
     footer {
@@ -545,17 +511,21 @@ body::-webkit-scrollbar {
         padding-top: 200px;
         transition: 1s;
     }
+
+    .container {
+        margin: 0 20px;
+    }
 }
 
 @media screen and (max-width: 900px) {
     #navbar {
-        width: 80%; /* Ajuster la largeur */
+        width: 80%;
     }
     
     .nav-link {
         font-size: small;
         margin-top: 10px;
-        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+        padding: 5px 5px;
     }
 
     .form1 label, form input {
@@ -567,33 +537,61 @@ body::-webkit-scrollbar {
         padding-top: 180px;
         transition: 1s;
     }
+
+    .horaires {
+        padding-top: 160px;
+    }
+    
+    .container {
+        margin: 0 15px;
+    }
 }
 
 @media screen and (max-width: 700px) {
     #navbar {
-        width: 90%; /* Ajuster la largeur */
+        width: 90%;
     }
     
     .nav-link {
         font-size: small;
         margin-top: 10px;
-        padding: 5px 5px; /* Ajuster les marges pour plus d'espace autour du texte */
+        padding: 5px 5px;
+    }
+
+    .horaires-section {
+        padding: 20px;
     }
 }
 
 @media screen and (max-width: 500px) {
     #navbar {
-        width: 90%; /* Ajuster la largeur */
+        width: 90%;
     }
     
     .nav-link {
         font-size: smaller;
-        padding: 2px 2px; /* Ajuster les marges pour plus d'espace autour du texte */
+        padding: 2px 2px;
     }
 
     .form1 label, form input {
         width: 50%;
         transition: 1s;
+    }
+
+    .horaires {
+        padding-top: 140px;
+    }
+    
+    .horaires-section {
+        padding: 15px;
+    }
+    
+    .horaires-section h2 {
+        font-size: 1.5em;
+    }
+    
+    .horaires-block h3 {
+        font-size: 1.1em;
     }
 }
 
@@ -601,7 +599,7 @@ body::-webkit-scrollbar {
 .sidebar {
     position: fixed;
     top: 0;
-    left: 20px; /* D��calage par rapport au bord */
+    left: 20px; /* Décalage par rapport au bord */
     width: var(--sidebar-width);
     height: calc(100% - 40px); /* Hauteur réduite pour créer un espace en haut et en bas */
     background: var(--white);
@@ -705,3 +703,111 @@ body::-webkit-scrollbar {
 #navForm, a {
     text-decoration: none; /* Supprime la décoration des liens */
 }
+
+.horaires {
+    text-align: center;
+    padding-top: 120px;
+    transition: 1s;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.horaires-section {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.horaires-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.horaires-block {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--gray-lighter);
+    border-radius: 6px;
+}
+
+.horaires-block h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.horaires-details {
+    padding-left: 15px;
+}
+
+.horaires-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.highlight {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.horaires-details em {
+    color: var(--primary-dark);
+    font-size: 14px;
+}
+
+/* Styles communs pour les sections */
+.mentions, .contact, .horaires {
+    text-align: center;
+    padding-top: 120px;
+    transition: 1s;
+}
+
+.section-block {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--gray-lighter);
+    border-radius: 6px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+/* Styles des titres */
+.mentions h2, .contact h2, .horaires h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.mentions h3, .contact h3, .horaires h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+/* Styles des liens */
+.mentions a, .contact a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.mentions a:hover, .contact a:hover {
+    color: var(--primary-color);
+}
+
+/* Style spécifique pour la carte Google Maps */
+.contact iframe {
+    margin: 20px auto;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.contact iframe:hover {
+    transform: scale(1.02);
+}
+

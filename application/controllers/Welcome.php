@@ -25,6 +25,7 @@ class Welcome extends CI_Controller {
 		$this->load->model('model_bddclient','requetes');// Charger un modèle nommé model_bddclient.php
 		$this->load->library('form_validation');
 		$this->load->helper('form');
+        
 	}
 	
 	public function index()
@@ -49,17 +50,8 @@ class Welcome extends CI_Controller {
             case "Pains":
                 $this->load->view('Pains');
                 break;
-            case "Viennoiseries":
-                $this->load->view('Viennoiseries');
-                break;
-            case "Specialites":
-                $this->load->view('Specialites');
-                break;
             case "Contact":
                 $this->load->view('Contact');
-                break;
-            case "Commandes":
-                $this->load->view('Commandes');
                 break;
             case "Connexion":
                 $this->load->view('Connexion');
@@ -69,6 +61,9 @@ class Welcome extends CI_Controller {
                 break;
             case "Deconnexion":
                 $this->load->view('Deconnexion');
+                break;
+            case "Horaires":
+                $this->load->view('Horaires');
                 break;
         }
     
@@ -104,36 +99,5 @@ class Welcome extends CI_Controller {
         
         $this->load->view('Connexion_Traitement', $data);
     }
-
-    public function commandes() {
-        // Récupérer les données du formulaire
-        $this->load->view('Menu1'); // Chargement de la vue du menu
-        $this->load->view('piedPage'); // Chargement de la vue du pied de page
-        
-        // Récupérer l'ID du compte depuis la requête POST
-        $idCompte = $this->input->post('idCompte');
-        
-        // Préparer les données à passer à la vue
-        $data['idCompte'] = $idCompte;
-        
-        // Charger la vue Commandes avec les données
-        $this->load->view('Commandes', $data);
-    }
-    
-    public function traitement() {
-        // Récupérer les données du formulaire
-        $this->load->view('Menu1'); // Chargement de la vue du menu
-        $this->load->view('piedPage'); // Chargement de la vue du pied de page
-        
-        // Récupérer l'ID du compte depuis la requête POST
-        $idCompte = $this->input->post('idCompte');
-        
-        // Préparer les données à passer à la vue
-        $data['idCompte'] = $idCompte;
-        
-        // Charger la vue Commandes avec les données
-        $this->load->view('Traitement', $data);
-    }
-    
 
 }
