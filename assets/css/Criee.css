@@ -94,7 +94,9 @@
     background-color: var(--accent-color);
     background: none;
     border: none ;
-    padding: 0.5rem ;
+    padding: 10px 10px; /* Augmenter le rembourrage pour un bouton plus grand */
+    margin-right: 120px;
+    font-size: 1.2rem; /* Augmenter la taille de la police */
 }
 
 
@@ -102,13 +104,8 @@
 @media screen and (max-width: 768px) {
     #navbar {
         width: 90%;
-        padding: 12px 20px;
     }
 
-    .nav-link {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
 }
 
 
@@ -272,14 +269,6 @@
     align-content: center;
 }
 
-#produit {
-    text-align: center; /* Centrer le contenu du formulaire */
-    height: 30px;
-    margin-bottom:10px ;
-    border-radius: 10px;
-    transition: 0.5s;
-}
-
  
 
 .form1 label, form input {
@@ -289,44 +278,6 @@
     text-align: center;
 }
 
-
-footer {
-    background-color: var(--primary-color);
-    color: var(--white);
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1; 
-    box-shadow: 0 0 15px var(--primary-light); /* Ombre */
-    color: var(--white);
-    transition: 0.5s;
-}
-
-footer a {
-    color: var(--gray-light); /* Couleur des liens dans le footer */
-    text-decoration: none; /* Supprimer la soulignement par défaut */
-    transition: 1s;
-}
-
-.footer1 {
-    font-size: large;
-    background-color: transparent; /* Rend le fond transparent */
-    border: none; /* Supprime les bordures du bouton */
-    cursor: pointer; /* Affiche un curseur au survol du bouton */
-    padding: 5px; /* Supprime le rembourrage autour du texte */
-    text-decoration: none; /* Supprime la décoration du texte */
-    transition: 1s;
-    color: var(--gray-light); /* Couleur des liens dans le footer */
-}
-
-
-
-.footer1:hover {
-    color: var(--primary-light); /* Couleur des liens au survol */
-    transition: 1s;
-}
 
 table {
     width: 80%; /* Ajuster la largeur du tableau selon vos besoins */
@@ -386,14 +337,6 @@ td img {
 }
 
 
-.traitement {
-
-    text-align: center; /* Centrer le contenu */
-    padding-top: 200px;
-    transition: 1s;
-}
-
-
 .traitement p, h2, h3 {
     
     text-align: center; /* Centrer le texte */
@@ -446,12 +389,6 @@ td img {
 }
 
 
-#commandeForm {
-    text-align: center; /* Centrer les boutons */
-    transition: 1s;
-}
-
-
 /* Personnalisation de l'apparence de la barre de défilement */
 body::-webkit-scrollbar {
     width: 10px;
@@ -470,13 +407,20 @@ body::-webkit-scrollbar {
   }
 
 
-@media screen and (max-width: 1300px) {
+  @media screen and (max-width: 1500px) {
+
     #navbar {
-        width: 80%;
-        padding-top: 10px;
-        padding-bottom: 15px;
+        width: 35%;
     }
-    
+}
+
+
+@media screen and (max-width: 1300px) {
+
+    #navbar {
+        width: 40%;
+    }
+
     .accueil {
         padding-top: 200px;
         transition: 1s;
@@ -489,18 +433,10 @@ body::-webkit-scrollbar {
 
 @media screen and (max-width: 1100px) {
     #navbar {
-        width: 80%;
-    }
-    
-    .nav-link {
-        font-size: small;
-        margin-top: 10px;
-        padding: 5px 5px;
+        width: 70%;
     }
 
-    footer {
-        padding: 3px;
-    }
+
     
     .accueil {
         padding-top: 200px;
@@ -519,13 +455,7 @@ body::-webkit-scrollbar {
 
 @media screen and (max-width: 900px) {
     #navbar {
-        width: 80%;
-    }
-    
-    .nav-link {
-        font-size: small;
-        margin-top: 10px;
-        padding: 5px 5px;
+        width: 60%;
     }
 
     .form1 label, form input {
@@ -548,14 +478,9 @@ body::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 700px) {
+
     #navbar {
-        width: 90%;
-    }
-    
-    .nav-link {
-        font-size: small;
-        margin-top: 10px;
-        padding: 5px 5px;
+        width: 50%;
     }
 
     .horaires-section {
@@ -565,12 +490,7 @@ body::-webkit-scrollbar {
 
 @media screen and (max-width: 500px) {
     #navbar {
-        width: 90%;
-    }
-    
-    .nav-link {
-        font-size: smaller;
-        padding: 2px 2px;
+        width: 40%;
     }
 
     .form1 label, form input {
@@ -646,8 +566,8 @@ body::-webkit-scrollbar {
 }
 
 .sidebar-item {
-    width: 100%;
-    padding: 1rem 1.2rem;
+    width: 90%; /* Réduire la largeur des boutons à 90% */
+    padding: 1rem 1.2rem; /* Augmenter le rembourrage pour donner plus de hauteur */
     background: none;
     border: none;
     color: var(--primary-color);
@@ -655,11 +575,12 @@ body::-webkit-scrollbar {
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 10px;
-    font-size: 1.1rem;
+    font-size: 1.1rem; /* Garder la taille de la police inchangée */
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    margin-bottom: 15px; /* Espacement entre les boutons */
 }
 
 .sidebar-item:hover {
@@ -809,5 +730,22 @@ body::-webkit-scrollbar {
 
 .contact iframe:hover {
     transform: scale(1.02);
+}
+
+.deco-button {
+
+    border-bottom: 2px solid var(--accent-color); /* Ajoute un trait bleu en dessous */
+    padding-bottom: 10px; /* Ajoute un peu d'espace entre le texte et le trait */
+}
+
+#navForm {
+    display: flex; /* Utiliser flexbox pour centrer le contenu */
+    align-items: center; /* Centrer verticalement */
+    justify-content: space-between; /* Espacer le logo et le bouton */
+}
+
+#navForm img {
+    height: 60px; /* Ajuster la hauteur du logo */
+    margin-left: 10px; /* Espacement à droite du logo */
 }
 
