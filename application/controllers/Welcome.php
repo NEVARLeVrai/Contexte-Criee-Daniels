@@ -33,8 +33,6 @@ class Welcome extends CI_Controller {
 		$this->load->view('Menu1'); // créer un fichier menu.php dans le répertoire views
 		$this->load->view('Accueil'); // créer affichage.php dans le répertoire views
 		$data['clients']= $this->requetes->getClients(); 
-		$this->load->view('piedPage',$data); // Vue piedPage à créer dans le dossier VIEWS
-		//$this->load->view('piedPage',NULL); // Vue piedPage à créer dans le dossier VIEWS 
 	}
     public function contenu($id) 
     {
@@ -67,13 +65,11 @@ class Welcome extends CI_Controller {
                 break;
         }
     
-        $this->load->view('piedPage', NULL); // Chargement de la vue pied de page
     }
     
     public function traitement_inscription() {
         // Récupérer les données du formulaire
         $this->load->view('Menu1'); // Chargement de la vue du menu
-        $this->load->view('piedPage');
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
     
@@ -88,7 +84,6 @@ class Welcome extends CI_Controller {
     public function traitement_connexion() {
         // Récupérer les données du formulaire
         $this->load->view('Menu1'); // Chargement de la vue du menu
-        $this->load->view('piedPage');
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
     
