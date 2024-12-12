@@ -18,6 +18,7 @@
 
   /* Couleurs d'état */
   --hover-shadow: 0 0 15px var(--accent-color);
+  --hover-shadow2: 0 0 5px var(--black);
   --nav-shadow: 0 0 15px var(--primary-dark);
   --footer-shadow: 0 0 15px var(--primary-light);
   --button-shadow: 0 2px 0 2px var(--accent-light);
@@ -407,10 +408,19 @@ body::-webkit-scrollbar {
   }
 
 
+  @media screen and (max-width: 1600px) {
+
+    #navbar {
+        width: 30%;
+    }
+}
+
+
+
   @media screen and (max-width: 1500px) {
 
     #navbar {
-        width: 35%;
+        width: 30%;
     }
 }
 
@@ -418,7 +428,7 @@ body::-webkit-scrollbar {
 @media screen and (max-width: 1300px) {
 
     #navbar {
-        width: 40%;
+        width: 35%;
     }
 
     .accueil {
@@ -433,7 +443,7 @@ body::-webkit-scrollbar {
 
 @media screen and (max-width: 1100px) {
     #navbar {
-        width: 70%;
+        width: 45%;
     }
 
 
@@ -455,7 +465,7 @@ body::-webkit-scrollbar {
 
 @media screen and (max-width: 900px) {
     #navbar {
-        width: 60%;
+        width: 50%;
     }
 
     .form1 label, form input {
@@ -488,9 +498,70 @@ body::-webkit-scrollbar {
     }
 }
 
+
+@media screen and (max-width: 600px) {
+    #navbar {
+        width: 60%;
+    }
+
+    .form1 label, form input {
+        width: 50%;
+        transition: 1s;
+    }
+
+    .horaires {
+        padding-top: 140px;
+    }
+    
+    .horaires-section {
+        padding: 15px;
+    }
+    
+    .horaires-section h2 {
+        font-size: 1.5em;
+    }
+    
+    .horaires-block h3 {
+        font-size: 1.1em;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 700px) {
+    #navbar {
+        width: 70%;
+    }
+
+    .form1 label, form input {
+        width: 50%;
+        transition: 1s;
+    }
+
+    .horaires {
+        padding-top: 140px;
+    }
+    
+    .horaires-section {
+        padding: 15px;
+    }
+    
+    .horaires-section h2 {
+        font-size: 1.5em;
+    }
+    
+    .horaires-block h3 {
+        font-size: 1.1em;
+    }
+}
+
+
+
 @media screen and (max-width: 500px) {
     #navbar {
-        width: 40%;
+        width: 90%;
     }
 
     .form1 label, form input {
@@ -531,10 +602,12 @@ body::-webkit-scrollbar {
     padding: 1.5rem;
     margin-top: 20px; /* Espace en haut */
     border-radius: 20px;
+    box-shadow: var(--hover-shadow);
 }
 
 .sidebar.active {
     transform: translateX(0);
+    box-shadow: var(--hover-shadow);
 }
 
 .sidebar-header {
@@ -574,7 +647,7 @@ body::-webkit-scrollbar {
 .sidebar-item {
     width: 90%; /* Réduire la largeur des boutons à 90% */
     padding: 1rem 1.2rem; /* Augmenter le rembourrage pour donner plus de hauteur */
-    background: none;
+    background-color:transparent ;
     border: none;
     color: var(--primary-color);
     text-align: left; /* Garder le texte à gauche */
@@ -582,13 +655,19 @@ body::-webkit-scrollbar {
     transition: all 0.3s ease;
     border-radius: 10px;
     font-size: 1.1rem; /* Garder la taille de la police inchangée */
-    display: flex; /* Utiliser flexbox pour centrer le contenu */
-    justify-content: center; /* Centrer horizontalement le contenu */
+    display: flex; /* Utiliser flexbox pour aligner le contenu */
+    align-items: center; /* Centrer verticalement le contenu */
     margin: 10px auto; /* Centrer le bouton avec une marge automatique */
 }
 
 .sidebar-item > i {
     margin-right: 10px; /* Espacement entre l'icône et le texte */
+    flex-shrink: 0; /* Empêche l'icône de se réduire */
+}
+
+.sidebar-item > span {
+    flex-grow: 1; /* Permet au texte de prendre tout l'espace restant */
+    text-align: center; /* Centrer le texte */
 }
 
 .sidebar-item:hover {
