@@ -45,9 +45,6 @@ class Welcome extends CI_Controller {
             case "Mentions":
                 $this->load->view('Mentions');
                 break;
-            case "Pains":
-                $this->load->view('Pains');
-                break;
             case "Contact":
                 $this->load->view('Contact');
                 break;
@@ -62,6 +59,9 @@ class Welcome extends CI_Controller {
                 break;
             case "Horaires":
                 $this->load->view('Horaires');
+                break;
+            case "Annonces":
+                $this->load->view('Annonces');
                 break;
         }
     

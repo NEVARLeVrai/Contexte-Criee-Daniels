@@ -33,22 +33,22 @@ session_start();
 
 
                 <a href="<?php echo site_url('welcome/contenu/Accueil');?>">
-                    <button class="sidebar-item deco-button" style="margin-top: 50px; ">
-                        <i class="fas fa-home"></i> Accueil
+                    <button class="sidebar-item deco-button" style="margin-top: 100px;">
+                        <i class="fas fa-home"></i> <span>Accueil</span>
                     </button>
                 </a>
 
                 
                 <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                         <button class="sidebar-item deco-button">
-                            <i class="fas fa-user"></i> Compte
+                            <i class="fas fa-user"></i> <span>Compte</span>
                     </button>
                 </a>
 
                 <?php if (isset($_SESSION) && $_SESSION): ?>
                 <a href="<?php echo site_url('welcome/contenu/Deconnexion');?>">
                     <button class="sidebar-item deco-button" style="margin-bottom: 50px;">
-                        <i class="fas fa-sign-out-alt"></i> Deconnexion
+                        <i class="fas fa-sign-out-alt"></i> <span>Deconnexion</span>
                     </button>
                 </a>
                 <?php endif; ?>
@@ -56,7 +56,7 @@ session_start();
 
                 <a href="<?php echo site_url('welcome/contenu/Annonces');?>">
                     <button class="sidebar-item deco-button"  style="margin-top: 50px; margin-bottom: 50px;">
-                        <i class="fas fa-bullhorn"></i> Annonces
+                        <i class="fas fa-bullhorn"></i> <span>Annonces</span>
                     </button>
                 </a>
 
@@ -65,24 +65,25 @@ session_start();
 
                 <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                     <button class="sidebar-item deco-button">
-                        <i class="fas fa-file-alt"></i> Mentions
+                        <i class="fas fa-file-alt"></i> <span>Mentions</span>
                     </button>
                 </a>
 
                 <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                     <button class="sidebar-item deco-button">
-                        <i class="fas fa-envelope"></i> Contact
+                        <i class="fas fa-envelope"></i> <span>Contact</span>
                     </button>
                 </a>
 
                 <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                     <button class="sidebar-item deco-button">
-                        <i class="fas fa-clock"></i> Horaires
+                        <i class="fas fa-clock"></i> <span>Horaires</span>
                     </button>
                 </a>
             </nav>
             <div class="sidebar-footer">
-                <p>Merci de visiter la Criée de Poulgoazec</p>
+            <p><i class="fas fa-fish"></i>
+                Merci de visiter la Criée de Poulgoazec</p>
             </div>
         </div>
         <header>
