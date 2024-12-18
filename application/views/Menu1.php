@@ -33,7 +33,7 @@ session_start();
 
 
                 <a href="<?php echo site_url('welcome/contenu/Accueil');?>">
-                    <button class="sidebar-item deco-button" style="margin-top: 100px;">
+                    <button class="sidebar-item deco-button" style="margin-top: 80px;">
                         <i class="fas fa-home"></i> <span>Accueil</span>
                     </button>
                 </a>
