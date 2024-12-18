@@ -63,19 +63,19 @@ session_start();
 
 
 
-                <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
+                <a href="<?php echo site_url('welcome/contenu/Mentions');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-file-alt"></i> <span>Mentions</span>
                     </button>
                 </a>
 
-                <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
+                <a href="<?php echo site_url('welcome/contenu/Contact');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-envelope"></i> <span>Contact</span>
                     </button>
                 </a>
 
-                <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
+                <a href="<?php echo site_url('welcome/contenu/Horaires');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-clock"></i> <span>Horaires</span>
                     </button>
