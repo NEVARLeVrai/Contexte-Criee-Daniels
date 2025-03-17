@@ -712,6 +712,24 @@ body::-webkit-scrollbar {
     text-decoration: none; /* Supprime la décoration des liens */
 }
 
+
+.Annonces {
+    text-align: center;
+    padding-top: 120px;
+    transition: 1s;
+}
+
+.Annonces-section {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.Annonces-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
 .horaires {
     text-align: center;
     padding-top: 120px;

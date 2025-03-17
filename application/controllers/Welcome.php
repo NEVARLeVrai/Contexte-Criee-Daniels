@@ -72,10 +72,12 @@ class Welcome extends CI_Controller {
         $this->load->view('Menu1'); // Chargement de la vue du menu
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
+        $typeCompte = $this->input->post('typeCompte');
     
         // Préparer les données à passer à la vue
         $data['idCompte'] = $idCompte;
         $data['mdpCompte'] = $mdpCompte;
+        $data['typeCompte'] = $typeCompte;
     
         // Charger la vue Inscription_Traitement avec les données
         $this->load->view('Inscription_Traitement', $data);
@@ -94,5 +96,24 @@ class Welcome extends CI_Controller {
         
         $this->load->view('Connexion_Traitement', $data);
     }
+
+
+    public function traitement_Compte() {
+        // Récupérer les données du formulaire
+        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $idCompte = $this->input->post('idCompte');
+        $mdpCompte = $this->input->post('mdpCompte');
+        $typeCompte = $this->input->post('typeCompte');
+    
+        // Préparer les données à passer à la vue
+        $data['idCompte'] = $idCompte;
+        $data['mdpCompte'] = $mdpCompte;
+        $data['typeCompte'] = $typeCompte;
+    
+        
+        $this->load->view('TraitementCompte', $data);
+    }
+
+    
 
 }
