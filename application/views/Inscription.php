@@ -17,6 +17,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <label for="mdpCompte">Mot de passe :</label><br>
             <input type="password" id="mdpCompte" name="mdpCompte" required><br>
 
+            <label for="typeCompte">Type de compte :</label><br>
+            <select id="typeCompte" name="typeCompte" required>
+                <option value="acheteur">Acheteur</option>
+                <option value="vendeur">Vendeur</option>
+            </select><br>
+
 			<br>
             <button type="submit" class="btn">Valider</button>
 			<button type='reset' class='btn'>Effacer</button> 
