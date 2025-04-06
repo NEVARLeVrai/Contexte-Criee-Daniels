@@ -222,4 +222,48 @@ VALUES
 
 INSERT INTO BATEAU (idBateau, immatriculation)
 VALUES
-('KORRI', 'AA 123456');
+('KORRI', 'AA 123456'),
+('TLAD', 'SIOSLAM');
+
+INSERT INTO COMPTE (idCompte, mdpCompte, typeCompte)
+VALUES
+('BELLER', 'bellerthierry', 'acheteur'),
+('PFISTER', 'pfisterludovic', 'acheteur'),
+('SOARES', 'soaresdaniels', 'vendeur'),
+('CIOBOTARU', 'ciobotarualexandru', 'vendeur'),
+('GEMINI', 'BIRD', 'admin');
+
+INSERT INTO ACHETEUR (idCompte, raisonSocialeEntreprise, locRue, rue, ville, codePostal, numHabilitation)
+VALUES
+('BELLER', 'TLAD', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345'),
+('PFISTER', 'TLAD', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345');
+
+INSERT INTO VENDEUR (idCompte, raisonSocialeEntreprise, nom, prenom, locRue, rue, ville, codePostal, numHabilitation)
+VALUES
+('SOARES', 'TLAD', 'Soares', 'Daniels', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345'),
+('CIOBOTARU', 'TLAD', 'Ciobotaru', 'Alexandru', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345');
+
+INSERT INTO ADMIN (idCompte)
+VALUES
+('GEMINI');
+
+INSERT INTO FACTURE (idFacture, idCompte)
+VALUES
+('001', 'BELLER'),
+('002', 'PFISTER');
+
+INSERT INTO PECHE (idBateau, datePeche)
+VALUES
+('KORRI', '2025-04-05'),
+('TLAD', '2020-01-01');
+
+INSERT INTO LOT (idBateau, datePeche, idLot, idEspece, idTaille, idPresentation, idBac, idCompte, idQualite, 
+poidsBrutLot, prixPlancher, prixDepart, prixEncheresMax, dateEnchere, heureDebutEnchere, codeEtat, idFacture) 
+VALUES 
+('KORRI', '2025-04-05', 1, 'LJL', 10, 'ENT', 'B', 'BELLER', 'E', 22.50, 10, 11, 15, '2025-04-05', '9:00:00', 'ok', '001'),
+('TLAD', '2020-01-01', 2, 'LJL', 20, 'VID', 'F', 'PFISTER', 'A', 44, 50, 53, 70, '2025-04-05', '9:00:00', 'ok', '002');
+
+INSERT INTO ANNONCE (idBateau, datePeche, idLot, idCompteA, prixEnchere, heureEnchere, nomAnnonce, idCompteV) 
+VALUES 
+('KORRI', '2025-04-05', 1, 'BELLER', 12.34, '10:00:00', 'annonce 1', 'SOARES'),
+('TLAD', '2020-01-01', 2, 'PFISTER', 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
