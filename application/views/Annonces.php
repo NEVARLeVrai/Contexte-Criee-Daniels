@@ -85,8 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     } elseif ($row['typeCompte'] === 'vendeur') {
                         // Si l'utilisateur est un vendeur, afficher le bouton pour créer une annonce
                         echo '<form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
-                        	<button type="button" class="btn">Créer mon annonce</button>
-                        </form>';
+                            <button type="submit" class="btn">Créer une annonce</button>
+                            </form>';
                     }
                     
                 } else {
