@@ -53,9 +53,14 @@ session_start();
                 </a>
                 <?php endif; ?>
 
+                <a href="<?php echo site_url('welcome/contenu/Lots');?>">
+                    <button class="sidebar-item deco-button" style=" margin-top: 50px; margin-bottom: 50px;">
+                        <i class="fas fa-fish"></i> <span>Lots</span>
+                    </button>
+                </a>
 
                 <a href="<?php echo site_url('welcome/contenu/Annonces');?>">
-                    <button class="sidebar-item deco-button"  style="margin-top: 50px; margin-bottom: 50px;">
+                    <button class="sidebar-item deco-button" style="margin-top: 50px; margin-bottom: 50px;">
                         <i class="fas fa-bullhorn"></i> <span>Annonces</span>
                     </button>
                 </a>
