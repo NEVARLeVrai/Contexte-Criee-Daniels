@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql:3306
--- Généré le : dim. 06 avr. 2025 à 09:21
+-- Généré le : mer. 23 avr. 2025 à 07:52
 -- Version du serveur : 5.7.44
 -- Version de PHP : 8.2.8
 
@@ -20,10 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `LaCriee`
 --
-
-DROP DATABASE IF EXISTS LaCriee;
-CREATE DATABASE IF NOT EXISTS LaCriee CHARACTER SET utf8;
-USE LaCriee;
 
 -- --------------------------------------------------------
 
@@ -96,6 +92,13 @@ CREATE TABLE `BATEAU` (
   `idBateau` varchar(50) NOT NULL,
   `immatriculation` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `BATEAU`
+--
+
+INSERT INTO `BATEAU` (`idBateau`, `immatriculation`) VALUES
+('KORRI', 'AA 123456');
 
 -- --------------------------------------------------------
 
@@ -176,14 +179,6 @@ CREATE TABLE `PECHE` (
   `idBateau` varchar(50) NOT NULL,
   `datePeche` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `PECHE`
---
-
-INSERT INTO `PECHE` (`idBateau`, `datePeche`) VALUES
-('KORRI', '2025-04-05'),
-('TLAD', '2020-01-01');
 
 -- --------------------------------------------------------
 

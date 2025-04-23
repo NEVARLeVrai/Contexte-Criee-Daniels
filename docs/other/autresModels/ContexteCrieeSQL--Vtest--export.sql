@@ -350,7 +350,7 @@ ALTER TABLE `ADMIN`
 -- Index pour la table `ANNONCE`
 --
 ALTER TABLE `ANNONCE`
-  ADD PRIMARY KEY (`idBateau`,`datePeche`,`idLot`,`idCompteA`),
+  ADD PRIMARY KEY (`idBateau`,`datePeche`,`idLot`),
   ADD KEY `fk_annonce_vendeur` (`idCompteV`);
 
 --

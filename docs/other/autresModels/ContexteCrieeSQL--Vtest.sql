@@ -106,7 +106,7 @@ CREATE TABLE ANNONCE(
    heureEnchere TIME,
    nomAnnonce VARCHAR(50),
    idCompteV VARCHAR(30) NOT NULL,
-   PRIMARY KEY(idBateau, datePeche, idLot, idCompteA)
+   PRIMARY KEY(idBateau, datePeche, idLot)
 );
 
 -- Ajout des contraintes de clés étrangères
