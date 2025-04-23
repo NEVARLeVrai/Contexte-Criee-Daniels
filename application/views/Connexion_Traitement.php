@@ -53,6 +53,73 @@
 					{
 						$_SESSION["identifiant"] = $idCompte; // l'identifiant reçoit la valeur de la bdd
 						
+						// Récupérer le type de compte pour la session
+						$selectTypeCompte = "SELECT typeCompte FROM COMPTE WHERE idCompte = :idCompte";
+						$stmtType = $pdo->prepare($selectTypeCompte);
+						$stmtType->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
+						$stmtType->execute();
+						$typeCompte = $stmtType->fetchColumn();
+						
+						// Vérifier le type d'utilisateur dans les tables spécifiques sans afficher de débogage
+						$tables = ['VENDEUR', 'ACHETEUR', 'ADMIN'];
+						foreach ($tables as $table) {
+							$checkSql = "SELECT COUNT(*) FROM $table WHERE idCompte = :idCompte";
+							$checkStmt = $pdo->prepare($checkSql);
+							$checkStmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
+							$checkStmt->execute();
+							$exists = $checkStmt->fetchColumn();
+							
+							if ($exists > 0 && empty($typeCompte)) {
+								// Si le type n'est pas défini dans COMPTE mais existe dans une table spécifique
+								if ($table == 'VENDEUR') $typeCompte = 'vendeur';
+								elseif ($table == 'ACHETEUR') $typeCompte = 'acheteur';
+								elseif ($table == 'ADMIN') $typeCompte = 'admin';
+								
+								// Mettre à jour le type de compte dans la base de données
+								$updateTypeSql = "UPDATE COMPTE SET typeCompte = :typeCompte WHERE idCompte = :idCompte";
+								$updateStmt = $pdo->prepare($updateTypeSql);
+								$updateStmt->bindParam(':typeCompte', $typeCompte, PDO::PARAM_STR);
+								$updateStmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
+								$updateStmt->execute();
+							}
+						}
+						
+						// Si le type de compte est toujours vide, essayer de le déterminer
+						if (empty($typeCompte)) {
+							// Vérifier si l'utilisateur existe dans VENDEUR
+							$checkVendeur = "SELECT COUNT(*) FROM VENDEUR WHERE idCompte = :idCompte";
+							$stmt = $pdo->prepare($checkVendeur);
+							$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
+							$stmt->execute();
+							if ($stmt->fetchColumn() > 0) {
+								$typeCompte = 'vendeur';
+							} else {
+								// Vérifier si l'utilisateur existe dans ACHETEUR
+								$checkAcheteur = "SELECT COUNT(*) FROM ACHETEUR WHERE idCompte = :idCompte";
+								$stmt = $pdo->prepare($checkAcheteur);
+								$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
+								$stmt->execute();
+								if ($stmt->fetchColumn() > 0) {
+									$typeCompte = 'acheteur';
+								} else {
+									// Vérifier si l'utilisateur existe dans ADMIN
+									$checkAdmin = "SELECT COUNT(*) FROM ADMIN WHERE idCompte = :idCompte";
+									$stmt = $pdo->prepare($checkAdmin);
+									$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
+									$stmt->execute();
+									if ($stmt->fetchColumn() > 0) {
+										$typeCompte = 'admin';
+									} else {
+										// Type par défaut si on ne trouve pas l'utilisateur dans les tables spécifiques
+										$typeCompte = 'inconnu';
+									}
+								}
+							}
+						}
+						
+						// Stocker le type de compte dans la session
+						$_SESSION["typeCompte"] = $typeCompte;
+						
 						echo "
 						<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Connexion réussie.</h2><br>	

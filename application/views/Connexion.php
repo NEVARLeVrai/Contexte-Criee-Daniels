@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
     <section id="connexion_et_inscription" class="connexion_et_inscription">
         <?php
-            if($_SESSION)
+            if(isset($_SESSION) && isset($_SESSION["identifiant"]))
 			{
 				$id = $_SESSION["identifiant"]; 
 				echo '
