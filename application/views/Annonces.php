@@ -8,10 +8,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="Annonces-section">
                 <h2><i class="fas fa-bullhorn"></i> Les Annonces de la Criée de Poulgoazec</h2>
             </div>  
+            
+<!-- (session) SI COMPTE = ACHETEUR : affiche les annonces /// SI COMPTE = VENDEUR : bouton créer une annonce-->
+            
+            <?php
+				echo '
+				<form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
+					<button class="btn">Créer mon annonce</button>
+				</form>';
+            ?>
+
             <?php	
                 include "application/config/database.php";
              
-                $selectAnnonces = "SELECT idBateau, datePeche, idLot, idCompteA, prixEnchere, heureEnchere, nomAnnonce, idCompteV FROM ANNONCE ORDER BY idLot";
+                $selectAnnonces = "SELECT idBateau, datePeche, idLot, prixEnchere, heureEnchere, nomAnnonce, idCompteV FROM ANNONCE ORDER BY idLot";
 
                 // cette requête SQL va récupérer toutes les informations des annonces entrées dans la base de données			
                 
@@ -30,9 +40,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <tr> <!-- tr est une ligne dans le tableau -->
                                     <!-- th est l en-tete du tableau, le nom des colonnes -->
                                     <th scope="col">Bateau</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">Date de pêche</th>
                                     <th scope="col">Lot n°</th>
-                                    <th scope="col">Acheteur</th>
                                     <th scope="col">Prix</th> 	
                                     <th scope="col">Heure</th>
                                     <th scope="col">Titre</th>
@@ -49,7 +58,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <td>'.$row['idBateau'].'</td>
                                 <td>'.$row['datePeche'].'</td>
                                 <td>'.$row['idLot'].'</td>
-                                <td>'.$row['idCompteA'].'</td>
                                 <td>'.$row['prixEnchere'].'</td>
                                 <td>'.$row['heureEnchere'].'</td>
                                 <td>'.$row['nomAnnonce'].'</td>
