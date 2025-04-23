@@ -257,7 +257,7 @@ VALUES
 ('KORRI', '2025-04-05', 1, 'LJL', 10, 'ENT', 'B', 'BELLER', 'E', 22.50, 10, 11, 15, '2025-04-05', '9:00:00', 'ok', '001'),
 ('TLAD', '2020-01-01', 2, 'LJL', 20, 'VID', 'F', 'PFISTER', 'A', 44, 50, 53, 70, '2025-04-05', '9:00:00', 'ok', '002');
 
-INSERT INTO ANNONCE (idBateau, datePeche, idLot, prixEnchere, heureEnchere, nomAnnonce, idCompteV) 
+INSERT INTO ANNONCE (idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV) 
 VALUES 
 ('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
 ('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
