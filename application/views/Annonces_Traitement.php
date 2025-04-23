@@ -21,23 +21,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$prixEnchere = $_POST['prixEnchere'];
 					$DateEnchere = $_POST['DateEnchere'];
 					$titreAnnonce = $_POST['titreAnnonce'];
-					$idCompte = $_POST['idCompte'];
+					$idCompte = $_SESSION['identifiant'];
 
 					// Insérer la nouvelle annonce
-					$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, DateEnchere, titreAnnonce, idCompteV) 
-					VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :DateEnchere, :titreAnnonce, :idCompteV)";
+					$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, dateEnchere, titreAnnonce, idCompteV) 
+					VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :dateEnchere, :titreAnnonce, :idCompteV)";
 				
 					$stmt = $pdo->prepare($insertAnnonce);
 					$stmt->bindParam(':idImage', $idImage, PDO::PARAM_STR);
 					$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
 					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
-					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
+					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
 					$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
-					$stmt->bindParam(':DateEnchere', $DateEnchere, PDO::PARAM_STR);
+					$stmt->bindParam(':dateEnchere', $DateEnchere, PDO::PARAM_STR);
 					$stmt->bindParam(':titreAnnonce', $titreAnnonce, PDO::PARAM_STR);
-					$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
-
-					if ($stmt->execute()) {
+					$stmt->bindParam(':idCompteV', $idCompte, PDO::PARAM_STR);
+					$stmt->execute();
+					try { 
+						echo "Debug - idLot: " . $idImage . "<br>";
+						echo "Debug - nouveauPrix: " . $idBateau . "<br>";
+						echo "Debug - idCompteA: " . $datePeche . "<br>";
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Annonce créée avec succès !</h2>
 							<br>
@@ -47,7 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</a>
 							</form>
 						</section>";
-					} else {
+					} catch (PDOException $e) {
+						// Debug
+						
+						echo "Debug - idLot: " . $idImage . "<br>";
+						echo "Debug - nouveauPrix: " . $idBateau . "<br>";
+						echo "Debug - idCompteA: " . $datePeche . "<br>";
+						echo "<p>Exception: " . $e->getMessage() . "</p><br>";
+
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Erreur lors de la création de l'annonce</h2>
 							<br>
