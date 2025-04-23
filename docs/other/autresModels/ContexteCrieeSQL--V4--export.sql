@@ -21,6 +21,10 @@ SET time_zone = "+00:00";
 -- Base de données : `LaCriee`
 --
 
+DROP DATABASE IF EXISTS LaCriee;
+CREATE DATABASE IF NOT EXISTS LaCriee CHARACTER SET utf8;
+USE LaCriee;
+
 -- --------------------------------------------------------
 
 --
@@ -59,7 +63,7 @@ CREATE TABLE `ANNONCE` (
   `idLot` int(11) NOT NULL,
   `prixEnchere` decimal(15,2) DEFAULT NULL,
   `heureEnchere` time DEFAULT NULL,
-  `nomAnnonce` varchar(50) DEFAULT NULL,
+  `titreAnnonce` varchar(50) DEFAULT NULL,
   `idCompteV` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

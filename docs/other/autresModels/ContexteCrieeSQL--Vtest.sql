@@ -104,7 +104,7 @@ CREATE TABLE ANNONCE(
    idLot INT NOT NULL,
    prixEnchere DECIMAL(15,2),
    heureEnchere TIME,
-   nomAnnonce VARCHAR(50),
+   titreAnnonce VARCHAR(50),
    idCompteV VARCHAR(30) NOT NULL,
    PRIMARY KEY(idBateau, datePeche, idLot)
 );
