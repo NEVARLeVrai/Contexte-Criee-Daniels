@@ -9,47 +9,60 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <p>Créer mon annonce :</p>
 		<br>
         
-        <form method="POST" action="<?php echo site_url('welcome/annonces_traitement'); ?>">
+        <form method="POST" action="<?php echo site_url('welcome/traitement_annonces'); ?>">
+            <label for="idBateau">Bateau :</label><br>
+            <select id="idBateau" name="idBateau" required>
             <?php	
-                include "application/config/database.php";
-            
+                include "application/config/database.php";    
+
                 $selectBateaux = "SELECT idBateau, immatriculation FROM BATEAU";                
                 $stmt = $pdo->prepare($selectBateaux);
                 $stmt->execute();
-                $rows = $stmt->fetchAll();
-            
-                if(count($rows) > 0) // on vérifie que le nombre d'éléments dans $rows est supérieur à 0, soit que $rows ne soit pas vide
-                {
-                    echo '
-                    <label for="idBateau">Bateau :</label><br>
-                    <select id="idBateau" name="idBateau" required>';
-                        foreach ($rows as $row) // boucle pour tous les éléments dans $rows
-                        { 
-                            echo '<option value='.$row['idBateau'].'>'.$row['idBateau'].' - '.$row['immatriculation'].'</option>';
-                        }
-                    echo '</select><br><br>';
-                    
-                } else {
-                    echo "Erreur : aucun enregistrement de bateau trouvé";
-                    // si $rows est vide, cela signifie qu'aucun bateau n'existe dans la base
+                $rows = $stmt->fetchAll();        
+
+                foreach ($rows as $row) // boucle pour tous les éléments dans $rows
+                { 
+                    echo '<option value='.$row['idBateau'].'>'.$row['idBateau'].' - '.$row['immatriculation'].'</option>';
                 }
                 $pdo=null; // on ferme la connexion à la base de données en donnant une valeur vide à $pdo
             ?>
+            </select><br><br> 
 
-            <label for="datePeche">Date :</label><br>
+            <label for="datePeche">Date de pêche:</label><br>
             <input type="date" id="datePeche" name="datePeche" required><br>
+
+            <label for="idLot">Lot n° :</label><br>
+            <select id="idLot" name="idLot" required><br>
+            <?php	
+                include "application/config/database.php";    
+
+                $selectLots = "SELECT idBateau, idLot FROM LOT ORDER BY idLot";                
+                $stmt = $pdo->prepare($selectLots);
+                $stmt->execute();
+                $rows = $stmt->fetchAll();        
+
+                foreach ($rows as $row) // boucle pour tous les éléments dans $rows
+                { 
+                    echo '<option value='.$row['idLot'].'>'.$row['idLot'].' : '.$row['idBateau'].'</option>';
+                }                
+                $pdo=null; // on ferme la connexion à la base de données en donnant une valeur vide à $pdo
+            ?>
+            </select><br><br> 
 
             <label for="prixEnchere">Prix :</label><br>
             <input type="number" min="1" step="any" id="prixEnchere" name="prixEnchere" required><br>
 
-            <label for="heureEnchere">Heure :</label><br>
-            <input type="time" id="heureEnchere" name="heureEnchere" required><br>
+            <label for="DateEnchere">Date de l'enchère :</label><br>
+            <input type="datetime-local" id="DateEnchere" name="DateEnchere" required><br>
 
-            <label for="nomAnnonce">Titre :</label><br>
-            <input type="text" id="nomAnnonce" name="nomAnnonce" required><br>
+            <label for="titreAnnonce">Titre :</label><br>
+            <input type="text" id="titreAnnonce" name="titreAnnonce" required><br>
 
             <label for="dateFinEnchere">Date limite d'enchère :</label><br>
             <input type="datetime-local" id="dateFinEnchere" name="dateFinEnchere" required><br>
+
+            <label for="idImage">Ajouter une image :</label><br>
+            <input type="file" accept="image/*" id="idImage" name="idImage" required><br>
 
 			<br>
             <button type="submit" class="btn">Valider</button>

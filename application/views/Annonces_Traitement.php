@@ -14,26 +14,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				// Vérifier si c'est une création d'annonce ou une enchère
 				if (isset($_POST['idBateau'])) {
 					// Traitement de la création d'annonce
+					$idImage = $_POST["idImage"];
 					$idBateau = $_POST['idBateau'];
 					$datePeche = $_POST['datePeche'];
+					$idLot = $_POST["idLot"]; //
 					$prixEnchere = $_POST['prixEnchere'];
-					$heureEnchere = $_POST['heureEnchere'];
-					$titreAnnonce = $_POST['nomAnnonce'];
-					$idCompteV = $_SESSION['identifiant'];
+					$DateEnchere = $_POST['DateEnchere'];
+					$titreAnnonce = $_POST['titreAnnonce'];
+					$idCompte = $_SESSION['identifiant'];
 
 					// Insérer la nouvelle annonce
-					$insertAnnonce = "INSERT INTO ANNONCE (idBateau, datePeche, prixEnchere, heureEnchere, titreAnnonce, idCompteV) 
-									VALUES (:idBateau, :datePeche, :prixEnchere, :heureEnchere, :titreAnnonce, :idCompteV)";
-					
+					$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, dateEnchere, titreAnnonce, idCompteV) 
+					VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :dateEnchere, :titreAnnonce, :idCompteV)";
+				
 					$stmt = $pdo->prepare($insertAnnonce);
+					$stmt->bindParam(':idImage', $idImage, PDO::PARAM_STR);
 					$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
 					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
+					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
 					$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
-					$stmt->bindParam(':heureEnchere', $heureEnchere, PDO::PARAM_STR);
+					$stmt->bindParam(':dateEnchere', $DateEnchere, PDO::PARAM_STR);
 					$stmt->bindParam(':titreAnnonce', $titreAnnonce, PDO::PARAM_STR);
-					$stmt->bindParam(':idCompteV', $idCompteV, PDO::PARAM_STR);
-
-					if ($stmt->execute()) {
+					$stmt->bindParam(':idCompteV', $idCompte, PDO::PARAM_STR);
+					$stmt->execute();
+					try { 
+						echo "Debug - idLot: " . $idImage . "<br>";
+						echo "Debug - nouveauPrix: " . $idBateau . "<br>";
+						echo "Debug - idCompteA: " . $datePeche . "<br>";
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Annonce créée avec succès !</h2>
 							<br>
@@ -43,7 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</a>
 							</form>
 						</section>";
-					} else {
+					} catch (PDOException $e) {
+						// Debug
+						
+						echo "Debug - idLot: " . $idImage . "<br>";
+						echo "Debug - nouveauPrix: " . $idBateau . "<br>";
+						echo "Debug - idCompteA: " . $datePeche . "<br>";
+						echo "<p>Exception: " . $e->getMessage() . "</p><br>";
+
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Erreur lors de la création de l'annonce</h2>
 							<br>
@@ -58,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					// Traitement de l'enchère
 					$idLot = $_POST['idLot'];
 					$nouveauPrix = $_POST['nouveauPrix'];
-					$idCompteA = $_SESSION['identifiant'];
+					$idCompteA = $_SESSION['idCompteA'];
 					$dateActuelle = date('Y-m-d H:i:s'); // Format datetime pour MySQL
 
 					// Debug

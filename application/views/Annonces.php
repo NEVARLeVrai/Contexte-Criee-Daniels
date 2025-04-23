@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     if ($row['typeCompte'] === 'acheteur') {
                         // Si l'utilisateur est un acheteur, afficher les annonces
-                        $selectAnnonces = "SELECT idImage, idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV, idCompteA, dateDerniereEnchere, dateFinEnchere FROM ANNONCE ORDER BY idLot";
+                        $selectAnnonces = "SELECT idImage, idBateau, datePeche, idLot, prixEnchere, DateEnchere, titreAnnonce, idCompteV, idCompteA, dateDerniereEnchere, dateFinEnchere FROM ANNONCE ORDER BY idLot";
                         $stmt = $pdo->prepare($selectAnnonces);
                         $stmt->execute();
                         $rows = $stmt->fetchAll();
@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <th scope="col">Date de pêche</th>
                                         <th scope="col">Lot n°</th>
                                         <th scope="col">Prix</th> 	
-                                        <th scope="col">Heure</th>
+                                        <th scope="col">Date Enchère</th>
                                         <th scope="col">Titre</th>
                                         <th scope="col">Vendeur</th>
                                         <th scope="col">Dernier enchérisseur</th>
@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td>'.$row['datePeche'].'</td>
                                     <td>'.$row['idLot'].'</td>
                                     <td>'.$row['prixEnchere'].'</td>
-                                    <td>'.$row['heureEnchere'].'</td>
+                                    <td>'.$row['DateEnchere'].'</td>
                                     <td>'.$row['titreAnnonce'].'</td>
                                     <td>'.$row['idCompteV'].'</td>
                                     <td>'.($row['idCompteA'] ?? 'Aucun').'</td>
