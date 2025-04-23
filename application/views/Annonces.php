@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     if ($row['typeCompte'] === 'acheteur') {
                         // Si l'utilisateur est un acheteur, afficher les annonces
-                        $selectAnnonces = "SELECT idImage, idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV FROM ANNONCE ORDER BY idLot";
+                        $selectAnnonces = "SELECT idImage, idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV, idCompteA, dateDerniereEnchere, dateFinEnchere FROM ANNONCE ORDER BY idLot";
                         $stmt = $pdo->prepare($selectAnnonces);
                         $stmt->execute();
                         $rows = $stmt->fetchAll();
@@ -43,12 +43,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <th scope="col">Heure</th>
                                         <th scope="col">Titre</th>
                                         <th scope="col">Vendeur</th>
+                                        <th scope="col">Dernier enchérisseur</th>
+                                        <th scope="col">Date dernière enchère</th>
+                                        <th scope="col">Date limite</th>
                                     </tr>
                                 </thead>
                                 <tbody> <!-- tbody est le reste du tableau -->';
 
                             foreach ($rows as $row) 
                             {
+                                echo '<tr>';
                                 echo '<td><img src="../../assets/'.$row['idImage'].'"></td>';
                                 echo '
                                     <td>'.$row['idBateau'].'</td>
@@ -58,16 +62,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td>'.$row['heureEnchere'].'</td>
                                     <td>'.$row['titreAnnonce'].'</td>
                                     <td>'.$row['idCompteV'].'</td>
+                                    <td>'.($row['idCompteA'] ?? 'Aucun').'</td>
+                                    <td>'.($row['dateDerniereEnchere'] ?? 'Aucune').'</td>
+                                    <td>'.($row['dateFinEnchere'] ?? 'Non définie').'</td>
                                     </tr>';
                             }
                             echo '
                                 </tbody>
                             </table>';
 
-
-                            echo "<p>Vous allez être rediriger pour enchérir
+                            echo '<p>Vous allez être rediriger pour enchérir
                                   <br><br>
-                                  <button type='button' class='btn'>Enchérir</button>";
+                                    <form method="POST" action="' . site_url('welcome/contenu/Annonces_Encherir') . '">
+                                        <button type="submit" class="btn">Enchérir</button>
+                                    </form>
+                                </p>';
 
                         } else {
                             echo "Aucune annonce n'est disponible pour le moment.";
@@ -76,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     } elseif ($row['typeCompte'] === 'vendeur') {
                         // Si l'utilisateur est un vendeur, afficher le bouton pour créer une annonce
                         echo '<form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
-                            <button class="btn">Créer mon annonce</button>
+                        	<button type="button" class="btn">Créer mon annonce</button>
                         </form>';
                     }
                     

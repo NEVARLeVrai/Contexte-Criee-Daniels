@@ -65,7 +65,10 @@ class Welcome extends CI_Controller {
                 break;
             case "Annonces_Creation":
                 $this->load->view('Annonces_Creation');
-                break;    
+                break;
+            case "Annonces_Encherir":
+                $this->load->view('Annonces_Encherir');
+                break;     
         }
     
     }
@@ -117,6 +120,19 @@ class Welcome extends CI_Controller {
         $this->load->view('TraitementCompte', $data);
     }
 
-    
+    public function traitement_annonces() {
+        // Récupérer les données du formulaire
+        $this->load->view('Menu1'); // Chargement de la vue du menu
+        
+        // Récupérer les données de l'enchère
+        $idLot = $this->input->post('idLot');
+        $nouveauPrix = $this->input->post('nouveauPrix');
+        
+        // Préparer les données à passer à la vue
+        $data['idLot'] = $idLot;
+        $data['nouveauPrix'] = $nouveauPrix;
+        
+        $this->load->view('Annonces_Traitement', $data);
+    }
 
 }
