@@ -68,19 +68,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					echo "Debug - dateActuelle: " . $dateActuelle . "<br>";
 					echo "Debug - Heure actuelle: " . date('H:i:s') . "<br>";
 
-					// Vérifier si le nouveau prix est supérieur au prix actuel
-					$selectPrix = "SELECT prixEnchere, dateDerniereEnchere FROM ANNONCE WHERE idLot = :idLot";
-					$stmt = $pdo->prepare($selectPrix);
+					// Vérifier si le nouveau prix est supérieur au prix actuel et si la date limite n'est pas dépassée
+					$selectAnnonce = "SELECT prixEnchere, dateDerniereEnchere, dateFinEnchere FROM ANNONCE WHERE idLot = :idLot";
+					$stmt = $pdo->prepare($selectAnnonce);
 					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
 					$stmt->execute();
 					$result = $stmt->fetch(PDO::FETCH_ASSOC);
 					$prixActuel = $result['prixEnchere'];
 					$dateDerniereEnchere = $result['dateDerniereEnchere'];
+					$dateFinEnchere = $result['dateFinEnchere'];
 
 					echo "Debug - prixActuel: " . $prixActuel . "<br>";
 					echo "Debug - dateDerniereEnchere actuelle: " . $dateDerniereEnchere . "<br>";
+					echo "Debug - dateFinEnchere: " . $dateFinEnchere . "<br>";
 
-					if ($nouveauPrix > $prixActuel) {
+					// Vérifier si la date limite est dépassée
+					if (strtotime($dateActuelle) > strtotime($dateFinEnchere)) {
+						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+							<h2>Enchère impossible</h2>
+							<p>La date limite pour enchérir est dépassée.</p>
+							<p>Date limite : " . $dateFinEnchere . "</p>
+							<p>Date actuelle : " . $dateActuelle . "</p>
+							<br>
+							<form>
+								<a href='" . site_url('welcome/contenu/Annonces') . "'>
+									<button type='button' class='btn'>Retour aux annonces</button>
+								</a>
+							</form>
+						</section>";
+					} elseif ($nouveauPrix > $prixActuel) {
 						try {
 							// Mettre à jour le prix de l'enchère et les informations de l'enchérisseur
 							$updateEnchere = "UPDATE ANNONCE SET prixEnchere = :nouveauPrix, idCompteA = :idCompteA, dateDerniereEnchere = :dateActuelle WHERE idLot = :idLot";
