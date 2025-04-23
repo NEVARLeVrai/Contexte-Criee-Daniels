@@ -73,6 +73,7 @@ INSERT INTO `ADMIN` (`idCompte`) VALUES
 --
 
 CREATE TABLE `ANNONCE` (
+  `idImage` varchar(255) NOT NULL,
   `idBateau` varchar(50) NOT NULL,
   `datePeche` date NOT NULL,
   `idLot` int(11) NOT NULL,
@@ -86,9 +87,9 @@ CREATE TABLE `ANNONCE` (
 -- Déchargement des données de la table `ANNONCE`
 --
 
-INSERT INTO `ANNONCE` (`idBateau`, `datePeche`, `idLot`, `prixEnchere`, `heureEnchere`, `titreAnnonce`, `idCompteV`) VALUES
-('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
-('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
+INSERT INTO `ANNONCE` (`idImage`,`idBateau`, `datePeche`, `idLot`, `prixEnchere`, `heureEnchere`, `titreAnnonce`, `idCompteV`) VALUES
+('imgE/fsh-spin.gif','KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
+('imgE/fsh-spin.gif','TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
 
 -- --------------------------------------------------------
 
