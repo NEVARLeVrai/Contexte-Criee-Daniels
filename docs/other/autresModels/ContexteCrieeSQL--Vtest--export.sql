@@ -76,7 +76,6 @@ CREATE TABLE `ANNONCE` (
   `idBateau` varchar(50) NOT NULL,
   `datePeche` date NOT NULL,
   `idLot` int(11) NOT NULL,
-  `idCompteA` varchar(30) NOT NULL,
   `prixEnchere` decimal(15,2) DEFAULT NULL,
   `heureEnchere` time DEFAULT NULL,
   `nomAnnonce` varchar(50) DEFAULT NULL,
@@ -87,9 +86,9 @@ CREATE TABLE `ANNONCE` (
 -- Déchargement des données de la table `ANNONCE`
 --
 
-INSERT INTO `ANNONCE` (`idBateau`, `datePeche`, `idLot`, `idCompteA`, `prixEnchere`, `heureEnchere`, `nomAnnonce`, `idCompteV`) VALUES
-('KORRI', '2025-04-05', 1, 'BELLER', 12.34, '10:00:00', 'annonce 1', 'SOARES'),
-('TLAD', '2020-01-01', 2, 'PFISTER', 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
+INSERT INTO `ANNONCE` (`idBateau`, `datePeche`, `idLot`, `prixEnchere`, `heureEnchere`, `nomAnnonce`, `idCompteV`) VALUES
+('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
+('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
 
 -- --------------------------------------------------------
 
@@ -352,7 +351,6 @@ ALTER TABLE `ADMIN`
 --
 ALTER TABLE `ANNONCE`
   ADD PRIMARY KEY (`idBateau`,`datePeche`,`idLot`,`idCompteA`),
-  ADD KEY `fk_annonce_acheteur` (`idCompteA`),
   ADD KEY `fk_annonce_vendeur` (`idCompteV`);
 
 --
@@ -449,7 +447,6 @@ ALTER TABLE `ADMIN`
 -- Contraintes pour la table `ANNONCE`
 --
 ALTER TABLE `ANNONCE`
-  ADD CONSTRAINT `fk_annonce_acheteur` FOREIGN KEY (`idCompteA`) REFERENCES `ACHETEUR` (`idCompte`),
   ADD CONSTRAINT `fk_annonce_lot` FOREIGN KEY (`idBateau`,`datePeche`,`idLot`) REFERENCES `LOT` (`idBateau`, `datePeche`, `idLot`),
   ADD CONSTRAINT `fk_annonce_vendeur` FOREIGN KEY (`idCompteV`) REFERENCES `VENDEUR` (`idCompte`);
 

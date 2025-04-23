@@ -102,7 +102,6 @@ CREATE TABLE ANNONCE(
    idBateau VARCHAR(50) NOT NULL,
    datePeche DATE NOT NULL,
    idLot INT NOT NULL,
-   idCompteA VARCHAR(30) NOT NULL,
    prixEnchere DECIMAL(15,2),
    heureEnchere TIME,
    nomAnnonce VARCHAR(50),
@@ -180,11 +179,6 @@ ALTER TABLE ANNONCE
 ADD CONSTRAINT fk_annonce_lot
 FOREIGN KEY (idBateau, datePeche, idLot) 
 REFERENCES LOT(idBateau, datePeche, idLot);
-
-ALTER TABLE ANNONCE
-ADD CONSTRAINT fk_annonce_acheteur
-FOREIGN KEY (idCompteA) 
-REFERENCES ACHETEUR(idCompte);
 
 ALTER TABLE ANNONCE
 ADD CONSTRAINT fk_annonce_vendeur

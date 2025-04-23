@@ -102,7 +102,6 @@ CREATE TABLE ANNONCE(
    idBateau VARCHAR(50) NOT NULL,
    datePeche DATE NOT NULL,
    idLot INT NOT NULL,
-   idCompteA VARCHAR(30) NOT NULL,
    prixEnchere DECIMAL(15,2),
    heureEnchere TIME,
    nomAnnonce VARCHAR(50),
@@ -182,11 +181,6 @@ FOREIGN KEY (idBateau, datePeche, idLot)
 REFERENCES LOT(idBateau, datePeche, idLot);
 
 ALTER TABLE ANNONCE
-ADD CONSTRAINT fk_annonce_acheteur
-FOREIGN KEY (idCompteA) 
-REFERENCES ACHETEUR(idCompte);
-
-ALTER TABLE ANNONCE
 ADD CONSTRAINT fk_annonce_vendeur
 FOREIGN KEY (idCompteV) 
 REFERENCES VENDEUR(idCompte);
@@ -263,7 +257,7 @@ VALUES
 ('KORRI', '2025-04-05', 1, 'LJL', 10, 'ENT', 'B', 'BELLER', 'E', 22.50, 10, 11, 15, '2025-04-05', '9:00:00', 'ok', '001'),
 ('TLAD', '2020-01-01', 2, 'LJL', 20, 'VID', 'F', 'PFISTER', 'A', 44, 50, 53, 70, '2025-04-05', '9:00:00', 'ok', '002');
 
-INSERT INTO ANNONCE (idBateau, datePeche, idLot, idCompteA, prixEnchere, heureEnchere, nomAnnonce, idCompteV) 
+INSERT INTO ANNONCE (idBateau, datePeche, idLot, prixEnchere, heureEnchere, nomAnnonce, idCompteV) 
 VALUES 
-('KORRI', '2025-04-05', 1, 'BELLER', 12.34, '10:00:00', 'annonce 1', 'SOARES'),
-('TLAD', '2020-01-01', 2, 'PFISTER', 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
+('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
+('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
