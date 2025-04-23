@@ -62,6 +62,19 @@
 							<form action='" . site_url('welcome/contenu/Accueil') . "' method='POST'>
 								<input type='hidden' id='idCompte' name='idCompte' value=".htmlspecialchars($idCompte).">
 								<button type='submit' class='btn'>Accueil</button>
+								<br>
+							</form>	
+							<br>
+
+							<form action='" . site_url('welcome/contenu/Annonces') . "' method='POST'>
+								<input type='hidden' id='idCompte' name='idCompte' value=".htmlspecialchars($idCompte).">
+								<button type='submit' class='btn'>Annonces</button>
+								
+							</form>	
+							<br>
+							<form action='" . site_url('welcome/contenu/Lots') . "' method='POST'>
+								<input type='hidden' id='idCompte' name='idCompte' value=".htmlspecialchars($idCompte).">
+								<button type='submit' class='btn'>Lots</button>
 							</form>	
 						</section>";
 					}
