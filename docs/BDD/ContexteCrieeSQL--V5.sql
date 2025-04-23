@@ -41,14 +41,6 @@ CREATE TABLE `ACHETEUR` (
   `numHabilitation` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `ACHETEUR`
---
-
-INSERT INTO `ACHETEUR` (`idCompte`, `raisonSocialeEntreprise`, `locRue`, `rue`, `ville`, `codePostal`, `numHabilitation`) VALUES
-('BELLER', 'TLAD', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345'),
-('PFISTER', 'TLAD', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345');
-
 -- --------------------------------------------------------
 
 --
@@ -123,6 +115,8 @@ CREATE TABLE `BATEAU` (
 
 INSERT INTO `BATEAU` (`idBateau`, `immatriculation`) VALUES
 ('KORRI', 'AA123456'),
+('CARGO', 'BR75341'),
+('FISH', 'TM49123'),
 ('TLAD', 'SIOSLAM');
 
 -- --------------------------------------------------------
@@ -155,7 +149,10 @@ CREATE TABLE `ESPECE` (
 --
 
 INSERT INTO `ESPECE` (`idEspece`, `nomEspece`, `nomCommun`, `nomScientifique`) VALUES
-('LJL', 'LJAUL', 'lieu jaune ligne', 'polliachus polliachus');
+('LJL', 'LJAUL', 'lieu jaune ligne', 'pollachius pollachius'),
+('MQR', 'MAQUER', 'maquereau', 'scomber scombrus'),
+('CBL', 'CBLLD', 'cabillaud', 'gadus morhua');
+
 
 -- --------------------------------------------------------
 
@@ -307,14 +304,6 @@ CREATE TABLE `VENDEUR` (
   `codePostal` varchar(50) DEFAULT NULL,
   `numHabilitation` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `VENDEUR`
---
-
-INSERT INTO `VENDEUR` (`idCompte`, `raisonSocialeEntreprise`, `nom`, `prenom`, `locRue`, `rue`, `ville`, `codePostal`, `numHabilitation`) VALUES
-('CIOBOTARU', 'TLAD', 'Ciobotaru', 'Alexandru', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345'),
-('SOARES', 'TLAD', 'Soares', 'Daniels', '4', 'rue Schoch', 'STRASBOURG', '67000', '12345');
 
 --
 -- Index pour les tables déchargées
