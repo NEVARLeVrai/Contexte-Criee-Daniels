@@ -21,6 +21,10 @@ SET time_zone = "+00:00";
 -- Base de données : `LaCriee`
 --
 
+DROP DATABASE IF EXISTS LaCriee;
+CREATE DATABASE IF NOT EXISTS LaCriee CHARACTER SET utf8;
+USE LaCriee;
+
 -- --------------------------------------------------------
 
 --
