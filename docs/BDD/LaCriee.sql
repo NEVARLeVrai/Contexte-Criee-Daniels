@@ -71,7 +71,7 @@ CREATE TABLE `ANNONCE` (
   `datePeche` date NOT NULL,
   `idLot` int(11) NOT NULL,
   `prixEnchere` decimal(15,2) DEFAULT NULL,
-  `heureEnchere` time DEFAULT NULL,
+  `DateEnchere` datetime DEFAULT NULL,
   `titreAnnonce` varchar(50) DEFAULT NULL,
   `idCompteV` varchar(30) NOT NULL,
   `idCompteA` varchar(30) DEFAULT NULL,
@@ -83,9 +83,9 @@ CREATE TABLE `ANNONCE` (
 -- Déchargement des données de la table `ANNONCE`
 --
 
-INSERT INTO `ANNONCE` (`idImage`, `idBateau`, `datePeche`, `idLot`, `prixEnchere`, `heureEnchere`, `titreAnnonce`, `idCompteV`, `idCompteA`, `dateDerniereEnchere`, `dateFinEnchere`) VALUES
-('imgE/fsh-spin.gif', 'KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES', 'BELLER', '2025-04-05 10:00:00', '2025-04-05 12:00:00'),
-('imgE/fsh-spin.gif', 'TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU', 'PFISTER', '2025-04-05 15:30:00', '2025-04-05 17:30:00');
+INSERT INTO `ANNONCE` (`idImage`, `idBateau`, `datePeche`, `idLot`, `prixEnchere`, `DateEnchere`, `titreAnnonce`, `idCompteV`, `idCompteA`, `dateDerniereEnchere`, `dateFinEnchere`) VALUES
+('imgE/fsh-spin.gif', 'KORRI', '2025-04-05', 1, 12.34, '2025-04-05 10:00:00', 'annonce 1', 'SOARES', 'BELLER', '2025-04-05 10:00:00', '2025-04-05 12:00:00'),
+('imgE/fsh-spin.gif', 'TLAD', '2020-01-01', 2, 56.78, '2025-04-05 10:00:00', 'annonce 2', 'CIOBOTARU', 'PFISTER', '2025-04-05 15:30:00', '2025-04-05 17:30:00');
 
 -- --------------------------------------------------------
 

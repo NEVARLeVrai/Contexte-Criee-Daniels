@@ -19,13 +19,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$datePeche = $_POST['datePeche'];
 					$idLot = $_POST["idLot"]; //
 					$prixEnchere = $_POST['prixEnchere'];
-					$heureEnchere = $_POST['heureEnchere'];
+					$DateEnchere = $_POST['DateEnchere'];
 					$titreAnnonce = $_POST['titreAnnonce'];
 					$idCompte = $_POST['idCompte'];
 
 					// Insérer la nouvelle annonce
-					$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV) 
-					VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :heureEnchere, :titreAnnonce, :idCompteV)";
+					$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, DateEnchere, titreAnnonce, idCompteV) 
+					VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :DateEnchere, :titreAnnonce, :idCompteV)";
 				
 					$stmt = $pdo->prepare($insertAnnonce);
 					$stmt->bindParam(':idImage', $idImage, PDO::PARAM_STR);
@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
 					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
 					$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
-					$stmt->bindParam(':heureEnchere', $heureEnchere, PDO::PARAM_STR);
+					$stmt->bindParam(':DateEnchere', $DateEnchere, PDO::PARAM_STR);
 					$stmt->bindParam(':titreAnnonce', $titreAnnonce, PDO::PARAM_STR);
 					$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
 

@@ -45,8 +45,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <label for="prixEnchere">Prix :</label><br>
             <input type="number" min="1" step="any" id="prixEnchere" name="prixEnchere" required><br>
 
-            <label for="heureEnchere">Heure :</label><br>
-            <input type="time" id="heureEnchere" name="heureEnchere" required><br>
+            <label for="DateEnchere">Date de l'enchère :</label><br>
+            <input type="datetime-local" id="DateEnchere" name="DateEnchere" required><br>
 
             <label for="titreAnnonce">Titre :</label><br>
             <input type="text" id="titreAnnonce" name="titreAnnonce" required><br>
