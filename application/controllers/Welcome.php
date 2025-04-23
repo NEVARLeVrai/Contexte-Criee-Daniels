@@ -26,6 +26,7 @@ class Welcome extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('form');
         
+        // Session déjà démarrée dans Menu1.php
 	}
 	
 	public function index()
@@ -71,7 +72,10 @@ class Welcome extends CI_Controller {
                 break;
             case "Annonces_Encherir":
                 $this->load->view('Annonces_Encherir');
-                break;     
+                break;
+            case "Lots":
+                $this->load->view('Lots_Creation');
+                break;
         }
     
     }
@@ -136,6 +140,16 @@ class Welcome extends CI_Controller {
         $data['nouveauPrix'] = $nouveauPrix;
         
         $this->load->view('Annonces_Traitement', $data);
+    }
+
+    public function creation_lots() {
+        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Lots_Creation'); // Chargement de la vue pour la création de lots
+    }
+
+    public function traitement_lots() {
+        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Lots_Traitement'); // Chargement de la vue pour le traitement des lots
     }
 
 }

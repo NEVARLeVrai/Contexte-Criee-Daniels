@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         $stmt->execute();
                         $rows = $stmt->fetchAll();
                         
-                        if(count($rows) > 0) // on vérifie que le nombre d'éléments dans $rows est supérieur à 0, soit que $rows ne soit pas vide
+                        if(count($rows) > 0) // vérifie que le nombre d'éléments dans $rows est supérieur à 0, soit que $rows ne soit pas vide
                         {
                             echo '<table> <!-- table est un tableau -->
                                 <thead> <!-- thead est le haut du tableau -->

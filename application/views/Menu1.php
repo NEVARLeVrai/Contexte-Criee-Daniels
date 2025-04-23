@@ -45,7 +45,7 @@ session_start();
                     </button>
                 </a>
 
-                <?php if (isset($_SESSION) && $_SESSION): ?>
+                <?php if (isset($_SESSION) && isset($_SESSION["identifiant"])): ?>
                 <a href="<?php echo site_url('welcome/contenu/Deconnexion');?>">
                     <button class="sidebar-item deco-button" style="margin-bottom: 50px;">
                         <i class="fas fa-sign-out-alt"></i> <span>Deconnexion</span>
@@ -65,7 +65,12 @@ session_start();
                     </button>
                 </a>
 
-
+                <!-- Lien vers la création de lots visible pour tous les utilisateurs -->
+                <a href="<?php echo site_url('welcome/contenu/Lots');?>">
+                    <button class="sidebar-item deco-button" style="margin-bottom: 50px;">
+                        <i class="fas fa-box"></i> <span>Création de lots</span>
+                    </button>
+                </a>
 
 
                 <a href="<?php echo site_url('welcome/contenu/Mentions');?>">
