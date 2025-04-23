@@ -13,9 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php	
                 include "application/config/database.php";
             
-                $selectAnnonces = "SELECT idLot, titreAnnonce, prixEnchere FROM ANNONCE WHERE idCompteV != :idCompte ORDER BY idLot";                
+                $selectAnnonces = "SELECT idLot, titreAnnonce, prixEnchere FROM ANNONCE ORDER BY idLot";                
                 $stmt = $pdo->prepare($selectAnnonces);
-                $stmt->bindParam(':idCompte', $_SESSION['identifiant'], PDO::PARAM_STR);
+                $stmt->bindParam(':idCompte', $_SESSION['idCompteA'], PDO::PARAM_STR);
                 $stmt->execute();
                 $rows = $stmt->fetchAll();
             

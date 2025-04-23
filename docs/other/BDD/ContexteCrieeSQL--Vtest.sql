@@ -109,6 +109,7 @@ CREATE TABLE ANNONCE(
    idCompteA VARCHAR(30),
    dateDerniereEnchere DATETIME,
    dateFinEnchere DATETIME,
+   idImage VARCHAR(255),
    PRIMARY KEY(idBateau, datePeche, idLot)
 );
 

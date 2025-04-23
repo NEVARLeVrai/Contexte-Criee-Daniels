@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <p>Créer mon annonce :</p>
 		<br>
         
-        <form method="POST" action="<?php echo site_url('welcome/annonces_traitement'); ?>">
+        <form method="POST" action="<?php echo site_url('welcome/traitement_annonces'); ?>">
             <?php	
                 include "application/config/database.php";
             
@@ -39,17 +39,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <label for="datePeche">Date :</label><br>
             <input type="date" id="datePeche" name="datePeche" required><br>
 
+            <label for="idLot">numéro du lot, à modifier :</label><br>
+            <input type="number" id="idLot" name="idLot" required><br>
+
             <label for="prixEnchere">Prix :</label><br>
             <input type="number" min="1" step="any" id="prixEnchere" name="prixEnchere" required><br>
 
             <label for="heureEnchere">Heure :</label><br>
             <input type="time" id="heureEnchere" name="heureEnchere" required><br>
 
-            <label for="nomAnnonce">Titre :</label><br>
-            <input type="text" id="nomAnnonce" name="nomAnnonce" required><br>
+            <label for="titreAnnonce">Titre :</label><br>
+            <input type="text" id="titreAnnonce" name="titreAnnonce" required><br>
 
             <label for="dateFinEnchere">Date limite d'enchère :</label><br>
             <input type="datetime-local" id="dateFinEnchere" name="dateFinEnchere" required><br>
+
+            <label for="idImage">Ajouter une image :</label><br>
+            <input type="file" accept="image/*" id="idImage" name="idImage" required><br>
 
 			<br>
             <button type="submit" class="btn">Valider</button>
