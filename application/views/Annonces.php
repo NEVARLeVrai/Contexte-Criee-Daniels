@@ -72,7 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </form>';
                     }
                 } else {
-                    echo "Veuillez vous connecter pour voir les annonces ou créer une annonce.";
+                    echo 'Veuillez vous connecter pour voir les annonces ou créer une annonce.
+                    <form method="POST" action="' . site_url('welcome/contenu/Connexion') . '">
+                        <br><button type="submit" class="btn">Connexion</button>
+                    </form>';
                 }
                 $pdo=null; // on ferme la connexion à la base de données en donnant une valeur vide à $pdo
             ?>
