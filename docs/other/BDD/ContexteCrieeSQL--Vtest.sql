@@ -106,6 +106,9 @@ CREATE TABLE ANNONCE(
    heureEnchere TIME,
    titreAnnonce VARCHAR(50),
    idCompteV VARCHAR(30) NOT NULL,
+   idCompteA VARCHAR(30),
+   dateDerniereEnchere DATETIME,
+   dateFinEnchere DATETIME,
    PRIMARY KEY(idBateau, datePeche, idLot)
 );
 
@@ -257,7 +260,7 @@ VALUES
 ('KORRI', '2025-04-05', 1, 'LJL', 10, 'ENT', 'B', 'BELLER', 'E', 22.50, 10, 11, 15, '2025-04-05', '9:00:00', 'ok', '001'),
 ('TLAD', '2020-01-01', 2, 'LJL', 20, 'VID', 'F', 'PFISTER', 'A', 44, 50, 53, 70, '2025-04-05', '9:00:00', 'ok', '002');
 
-INSERT INTO ANNONCE (idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV) 
+INSERT INTO ANNONCE (idBateau, datePeche, idLot, prixEnchere, heureEnchere, titreAnnonce, idCompteV, idCompteA, dateDerniereEnchere, dateFinEnchere) 
 VALUES 
-('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
-('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
+('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES', 'BELLER', '2025-04-05 10:00:00', '2025-04-05 12:00:00'),
+('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU', 'PFISTER', '2025-04-05 15:30:00', '2025-04-05 17:30:00');

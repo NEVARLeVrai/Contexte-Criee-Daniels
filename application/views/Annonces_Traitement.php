@@ -1,9 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-// Récupérer les valeurs des champs du formulaire
-$idCompte = $_POST["idCompte"];
-$typeCompte = $_POST["typeCompte"];
 ?>
 
 <html>
@@ -11,169 +7,148 @@ $typeCompte = $_POST["typeCompte"];
 		<?php
 			include "application/config/database.php";
 
-			// Déclarer la fonction ajouteUtilisateur en dehors des blocs conditionnels
-			function ajouteUtilisateur($idCompte, $typeCompte, $pdo)
-			{
-				if ($typeCompte === 'acheteur') {
-					// Insérer dans la table ACHETEUR (seulement l'idCompte)
-					$insertAcheteur = "INSERT INTO ACHETEUR (idCompte) VALUES (:idCompte)";
-					$stmtAcheteur = $pdo->prepare($insertAcheteur);
-					$stmtAcheteur->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
-					$stmtAcheteur->execute();
-					
-					return true;
-				} elseif ($typeCompte === 'vendeur') {
-					// Insérer dans la table VENDEUR (seulement l'idCompte)
-					$insertVendeur = "INSERT INTO VENDEUR (idCompte) VALUES (:idCompte)";
-					$stmtVendeur = $pdo->prepare($insertVendeur);
-					$stmtVendeur->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
-					$stmtVendeur->execute();
-					
-					return true;
-				}
-				return false;
-			}
+			// Définir le fuseau horaire à Paris
+			date_default_timezone_set('Europe/Paris');
 
-			// Vérifier si le formulaire d'inscription a été soumis
-			if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-            	// Récupérer les valeurs des champs du formulaire
-				$idCompte = $_POST["idCompte"]; 
-				$mdpCompte = $_POST["mdpCompte"]; 
-				$typeCompte = $_POST["typeCompte"];
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				// Vérifier si c'est une création d'annonce ou une enchère
+				if (isset($_POST['idBateau'])) {
+					// Traitement de la création d'annonce
+					$idBateau = $_POST['idBateau'];
+					$datePeche = $_POST['datePeche'];
+					$prixEnchere = $_POST['prixEnchere'];
+					$heureEnchere = $_POST['heureEnchere'];
+					$titreAnnonce = $_POST['nomAnnonce'];
+					$idCompteV = $_SESSION['identifiant'];
 
-				if (empty($idCompte) || empty($mdpCompte) || empty($typeCompte)) // si id, mdp ou type de compte est vide
-				{
-					echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-						Veuillez remplir tous les champs.
-						<form>
-							<a href='" . site_url('welcome/contenu/Inscription') . "'>
-								<button type='submit' class='btn'>Retour</button>
-							</a>
-						</form>
-					</section>";
-				} 
-				else 
-				{
-					//Vérifier si l'identifiant est déjà utilisé
-					$selectIdVerif = "SELECT idCompte FROM COMPTE WHERE idCompte = :idCompte";
-					$stmt = $pdo->prepare($selectIdVerif);
-					$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
-					$stmt->execute();
-					$rows = $stmt->fetchAll();
-					//Vérifier si l'identifiant est déjà utilisé
-					if (count($rows) > 0) 
-					{
+					// Insérer la nouvelle annonce
+					$insertAnnonce = "INSERT INTO ANNONCE (idBateau, datePeche, prixEnchere, heureEnchere, titreAnnonce, idCompteV) 
+									VALUES (:idBateau, :datePeche, :prixEnchere, :heureEnchere, :titreAnnonce, :idCompteV)";
+					
+					$stmt = $pdo->prepare($insertAnnonce);
+					$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
+					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
+					$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
+					$stmt->bindParam(':heureEnchere', $heureEnchere, PDO::PARAM_STR);
+					$stmt->bindParam(':titreAnnonce', $titreAnnonce, PDO::PARAM_STR);
+					$stmt->bindParam(':idCompteV', $idCompteV, PDO::PARAM_STR);
+
+					if ($stmt->execute()) {
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-							<h2>L'identifiant est déjà utilisé.</h2>
-							<br>
-							Veuillez en choisir un autre.
-							<br>
+							<h2>Annonce créée avec succès !</h2>
 							<br>
 							<form>
-								<a href='" . site_url('welcome/contenu/Inscription') . "'>
-									<button type='button' class='btn'>Retour</button>
+								<a href='" . site_url('welcome/contenu/Annonces') . "'>
+									<button type='button' class='btn'>Retour aux annonces</button>
+								</a>
+							</form>
+						</section>";
+					} else {
+						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+							<h2>Erreur lors de la création de l'annonce</h2>
+							<br>
+							<form>
+								<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+									<button type='button' class='btn'>Réessayer</button>
 								</a>
 							</form>
 						</section>";
 					}
-					else
-					{
-						// Hash le mot de passe avant de l'insérer dans la base de données
-						$mdpCrypte = crypterMotDePasse($mdpCompte);
-						// Insérer le nouvel utilisateur dans la base de données
-						$ajouteUtilisateur = "INSERT INTO COMPTE (idCompte, mdpCompte, typeCompte) VALUES (:idCompte, :mdpCompte, :typeCompte)";
-						$stmt = $pdo->prepare($ajouteUtilisateur);
-						$stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
-						$stmt->bindParam(':mdpCompte', $mdpCrypte, PDO::PARAM_STR);
-						$stmt->bindParam(':typeCompte', $typeCompte, PDO::PARAM_STR);
+				} else {
+					// Traitement de l'enchère
+					$idLot = $_POST['idLot'];
+					$nouveauPrix = $_POST['nouveauPrix'];
+					$idCompteA = $_SESSION['identifiant'];
+					$dateActuelle = date('Y-m-d H:i:s'); // Format datetime pour MySQL
 
-						if ($stmt->execute())
-						{
-							// Insérer l'utilisateur dans la table ACHETEUR ou VENDEUR
-							if (ajouteUtilisateur($idCompte, $typeCompte, $pdo)) {
+					// Debug
+					echo "Debug - idLot: " . $idLot . "<br>";
+					echo "Debug - nouveauPrix: " . $nouveauPrix . "<br>";
+					echo "Debug - idCompteA: " . $idCompteA . "<br>";
+					echo "Debug - dateActuelle: " . $dateActuelle . "<br>";
+					echo "Debug - Heure actuelle: " . date('H:i:s') . "<br>";
+
+					// Vérifier si le nouveau prix est supérieur au prix actuel
+					$selectPrix = "SELECT prixEnchere, dateDerniereEnchere FROM ANNONCE WHERE idLot = :idLot";
+					$stmt = $pdo->prepare($selectPrix);
+					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
+					$stmt->execute();
+					$result = $stmt->fetch(PDO::FETCH_ASSOC);
+					$prixActuel = $result['prixEnchere'];
+					$dateDerniereEnchere = $result['dateDerniereEnchere'];
+
+					echo "Debug - prixActuel: " . $prixActuel . "<br>";
+					echo "Debug - dateDerniereEnchere actuelle: " . $dateDerniereEnchere . "<br>";
+
+					if ($nouveauPrix > $prixActuel) {
+						try {
+							// Mettre à jour le prix de l'enchère et les informations de l'enchérisseur
+							$updateEnchere = "UPDATE ANNONCE SET prixEnchere = :nouveauPrix, idCompteA = :idCompteA, dateDerniereEnchere = :dateActuelle WHERE idLot = :idLot";
+							$stmt = $pdo->prepare($updateEnchere);
+							$stmt->bindParam(':nouveauPrix', $nouveauPrix, PDO::PARAM_STR);
+							$stmt->bindParam(':idCompteA', $idCompteA, PDO::PARAM_STR);
+							$stmt->bindParam(':dateActuelle', $dateActuelle, PDO::PARAM_STR);
+							$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
+
+							if ($stmt->execute()) {
+								// Vérifier la mise à jour
+								$selectVerif = "SELECT dateDerniereEnchere FROM ANNONCE WHERE idLot = :idLot";
+								$stmt = $pdo->prepare($selectVerif);
+								$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
+								$stmt->execute();
+								$nouvelleDate = $stmt->fetchColumn();
+								
+								echo "Debug - Nouvelle dateDerniereEnchere: " . $nouvelleDate . "<br>";
+								
 								echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-									<h2>Inscription réussie avec l'id ".htmlspecialchars($idCompte)."</h2>
+									<h2>Enchère validée avec succès !</h2>
 									<br>
-									<form method='POST' action='" . site_url('welcome/traitement_Compte') . "'>
-										<input type='hidden' name='idCompte' value='" . htmlspecialchars($idCompte) . "'>
-										<input type='hidden' name='typeCompte' value='" . htmlspecialchars($typeCompte) . "'>";
-
-								if ($typeCompte === 'acheteur') {
-									echo "<label for='raisonSocialeEntreprise'>Raison Sociale :</label><br>
-										<input type='text' id='raisonSocialeEntreprise' name='raisonSocialeEntreprise' required><br>
-
-										<label for='locRue'>Localisation Rue :</label><br>
-										<input type='text' id='locRue' name='locRue' required><br>
-
-										<label for='rue'>Rue :</label><br>
-										<input type='text' id='rue' name='rue' required><br>
-
-										<label for='ville'>Ville :</label><br>
-										<input type='text' id='ville' name='ville' required><br>
-
-										<label for='codePostal'>Code Postal :</label><br>
-										<input type='text' id='codePostal' name='codePostal' required><br>
-
-										<label for='numHabilitation'>Numéro d'Habilitation :</label><br>
-										<input type='text' id='numHabilitation' name='numHabilitation' required><br>";
-								} elseif ($typeCompte === 'vendeur') {
-									echo "<label for='nom'>Nom :</label><br>
-										<input type='text' id='nom' name='nom' required><br>
-
-										<label for='prenom'>Prénom :</label><br>
-										<input type='text' id='prenom' name='prenom' required><br>
-
-										<label for='locRue'>Localisation Rue :</label><br>
-										<input type='text' id='locRue' name='locRue' required><br>
-
-										<label for='rue'>Rue :</label><br>
-										<input type='text' id='rue' name='rue' required><br>
-
-										<label for='ville'>Ville :</label><br>
-										<input type='text' id='ville' name='ville' required><br>
-
-										<label for='cp'>Code Postal :</label><br>
-										<input type='text' id='cp' name='cp' required><br>
-
-										<label for='raisonSocialeEntreprise'>Raison Sociale :</label><br>
-										<input type='text' id='raisonSocialeEntreprise' name='raisonSocialeEntreprise' required><br>";
-								}
-
-								echo "<br>
-										<button type='submit' class='btn'>Valider</button>
-										<button type='reset' class='btn'>Effacer</button> 
+									<form>
+										<a href='" . site_url('welcome/contenu/Annonces') . "'>
+											<button type='button' class='btn'>Retour aux annonces</button>
+										</a>
 									</form>
 								</section>";
 							} else {
 								echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-									Une erreur s'est produite lors de l'inscription dans la table " . htmlspecialchars($typeCompte) . ".
+									<h2>Erreur lors de la validation de l'enchère</h2>
+									<p>Erreur SQL: " . implode(", ", $stmt->errorInfo()) . "</p>
 									<br>
-									Veuillez réessayer.
 									<form>
-										<a href='" . site_url('welcome/contenu/Inscription') . "'>
-											<button type='submit' class='btn'>Retour</button>
+										<a href='" . site_url('welcome/contenu/Annonces_Encherir') . "'>
+											<button type='button' class='btn'>Réessayer</button>
 										</a>
 									</form>
 								</section>";
 							}
-						} 
-						else 
-						{
+						} catch (PDOException $e) {
 							echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-								Une erreur s'est produite lors de l'inscription. 
+								<h2>Erreur lors de la validation de l'enchère</h2>
+								<p>Exception: " . $e->getMessage() . "</p>
 								<br>
-								Veuillez réessayer.
 								<form>
-									<a href='" . site_url('welcome/contenu/Inscription') . "'>
-										<button type='submit' class='btn'>Retour</button>
+									<a href='" . site_url('welcome/contenu/Annonces_Encherir') . "'>
+										<button type='button' class='btn'>Réessayer</button>
 									</a>
 								</form>
 							</section>";
 						}
-					}	
+					} else {
+						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+							<h2>Le prix proposé doit être supérieur au prix actuel</h2>
+							<p>Prix actuel: " . $prixActuel . "€</p>
+							<p>Prix proposé: " . $nouveauPrix . "€</p>
+							<br>
+							<form>
+								<a href='" . site_url('welcome/contenu/Annonces_Encherir') . "'>
+									<button type='button' class='btn'>Réessayer</button>
+								</a>
+							</form>
+						</section>";
+					}
 				}
 			}
-			$pdo=null; 
+			$pdo = null;
 		?>
 	</body>
 </html>

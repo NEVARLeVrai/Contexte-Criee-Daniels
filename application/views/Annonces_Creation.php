@@ -48,6 +48,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <label for="nomAnnonce">Titre :</label><br>
             <input type="text" id="nomAnnonce" name="nomAnnonce" required><br>
 
+            <label for="dateFinEnchere">Date limite d'enchère :</label><br>
+            <input type="datetime-local" id="dateFinEnchere" name="dateFinEnchere" required><br>
+
 			<br>
             <button type="submit" class="btn">Valider</button>
 			<button type='reset' class='btn'>Effacer</button> 
