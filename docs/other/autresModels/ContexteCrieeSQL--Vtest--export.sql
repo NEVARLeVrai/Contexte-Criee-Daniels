@@ -78,7 +78,7 @@ CREATE TABLE `ANNONCE` (
   `idLot` int(11) NOT NULL,
   `prixEnchere` decimal(15,2) DEFAULT NULL,
   `heureEnchere` time DEFAULT NULL,
-  `nomAnnonce` varchar(50) DEFAULT NULL,
+  `titreAnnonce` varchar(50) DEFAULT NULL,
   `idCompteV` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -86,7 +86,7 @@ CREATE TABLE `ANNONCE` (
 -- Déchargement des données de la table `ANNONCE`
 --
 
-INSERT INTO `ANNONCE` (`idBateau`, `datePeche`, `idLot`, `prixEnchere`, `heureEnchere`, `nomAnnonce`, `idCompteV`) VALUES
+INSERT INTO `ANNONCE` (`idBateau`, `datePeche`, `idLot`, `prixEnchere`, `heureEnchere`, `titreAnnonce`, `idCompteV`) VALUES
 ('KORRI', '2025-04-05', 1, 12.34, '10:00:00', 'annonce 1', 'SOARES'),
 ('TLAD', '2020-01-01', 2, 56.78, '15:30:00', 'annonce 2', 'CIOBOTARU');
 
@@ -125,7 +125,7 @@ CREATE TABLE `BATEAU` (
 --
 
 INSERT INTO `BATEAU` (`idBateau`, `immatriculation`) VALUES
-('KORRI', 'AA 123456'),
+('KORRI', 'AA123456'),
 ('TLAD', 'SIOSLAM');
 
 -- --------------------------------------------------------

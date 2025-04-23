@@ -102,7 +102,7 @@ CREATE TABLE `BATEAU` (
 --
 
 INSERT INTO `BATEAU` (`idBateau`, `immatriculation`) VALUES
-('KORRI', 'AA 123456');
+('KORRI', 'AA123456');
 
 -- --------------------------------------------------------
 
