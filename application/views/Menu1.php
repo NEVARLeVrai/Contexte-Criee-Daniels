@@ -55,7 +55,7 @@ session_start();
 
                 <a href="<?php echo site_url('welcome/contenu/Lots');?>">
                     <button class="sidebar-item deco-button" style=" margin-top: 50px; margin-bottom: 50px;">
-                        <i class="fas fa-fish"></i> <span>Lots</span>
+                        <i class="fas fa-box"></i> <span>Lots</span>
                     </button>
                 </a>
 
@@ -65,12 +65,6 @@ session_start();
                     </button>
                 </a>
 
-                <!-- Lien vers la création de lots visible pour tous les utilisateurs -->
-                <a href="<?php echo site_url('welcome/contenu/Lots');?>">
-                    <button class="sidebar-item deco-button" style="margin-bottom: 50px;">
-                        <i class="fas fa-box"></i> <span>Création de lots</span>
-                    </button>
-                </a>
 
 
                 <a href="<?php echo site_url('welcome/contenu/Mentions');?>">
