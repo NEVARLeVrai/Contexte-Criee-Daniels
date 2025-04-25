@@ -65,7 +65,10 @@ class Welcome extends CI_Controller {
                 $this->load->view('Annonces');
                 break;
             case "Lots":
-                $this->load->view('Lots_Creation');
+                $this->load->view('Lots');
+                break;
+            case "LotsCreation":
+                $this->load->view('LotsCreation');
                 break;
             case "Annonces_Creation":
                 $this->load->view('Annonces_Creation');
