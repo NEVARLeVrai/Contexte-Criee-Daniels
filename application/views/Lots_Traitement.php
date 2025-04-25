@@ -98,8 +98,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <br>
                         <form>
                             <a href='" . site_url('welcome/contenu/Lots') . "'>
+                                <button type='button' class='btn'>Voir les lots</button>
+                            </a>
+                                                        <br>                            <br>
+                            <a href='" . site_url('welcome/contenu/LotsCreation') . "'>
                                 <button type='button' class='btn'>Créer un autre lot</button>
                             </a>
+                                                        <br>                            <br>
                             <a href='" . site_url('welcome/contenu/Accueil') . "'>
                                 <button type='button' class='btn'>Retour à l'accueil</button>
                             </a>
