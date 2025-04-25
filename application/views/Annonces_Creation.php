@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <p>Créer mon annonce :</p>
 		<br>
         
-        <form method="POST" action="<?php echo site_url('welcome/traitement_annonces'); ?>">
+        <form method="POST" action="<?php echo site_url('welcome/traitement_annonces'); ?>" enctype="multipart/form-data">
             <label for="idBateau">Bateau :</label><br>
             <select id="idBateau" name="idBateau" required>
             <?php	
@@ -61,8 +61,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <label for="dateFinEnchere">Date limite d'enchère :</label><br>
             <input type="datetime-local" id="dateFinEnchere" name="dateFinEnchere" required><br>
 
-            <label for="idImage">Ajouter une image :</label><br>
-            <input type="file" accept="image/*" id="idImage" name="idImage" required><br>
+            <label for="image">Ajouter une image :</label><br>
+            <input type="file" accept="image/*" id="image" name="image" required><br>
 
 			<br>
             <button type="submit" class="btn">Valider</button>
