@@ -14,65 +14,100 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				// Vérifier si c'est une création d'annonce ou une enchère
 				if (isset($_POST['idBateau'])) {
 					// Traitement de la création d'annonce
-					$idImage = $_POST["idImage"];
 					$idBateau = $_POST['idBateau'];
 					$datePeche = $_POST['datePeche'];
-					$idLot = $_POST["idLot"]; //
+					$idLot = $_POST["idLot"];
 					$prixEnchere = $_POST['prixEnchere'];
 					$DateEnchere = $_POST['DateEnchere'];
 					$titreAnnonce = $_POST['titreAnnonce'];
+					$dateFinEnchere = $_POST['dateFinEnchere'];
 					$idCompte = $_SESSION['identifiant'];
 
-					// Insérer la nouvelle annonce
-					$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, dateEnchere, titreAnnonce, idCompteV) 
-					VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :dateEnchere, :titreAnnonce, :idCompteV)";
-				
-					$stmt = $pdo->prepare($insertAnnonce);
-					$stmt->bindParam(':idImage', $idImage, PDO::PARAM_STR);
-					$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
-					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
-					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
-					$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
-					$stmt->bindParam(':dateEnchere', $DateEnchere, PDO::PARAM_STR);
-					$stmt->bindParam(':titreAnnonce', $titreAnnonce, PDO::PARAM_STR);
-					$stmt->bindParam(':idCompteV', $idCompte, PDO::PARAM_STR);
-					$stmt->execute();
-					try { 
-						echo "Debug - idLot: " . $idImage . "<br>";
-						echo "Debug - nouveauPrix: " . $idBateau . "<br>";
-						echo "Debug - idCompteA: " . $datePeche . "<br>";
-						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-							<h2>Annonce créée avec succès !</h2>
-							<br>
-							<form>
-								<a href='" . site_url('welcome/contenu/Annonces') . "'>
-									<button type='button' class='btn'>Retour aux annonces</button>
-								</a>
-							</form>
-						</section>";
-					} catch (PDOException $e) {
-						// Debug
-						
-						echo "Debug - idLot: " . $idImage . "<br>";
-						echo "Debug - nouveauPrix: " . $idBateau . "<br>";
-						echo "Debug - idCompteA: " . $datePeche . "<br>";
-						echo "<p>Exception: " . $e->getMessage() . "</p><br>";
+					// Traitement de l'image
+					$target_dir = "assets/imgE/";
+					$imageFileType = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
+					$newFileName = uniqid() . '.' . $imageFileType;
+					$target_file = $target_dir . $newFileName;
+					$uploadOk = 1;
 
-						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-							<h2>Erreur lors de la création de l'annonce</h2>
-							<br>
-							<form>
-								<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
-									<button type='button' class='btn'>Réessayer</button>
-								</a>
-							</form>
-						</section>";
+					// Vérifier si le fichier est une image
+					$check = getimagesize($_FILES["image"]["tmp_name"]);
+					if($check === false) {
+						echo "Le fichier n'est pas une image.";
+						$uploadOk = 0;
+					}
+
+					// Vérifier la taille du fichier
+					if ($_FILES["image"]["size"] > 5000000) {
+						echo "Désolé, votre fichier est trop volumineux.";
+						$uploadOk = 0;
+					}
+
+					// Autoriser certains formats de fichiers
+					if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+						echo "Désolé, seuls les fichiers JPG, JPEG, PNG & GIF sont autorisés.";
+						$uploadOk = 0;
+					}
+
+					if ($uploadOk == 1) {
+						if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+							$idImage = "imgE/" . $newFileName;
+
+							// Insérer la nouvelle annonce
+							$insertAnnonce = "INSERT INTO ANNONCE (idImage, idBateau, datePeche, idLot, prixEnchere, dateEnchere, titreAnnonce, idCompteV, dateFinEnchere) 
+							VALUES (:idImage, :idBateau, :datePeche, :idLot, :prixEnchere, :dateEnchere, :titreAnnonce, :idCompteV, :dateFinEnchere)";
+						
+							$stmt = $pdo->prepare($insertAnnonce);
+							$stmt->bindParam(':idImage', $idImage, PDO::PARAM_STR);
+							$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
+							$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
+							$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
+							$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
+							$stmt->bindParam(':dateEnchere', $DateEnchere, PDO::PARAM_STR);
+							$stmt->bindParam(':titreAnnonce', $titreAnnonce, PDO::PARAM_STR);
+							$stmt->bindParam(':idCompteV', $idCompte, PDO::PARAM_STR);
+							$stmt->bindParam(':dateFinEnchere', $dateFinEnchere, PDO::PARAM_STR);
+							
+							try { 
+								$stmt->execute();
+								echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+									<h2>Annonce créée avec succès !</h2>
+									<br>
+									<form>
+										<a href='" . site_url('welcome/contenu/Annonces') . "'>
+											<button type='button' class='btn'>Retour aux annonces</button>
+										</a>
+									</form>
+								</section>";
+							} catch (PDOException $e) {
+								echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+									<h2>Erreur lors de la création de l'annonce</h2>
+									<p>Erreur SQL: " . $e->getMessage() . "</p>
+									<br>
+									<form>
+										<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+											<button type='button' class='btn'>Réessayer</button>
+										</a>
+									</form>
+								</section>";
+							}
+						} else {
+							echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+								<h2>Erreur lors de l'upload de l'image</h2>
+								<br>
+								<form>
+									<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+										<button type='button' class='btn'>Réessayer</button>
+									</a>
+								</form>
+							</section>";
+						}
 					}
 				} else {
 					// Traitement de l'enchère
 					$idLot = $_POST['idLot'];
 					$nouveauPrix = $_POST['nouveauPrix'];
-					$idCompteA = $_SESSION['idCompteA'];
+					$idCompteA = $_SESSION['identifiant'];
 					$dateActuelle = date('Y-m-d H:i:s'); // Format datetime pour MySQL
 
 					// Debug

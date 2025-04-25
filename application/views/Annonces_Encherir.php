@@ -13,9 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php	
                 include "application/config/database.php";
             
-                $selectAnnonces = "SELECT idLot, titreAnnonce, prixEnchere FROM ANNONCE ORDER BY idLot";                
+                $selectAnnonces = "SELECT idLot, titreAnnonce, prixEnchere, idCompteA FROM ANNONCE ORDER BY idLot";                
                 $stmt = $pdo->prepare($selectAnnonces);
-                $stmt->bindParam(':idCompte', $_SESSION['idCompteA'], PDO::PARAM_STR);
                 $stmt->execute();
                 $rows = $stmt->fetchAll();
             
@@ -24,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <label for="idLot">Sélectionner l\'annonce :</label><br>
                     <select id="idLot" name="idLot" required>';
                         foreach ($rows as $row) {
-                            echo '<option value='.$row['idLot'].'>Lot n°'.$row['idLot'].' - '.$row['titreAnnonce'].' (Prix actuel: '.$row['prixEnchere'].'€)</option>';
+                            $dernierEncherisseur = $row['idCompteA'] ? ' (Dernier enchérisseur: ' . $row['idCompteA'] . ')' : ' (Aucun enchérisseur)';
+                            echo '<option value='.$row['idLot'].'>Lot n°'.$row['idLot'].' - '.$row['titreAnnonce'].' (Prix actuel: '.$row['prixEnchere'].'€)'.$dernierEncherisseur.'</option>';
                         }
                     echo '</select><br><br>';
                     
