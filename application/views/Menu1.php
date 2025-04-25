@@ -53,6 +53,7 @@ session_start();
                 </a>
                 <?php endif; ?>
 
+
                 <a href="<?php echo site_url('welcome/contenu/Lots');?>">
                     <button class="sidebar-item deco-button" style=" margin-top: 50px; margin-bottom: 50px;">
                         <i class="fas fa-box"></i> <span>Lots</span>

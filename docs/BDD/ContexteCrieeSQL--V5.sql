@@ -76,7 +76,7 @@ CREATE TABLE `ANNONCE` (
 --
 
 INSERT INTO `ANNONCE` (`idImage`, `idBateau`, `datePeche`, `idLot`, `prixEnchere`, `DateEnchere`, `titreAnnonce`, `idCompteV`, `idCompteA`, `dateDerniereEnchere`, `dateFinEnchere`) VALUES
-('imgE/fsh-spin.gif', 'KORRI', '2025-04-05', 1, 12.34, '2025-04-05 10:00:00', 'annonce 1', 'SOARES', 'BELLER', '2025-04-05 10:00:00', '2025-04-05 12:00:00'),
+('imgE/fsh-spin.gif', 'KORRI', '2025-04-05', 1, 12.34, '2025-04-05 09:00:00', 'annonce 1', 'SOARES', 'BELLER', '2025-04-05 10:00:00', '2025-04-05 12:00:00'),
 ('imgE/fsh-spin.gif', 'TLAD', '2020-01-01', 2, 56.78, '2025-04-05 10:00:00', 'annonce 2', 'CIOBOTARU', 'PFISTER', '2025-04-05 15:30:00', '2025-04-05 17:30:00');
 
 -- --------------------------------------------------------
@@ -193,8 +193,7 @@ CREATE TABLE `LOT` (
   `prixPlancher` decimal(15,2) DEFAULT NULL,
   `prixDepart` decimal(15,2) DEFAULT NULL,
   `prixEncheresMax` decimal(15,2) DEFAULT NULL,
-  `dateEnchere` date DEFAULT NULL,
-  `heureDebutEnchere` time DEFAULT NULL,
+  `DateEnchere` datetime DEFAULT NULL,
   `codeEtat` varchar(50) DEFAULT NULL,
   `idFacture` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -203,9 +202,9 @@ CREATE TABLE `LOT` (
 -- Déchargement des données de la table `LOT`
 --
 
-INSERT INTO `LOT` (`idBateau`, `datePeche`, `idLot`, `idEspece`, `idTaille`, `idPresentation`, `idBac`, `idCompte`, `idQualite`, `poidsBrutLot`, `prixPlancher`, `prixDepart`, `prixEncheresMax`, `dateEnchere`, `heureDebutEnchere`, `codeEtat`, `idFacture`) VALUES
-('KORRI', '2025-04-05', 1, 'LJL', 10, 'ENT', 'B', 'BELLER', 'E', 22.50, 10.00, 11.00, 15.00, '2025-04-05', '09:00:00', 'ok', '001'),
-('TLAD', '2020-01-01', 2, 'LJL', 20, 'VID', 'F', 'PFISTER', 'A', 44.00, 50.00, 53.00, 70.00, '2025-04-05', '09:00:00', 'ok', '002');
+INSERT INTO `LOT` (`idBateau`, `datePeche`, `idLot`, `idEspece`, `idTaille`, `idPresentation`, `idBac`, `idCompte`, `idQualite`, `poidsBrutLot`, `prixPlancher`, `prixDepart`, `prixEncheresMax`, `DateEnchere`, `codeEtat`, `idFacture`) VALUES
+('KORRI', '2025-04-05', 1, 'LJL', 10, 'ENT', 'B', 'BELLER', 'E', 22.50, 10.00, 11.00, 15.00, '2025-04-05 09:00:00', 'ok', '001'),
+('TLAD', '2020-01-01', 2, 'LJL', 20, 'VID', 'F', 'PFISTER', 'A', 44.00, 50.00, 53.00, 70.00, '2025-04-05 10:00:00', 'ok', '002');
 
 -- --------------------------------------------------------
 
