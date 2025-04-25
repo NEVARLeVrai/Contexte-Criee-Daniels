@@ -3,11 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <body>  
-    <section class="Annonces">
-        <div class="Annonces-container">
-            <div class="Annonces-section">
-                <h2><i class="fas fa-bullhorn"></i> Les Annonces de la Criée de Poulgoazec</h2>
-            </div>  
+<section id="connexion_et_inscription" class="connexion_et_inscription">
+            <h2><i class="fas fa-bullhorn"></i> Les Annonces de la Criée de Poulgoazec</h2>
             
             <?php
                 include "application/config/database.php";
@@ -25,7 +22,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     // Vérifier si les informations du compte ont été trouvées
                     if ($row === false) {
                         echo "<p>Erreur : Impossible de récupérer les informations du compte. L'utilisateur n'existe peut-être plus. Veuillez vous reconnecter.</p>";
-                        // Optionnel : Proposer de se déconnecter ou rediriger
                         echo '<form method="POST" action="' . site_url('welcome/contenu/Connexion') . '">
                                 <br><button type="submit" class="btn">Se reconnecter</button>
                               </form>';
@@ -33,22 +29,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         // Si les informations sont trouvées, continuer la logique existante
                         if ($row['typeCompte'] === 'acheteur') {
                             // Si l'utilisateur est un acheteur, afficher les annonces
-                            $selectAnnonces = "SELECT idImage, idBateau, datePeche, idLot, prixEnchere, DateEnchere, titreAnnonce, idCompteV, idCompteA, dateDerniereEnchere, dateFinEnchere FROM ANNONCE ORDER BY idLot";
+                            $selectAnnonces = "SELECT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
+                                             a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
+                                             a.dateDerniereEnchere, a.dateFinEnchere,
+                                             l.prixPlancher, l.prixEncheresMax
+                                             FROM ANNONCE a
+                                             JOIN LOT l ON a.idLot = l.idLot
+                                             ORDER BY a.idLot";
                             $stmt = $pdo->prepare($selectAnnonces);
                             $stmt->execute();
                             $rows = $stmt->fetchAll();
                             
-                            if(count($rows) > 0) // vérifie que le nombre d'éléments dans $rows est supérieur à 0, soit que $rows ne soit pas vide
-                            {
-                                echo '<table> <!-- table est un tableau -->
-                                    <thead> <!-- thead est le haut du tableau -->
-                                        <tr> <!-- tr est une ligne dans le tableau -->
-                                            <!-- th est l en-tete du tableau, le nom des colonnes -->
+                            if(count($rows) > 0) {
+                                echo '<table>
+                                    <thead>
+                                        <tr>
                                             <th scope="col">Image</th>                                        
                                             <th scope="col">Bateau</th>
                                             <th scope="col">Date de pêche</th>
                                             <th scope="col">Lot n°</th>
-                                            <th scope="col">Prix</th> 	
+                                            <th scope="col">Prix actuel</th>
+                                            <th scope="col">Prix plancher</th>
+                                            <th scope="col">Prix max</th>
                                             <th scope="col">Date Enchère</th>
                                             <th scope="col">Titre</th>
                                             <th scope="col">Vendeur</th>
@@ -57,28 +59,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <th scope="col">Date limite</th>
                                         </tr>
                                     </thead>
-                                    <tbody> <!-- tbody est le reste du tableau -->';
+                                    <tbody>';
 
-                                foreach ($rows as $row) 
-                                {
+                                foreach ($rows as $row) {
                                     echo '<tr>';
                                     echo '<td><img src="../../assets/'.$row['idImage'].'"></td>';
-                                    echo '
-                                        <td>'.$row['idBateau'].'</td>
-                                        <td>'.$row['datePeche'].'</td>
-                                        <td>'.$row['idLot'].'</td>
-                                        <td>'.$row['prixEnchere'].'</td>
-                                        <td>'.$row['DateEnchere'].'</td>
-                                        <td>'.$row['titreAnnonce'].'</td>
-                                        <td>'.$row['idCompteV'].'</td>
-                                        <td>'.($row['idCompteA'] ?? 'Aucun').'</td>
-                                        <td>'.($row['dateDerniereEnchere'] ?? 'Aucune').'</td>
-                                        <td>'.($row['dateFinEnchere'] ?? 'Non définie').'</td>
-                                        </tr>';
+                                    echo '<td>'.$row['idBateau'].'</td>';
+                                    echo '<td>'.$row['datePeche'].'</td>';
+                                    echo '<td>'.$row['idLot'].'</td>';
+                                    echo '<td>'.$row['prixEnchere'].' €</td>';
+                                    echo '<td>'.$row['prixPlancher'].' €</td>';
+                                    echo '<td>'.($row['prixEncheresMax'] ?? 'Non défini').' €</td>';
+                                    echo '<td>'.$row['DateEnchere'].'</td>';
+                                    echo '<td>'.$row['titreAnnonce'].'</td>';
+                                    echo '<td>'.$row['idCompteV'].'</td>';
+                                    echo '<td>'.($row['idCompteA'] ?? 'Aucun').'</td>';
+                                    echo '<td>'.($row['dateDerniereEnchere'] ?? 'Aucune').'</td>';
+                                    echo '<td>'.($row['dateFinEnchere'] ?? 'Non définie').'</td>';
+                                    echo '</tr>';
                                 }
-                                echo '
-                                    </tbody>
-                                </table>';
+                                echo '</tbody></table>';
 
                                 echo '<p>Vous allez être rediriger pour enchérir
                                       <br><br>
@@ -89,23 +89,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                             } else {
                                 echo "Aucune annonce n'est disponible pour le moment.";
-                                // si $rows est vide, cela signifie qu'aucune annonce n'a été trouvée ou n'existe dans la base
                             }
                         } elseif ($row['typeCompte'] === 'vendeur') {
-                            // Si l'utilisateur est un vendeur, afficher le bouton pour créer une annonce
-                            echo '<form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
+                            // Si l'utilisateur est un vendeur, afficher les annonces
+                            $selectAnnonces = "SELECT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
+                                             a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
+                                             a.dateDerniereEnchere, a.dateFinEnchere,
+                                             l.prixPlancher, l.prixEncheresMax
+                                             FROM ANNONCE a
+                                             JOIN LOT l ON a.idLot = l.idLot
+                                             ORDER BY a.idLot";
+                            $stmt = $pdo->prepare($selectAnnonces);
+                            $stmt->execute();
+                            $rows = $stmt->fetchAll();
+                            
+                            if(count($rows) > 0) {
+                                echo '<br>
+                                <form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
                                 <button type="submit" class="btn">Créer une annonce</button>
                                 </form>';
+
+                                echo '<table>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Image</th>                                        
+                                            <th scope="col">Bateau</th>
+                                            <th scope="col">Date de pêche</th>
+                                            <th scope="col">Lot n°</th>
+                                            <th scope="col">Prix actuel</th>
+                                            <th scope="col">Prix plancher</th>
+                                            <th scope="col">Prix max</th>
+                                            <th scope="col">Date Enchère</th>
+                                            <th scope="col">Titre</th>
+                                            <th scope="col">Vendeur</th>
+                                            <th scope="col">Dernier enchérisseur</th>
+                                            <th scope="col">Date dernière enchère</th>
+                                            <th scope="col">Date limite</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+
+                                foreach ($rows as $row) {
+                                    echo '<tr>';
+                                    echo '<td><img src="../../assets/'.$row['idImage'].'"></td>';
+                                    echo '<td>'.$row['idBateau'].'</td>';
+                                    echo '<td>'.$row['datePeche'].'</td>';
+                                    echo '<td>'.$row['idLot'].'</td>';
+                                    echo '<td>'.$row['prixEnchere'].' €</td>';
+                                    echo '<td>'.$row['prixPlancher'].' €</td>';
+                                    echo '<td>'.($row['prixEncheresMax'] ?? 'Non défini').' €</td>';
+                                    echo '<td>'.$row['DateEnchere'].'</td>';
+                                    echo '<td>'.$row['titreAnnonce'].'</td>';
+                                    echo '<td>'.$row['idCompteV'].'</td>';
+                                    echo '<td>'.($row['idCompteA'] ?? 'Aucun').'</td>';
+                                    echo '<td>'.($row['dateDerniereEnchere'] ?? 'Aucune').'</td>';
+                                    echo '<td>'.($row['dateFinEnchere'] ?? 'Non définie').'</td>';
+                                    echo '</tr>';
+                                }
+                                echo '</tbody></table>';
+                            } else {
+                                echo "Aucune annonce n'est disponible pour le moment.";
+                            }
                         }
                     }
                 } else {
-                    echo 'Veuillez vous connecter pour voir les annonces ou créer une annonce.
+                    echo '<br>
+                    Veuillez vous connecter pour voir les annonces ou créer une annonce.
                     <form method="POST" action="' . site_url('welcome/contenu/Connexion') . '">
                         <br><button type="submit" class="btn">Connexion</button>
                     </form>';
                 }
-                $pdo=null; // on ferme la connexion à la base de données en donnant une valeur vide à $pdo
+                $pdo=null;
             ?>
-        </div>
     </section> 
 </body>

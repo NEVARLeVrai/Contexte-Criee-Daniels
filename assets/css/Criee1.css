@@ -280,34 +280,91 @@
 }
 
 
+
+/* Styles pour les tableaux */
 table {
-    width: 80%; /* Ajuster la largeur du tableau selon vos besoins */
-    margin: 20px auto; /* Centrer horizontalement le tableau */
+    width: 90%;
+    margin: 20px auto;
     border-collapse: collapse;
-    transition: 1s;
-  
+    box-shadow: var(--shadow);
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.9em;
 }
 
 th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid var(--gray-border);
-    transition: 1s;
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid var(--gray-border);
+    white-space: nowrap;
 }
 
 th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+tr:nth-child(even) {
     background-color: var(--gray-lighter);
-    transition: 1s;
-    border-radius: 100px;
-    text-justify: center;
+}
+
+tr:hover {
+    background-color: var(--gray-light);
 }
 
 td img {
-    max-width: 100px;
+    max-width: 80px;
     height: auto;
     display: block;
-    margin: 0 auto; /* Centrer l'image à l'intérieur de la cellule */
-    transition: 1s;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+/* Styles spécifiques pour certaines colonnes */
+td:nth-child(5), /* Prix actuel */
+td:nth-child(6), /* Prix plancher */
+td:nth-child(7) /* Prix max */ {
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+
+
+/* Responsive design pour les tableaux */
+@media screen and (max-width: 1200px) {
+    table {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    table {
+        width: 98%;
+        font-size: 0.8em;
+    }
+    
+    th, td {
+        padding: 4px;
+    }
+    
+    td img {
+        max-width: 60px;
+    }
+}
+
+#lotInfo {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+#lotInfo p {
+    margin: 5px 0;
 }
 
 .mentions {
@@ -713,22 +770,6 @@ body::-webkit-scrollbar {
 }
 
 
-.Annonces {
-    text-align: center;
-    padding-top: 120px;
-    transition: 1s;
-}
-
-.Annonces-section {
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.Annonces-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
 
 .horaires {
     text-align: center;
