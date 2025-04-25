@@ -10,28 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<br>
         
         <form method="POST" action="<?php echo site_url('welcome/traitement_annonces'); ?>" enctype="multipart/form-data">
-            <label for="idBateau">Bateau :</label><br>
-            <select id="idBateau" name="idBateau" required>
-            <?php	
-                include "application/config/database.php";    
 
-                $selectBateaux = "SELECT idBateau, immatriculation FROM BATEAU";                
-                $stmt = $pdo->prepare($selectBateaux);
-                $stmt->execute();
-                $rows = $stmt->fetchAll();        
-
-                foreach ($rows as $row) {
-                    echo '<option value='.$row['idBateau'].'>'.$row['idBateau'].' - '.$row['immatriculation'].'</option>';
-                }
-            ?>
-            </select><br><br> 
-
-            <label for="datePeche">Date de pêche:</label><br>
-            <input type="date" id="datePeche" name="datePeche" readonly required><br>
 
             <label for="idLot">Lot n° :</label><br>
             <select id="idLot" name="idLot" required onchange="updateLotInfo(this.value)"><br>
             <?php	
+            include "application/config/database.php";    
                 $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax 
                              FROM LOT l 
                              ORDER BY l.idLot";                
@@ -52,6 +36,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $pdo=null;
             ?>
             </select><br><br>
+
+            <label for="idBateau">Bateau :</label><br>
+            <select id="idBateau" name="idBateau" required>
+            <?php	
+                
+                include "application/config/database.php";    
+                $selectBateaux = "SELECT idBateau, immatriculation FROM BATEAU";                
+                $stmt = $pdo->prepare($selectBateaux);
+                $stmt->execute();
+                $rows = $stmt->fetchAll();        
+
+                foreach ($rows as $row) {
+                    echo '<option value='.$row['idBateau'].'>'.$row['idBateau'].' - '.$row['immatriculation'].'</option>';
+                }
+            ?>
+            </select><br><br> 
+
+            <label for="datePeche">Date de pêche:</label><br>
+            <input type="date" id="datePeche" name="datePeche" readonly required><br>
+
+
 
             <div id="lotInfo">
                 <p>Prix de départ du lot : <span id="prixDepart">-</span> €</p>
