@@ -14,8 +14,8 @@ session_start();
         <meta property="og:url" content="https://www.lyceecassin-strasbourg.eu/">
         <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil1.png');?>">
         <link rel="icon" href="<?php echo base_url('assets/img/Accueil1.png');?>">
-        <title>Criée de Poulgoazec</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee3.css');?>">
+        <title><?php echo isset($page_title) ? $page_title : 'Criée de Poulgoazec'; ?></title>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee4.css');?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <script src="<?php echo base_url('assets/js/Criee.js');?>"></script>
     </head>
