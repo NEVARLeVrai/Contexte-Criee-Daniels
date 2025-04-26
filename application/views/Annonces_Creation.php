@@ -33,7 +33,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $row['idLot'].' : '.$row['idBateau'].
                          '</option>';
                 }                
-                $pdo=null;
             ?>
             </select><br><br>
 
