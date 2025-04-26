@@ -23,6 +23,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$dateFinEnchere = $_POST['dateFinEnchere'];
 					$idCompte = $_SESSION['identifiant'];
 
+					// Vérifier si une annonce existe déjà pour ce lot
+					$checkAnnonce = "SELECT COUNT(*) FROM ANNONCE WHERE idLot = :idLot";
+					$stmt = $pdo->prepare($checkAnnonce);
+					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
+					$stmt->execute();
+					$annonceExists = $stmt->fetchColumn();
+
+					if ($annonceExists > 0) {
+						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+							<h2>Erreur lors de la création de l'annonce</h2>
+							<p>Une annonce existe déjà pour ce lot.</p>
+							<br>
+							<form>
+								<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+									<button type='button' class='btn'>Réessayer</button>
+								</a>
+							</form>
+						</section>";
+						exit;
+					}
+
+					// Vérifier si le lot existe dans la table PECHE
+					$checkPeche = "SELECT COUNT(*) FROM PECHE WHERE idBateau = :idBateau AND datePeche = :datePeche";
+					$stmt = $pdo->prepare($checkPeche);
+					$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
+					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
+					$stmt->execute();
+					$pecheExists = $stmt->fetchColumn();
+
+					if ($pecheExists == 0) {
+						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
+							<h2>Erreur lors de la création de l'annonce</h2>
+							<p>Le lot n'existe pas dans la table PECHE.</p>
+							<br>
+							<form>
+								<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+									<button type='button' class='btn'>Réessayer</button>
+								</a>
+							</form>
+						</section>";
+						exit;
+					}
+
 					// Traitement de l'image
 					$target_dir = "assets/imgE/";
 					$imageFileType = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
@@ -105,27 +148,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				} else {
 					// Traitement de l'enchère
-					$idLot = $_POST['idLot'];
-					$nouveauPrix = $_POST['nouveauPrix'];
+					$annonceId = $_POST['idAnnonce'];
+					
+					// Extraire les informations de l'identifiant composé
+					list($idBateau, $datePeche, $idLot) = explode('_', $annonceId);
+					
+					$prixEnchere = $_POST['prixEnchere'];
 					$idCompteA = $_SESSION['identifiant'];
 					$dateActuelle = date('Y-m-d H:i:s'); // Format datetime pour MySQL
 
 					// Vérifier si le nouveau prix est supérieur au prix actuel et si la date limite n'est pas dépassée
-					$selectAnnonce = "SELECT prixEnchere, dateDerniereEnchere, dateFinEnchere FROM ANNONCE WHERE idLot = :idLot";
+					$selectAnnonce = "SELECT prixEnchere, dateDerniereEnchere, dateFinEnchere FROM ANNONCE 
+									WHERE idBateau = :idBateau 
+									AND datePeche = :datePeche 
+									AND idLot = :idLot";
 					$stmt = $pdo->prepare($selectAnnonce);
-					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
+					$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
+					$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
+					$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
 					$stmt->execute();
 					$result = $stmt->fetch(PDO::FETCH_ASSOC);
-					$prixActuel = $result['prixEnchere'];
-					$dateDerniereEnchere = $result['dateDerniereEnchere'];
-					$dateFinEnchere = $result['dateFinEnchere'];
 
 					// Vérifier si la date limite est dépassée
-					if (strtotime($dateActuelle) > strtotime($dateFinEnchere)) {
+					if (strtotime($dateActuelle) > strtotime($result['dateFinEnchere'])) {
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Enchère impossible</h2>
 							<p>La date limite pour enchérir est dépassée.</p>
-							<p>Date limite : " . $dateFinEnchere . "</p>
+							<p>Date limite : " . $result['dateFinEnchere'] . "</p>
 							<p>Date actuelle : " . $dateActuelle . "</p>
 							<br>
 							<form>
@@ -134,15 +183,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</a>
 							</form>
 						</section>";
-					} elseif ($nouveauPrix > $prixActuel) {
+					} elseif ($prixEnchere > $result['prixEnchere']) {
 						try {
 							// Mettre à jour le prix de l'enchère et les informations de l'enchérisseur
-							$updateEnchere = "UPDATE ANNONCE SET prixEnchere = :nouveauPrix, idCompteA = :idCompteA, dateDerniereEnchere = :dateActuelle WHERE idLot = :idLot";
+							$updateEnchere = "UPDATE ANNONCE 
+										   SET prixEnchere = :prixEnchere, 
+											   idCompteA = :idCompteA, 
+											   dateDerniereEnchere = :dateActuelle 
+										   WHERE idBateau = :idBateau 
+										   AND datePeche = :datePeche 
+										   AND idLot = :idLot";
 							$stmt = $pdo->prepare($updateEnchere);
-							$stmt->bindParam(':nouveauPrix', $nouveauPrix, PDO::PARAM_STR);
+							$stmt->bindParam(':prixEnchere', $prixEnchere, PDO::PARAM_STR);
 							$stmt->bindParam(':idCompteA', $idCompteA, PDO::PARAM_STR);
 							$stmt->bindParam(':dateActuelle', $dateActuelle, PDO::PARAM_STR);
-							$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
+							$stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
+							$stmt->bindParam(':datePeche', $datePeche, PDO::PARAM_STR);
+							$stmt->bindParam(':idLot', $idLot, PDO::PARAM_INT);
 
 							if ($stmt->execute()) {
 								// Vérifier la mise à jour
@@ -151,8 +208,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								$stmt->bindParam(':idLot', $idLot, PDO::PARAM_STR);
 								$stmt->execute();
 								$nouvelleDate = $stmt->fetchColumn();
-								
-								echo "Debug - Nouvelle dateDerniereEnchere: " . $nouvelleDate . "<br>";
+							
 								
 								echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 									<h2>Enchère validée avec succès !</h2>
@@ -190,8 +246,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					} else {
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
 							<h2>Le prix proposé doit être supérieur au prix actuel</h2>
-							<p>Prix actuel: " . $prixActuel . "€</p>
-							<p>Prix proposé: " . $nouveauPrix . "€</p>
+							<p>Prix actuel: " . $result['prixEnchere'] . "€</p>
+							<p>Prix proposé: " . $prixEnchere . "€</p>
 							<br>
 							<form>
 								<a href='" . site_url('welcome/contenu/Annonces_Encherir') . "'>
