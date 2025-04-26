@@ -3,11 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <body>  
-    <section class="horaires">
-        <div class="container">
-            <div class="horaires-section">
+<section id="connexion_et_inscription" class="connexion_et_inscription">
+
+
                 <h2>Horaires de la Criée de Poulgoazec</h2>
-                
+                <br><br>
                 <div class="horaires-block">
                     <h3>Vente aux professionnels</h3>
                     <div class="horaires-details">
@@ -33,7 +33,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <p>• Stationnement réservé aux acheteurs</p>
                     </div>
                 </div>
-            </div>
-        </div>
+
     </section> 
 </body>

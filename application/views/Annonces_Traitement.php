@@ -110,13 +110,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$idCompteA = $_SESSION['identifiant'];
 					$dateActuelle = date('Y-m-d H:i:s'); // Format datetime pour MySQL
 
-					// Debug
-					echo "Debug - idLot: " . $idLot . "<br>";
-					echo "Debug - nouveauPrix: " . $nouveauPrix . "<br>";
-					echo "Debug - idCompteA: " . $idCompteA . "<br>";
-					echo "Debug - dateActuelle: " . $dateActuelle . "<br>";
-					echo "Debug - Heure actuelle: " . date('H:i:s') . "<br>";
-
 					// Vérifier si le nouveau prix est supérieur au prix actuel et si la date limite n'est pas dépassée
 					$selectAnnonce = "SELECT prixEnchere, dateDerniereEnchere, dateFinEnchere FROM ANNONCE WHERE idLot = :idLot";
 					$stmt = $pdo->prepare($selectAnnonce);
@@ -126,10 +119,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$prixActuel = $result['prixEnchere'];
 					$dateDerniereEnchere = $result['dateDerniereEnchere'];
 					$dateFinEnchere = $result['dateFinEnchere'];
-
-					echo "Debug - prixActuel: " . $prixActuel . "<br>";
-					echo "Debug - dateDerniereEnchere actuelle: " . $dateDerniereEnchere . "<br>";
-					echo "Debug - dateFinEnchere: " . $dateFinEnchere . "<br>";
 
 					// Vérifier si la date limite est dépassée
 					if (strtotime($dateActuelle) > strtotime($dateFinEnchere)) {

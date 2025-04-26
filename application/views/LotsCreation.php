@@ -40,7 +40,7 @@ include "application/config/database.php";
                     echo '<p>Créer mon lot :</p>
                     <br>
                     
-                    <form method="POST" action="' . site_url('welcome/traitement_lots') . '">'; 
+                    <form method="POST" action="' . site_url('welcome/traitement_lots') . '" class="lots-creation-form">'; 
                         include "application/config/database.php";
                     
                         $selectBateaux = "SELECT idBateau, immatriculation FROM BATEAU";                

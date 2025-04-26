@@ -51,7 +51,7 @@
     transform: translateX(-50%);
     width: 25%; /* Réduit la largeur de la barre de navigation à 50% de la largeur de la sidebar */
     height: 10%;
-    margin-top: 20px;
+    margin-top: -20px;
     padding-top: 8px; /* Ajuste le rembourrage supérieur */ 
     padding-bottom: 10px; /* Ajuste le rembourrage inférieur */
     border-radius: 50px;
@@ -111,13 +111,6 @@
 
 
 
-.accueil {
-
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-    
-
-}
 
 
 /* From Uiverse.io by kennyotsu */ 
@@ -222,28 +215,87 @@
 
 
 
-.accueil {
-    padding-top: 300px;
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-
-}
 
 
 .connexion_et_inscription {
+    margin-top: 60px;
     padding-top: 200px;
+    padding-bottom: 100px;
     display: flex;
-    flex-direction: column; /* Alignement vertical */
-    justify-content: center; /* Centrer horizontalement */
-    align-items: center; /* Centrer verticalement */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     transition: 1s;
+    text-align: center;
 }
 
-.connexion_et_inscription form{
-    width: 50%; /* Largeur du formulaire */
-    text-align: center; /* Centrer le contenu du formulaire */
+.connexion_et_inscription form {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    min-width: 260px;
+    margin: 30px auto 0 auto;
+    text-align: center;
     transition: 0.5s;
     align-content: center;
+    background-color: var(--white);
+    padding: 24px 32px 32px 32px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    border: 1px solid var(--primary-light);
+}
+
+.connexion_et_inscription form form, .connexion_et_inscription form a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.connexion_et_inscription input,
+.connexion_et_inscription select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--gray-border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    background-color: var(--white);
+}
+
+.connexion_et_inscription input:focus,
+.connexion_et_inscription select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 3px var(--primary-light);
+    outline: none;
+}
+
+.connexion_et_inscription label {
+    display: block;
+    margin: 10px 0 5px;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.connexion_et_inscription .btn-outside {
+    display: block;
+    margin: 24px auto 0 auto;
+    text-align: center;
+}
+
+.connexion_et_inscription .btn {
+    margin: 20px 10px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+}
+
+@media screen and (max-width: 900px) {
+    .connexion_et_inscription form {
+        width: 80%;
+        min-width: 0;
+        max-width: 95vw;
+        padding: 12px 6px 18px 6px;
+    }
 }
 
 .commandes {
@@ -283,7 +335,7 @@
 
 /* Styles pour les tableaux */
 table {
-    width: 90%;
+    width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
     box-shadow: var(--shadow);
@@ -297,7 +349,7 @@ th, td {
     padding: 8px 10px;
     text-align: center;
     border: 1px solid var(--gray-border);
-    white-space: nowrap;
+    min-width: 100px;
 }
 
 th {
@@ -337,18 +389,25 @@ td:nth-child(7) /* Prix max */ {
 /* Responsive design pour les tableaux */
 @media screen and (max-width: 1200px) {
     table {
-        width: 95%;
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+    
+    th, td {
+        min-width: 120px;
     }
 }
 
 @media screen and (max-width: 768px) {
     table {
-        width: 98%;
+        width: 100%;
         font-size: 0.8em;
     }
     
     th, td {
         padding: 4px;
+        min-width: 100px;
     }
     
     td img {
@@ -367,32 +426,6 @@ td:nth-child(7) /* Prix max */ {
     margin: 5px 0;
 }
 
-.mentions {
-
-    text-align: center; /* Centrer le contenu */
-    padding-top: 250px;
-    transition: 1s;
-}
-
-.mentions p, h2, h3 {
-    
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
-
-.contact {
-
-    text-align: center; /* Centrer le contenu */
-    padding-top: 200px;
-    transition: 1s;
-}
-
-
-.contact p, h2, h3 {
-    
-    text-align: center; /* Centrer le texte */
-    transition: 1s;
-}
 
 
 .traitement p, h2, h3 {
@@ -447,25 +480,53 @@ td:nth-child(7) /* Prix max */ {
 }
 
 
-/* Personnalisation de l'apparence de la barre de défilement */
-body::-webkit-scrollbar {
+/* Styles pour les barres de défilement */
+::-webkit-scrollbar {
     width: 10px;
     background-color: transparent;
 }
 
-  
-  body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: var(--primary-color);
     border-radius: 20px;
-  }
-  
-  body::-webkit-scrollbar-thumb:hover {
+}
+
+::-webkit-scrollbar-thumb:hover {
     background-color: var(--primary-light);
     border-radius: 20px;
-  }
+}
 
+/* Styles spécifiques pour la sidebar */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
 
-  @media screen and (max-width: 1600px) {
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 20px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-light);
+    border-radius: 20px;
+}
+
+/* Styles pour les tableaux */
+table::-webkit-scrollbar {
+    height: 8px;
+}
+
+table::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 20px;
+}
+
+table::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-light);
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 1600px) {
 
     #navbar {
         width: 30%;
@@ -488,14 +549,6 @@ body::-webkit-scrollbar {
         width: 35%;
     }
 
-    .accueil {
-        padding-top: 200px;
-        transition: 1s;
-    }
-
-    .horaires {
-        padding-top: 180px;
-    }
 }
 
 @media screen and (max-width: 1100px) {
@@ -505,10 +558,6 @@ body::-webkit-scrollbar {
 
 
     
-    .accueil {
-        padding-top: 200px;
-        transition: 1s;
-    }
     
     .commandes {
         padding-top: 200px;
@@ -535,9 +584,6 @@ body::-webkit-scrollbar {
         transition: 1s;
     }
 
-    .horaires {
-        padding-top: 160px;
-    }
     
     .container {
         margin: 0 15px;
@@ -648,18 +694,40 @@ body::-webkit-scrollbar {
 .sidebar {
     position: fixed;
     top: 0;
-    left: 20px; /* Décalage par rapport au bord */
+    left: 20px;
     width: var(--sidebar-width);
-    height: calc(100% - 40px); /* Hauteur réduite pour créer un espace en haut et en bas */
+    height: calc(100% - 40px);
     background: var(--white);
     z-index: 50;
-    transform: translateX(-120%); /* Déplacé plus loin pour voir l'animation */
+    transform: translateX(-120%);
     transition: all 0.4s ease;
     box-shadow: var(--nav-shadow);
     padding: 1.5rem;
-    margin-top: 20px; /* Espace en haut */
+    margin-top: 20px;
     border-radius: 20px;
     box-shadow: var(--hover-shadow);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 60px; /* Espace pour le footer */
+}
+
+.sidebar-footer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: var(--primary-color);
+    padding: 15px 0;
+    background-color: var(--white);
+    border-top: 2px solid var(--primary-light);
+    margin-top: auto;
 }
 
 .sidebar.active {
@@ -715,6 +783,9 @@ body::-webkit-scrollbar {
     display: flex; /* Utiliser flexbox pour aligner le contenu */
     align-items: center; /* Centrer verticalement le contenu */
     margin: 10px auto; /* Centrer le bouton avec une marge automatique */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar-item > i {
@@ -725,6 +796,8 @@ body::-webkit-scrollbar {
 .sidebar-item > span {
     flex-grow: 1; /* Permet au texte de prendre tout l'espace restant */
     text-align: center; /* Centrer le texte */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar-item:hover {
@@ -783,16 +856,6 @@ body::-webkit-scrollbar {
     padding: 20px;
 }
 
-.horaires-section {
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.horaires-section h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 28px;
-}
 
 .horaires-block {
     margin-bottom: 30px;
@@ -825,13 +888,6 @@ body::-webkit-scrollbar {
 .horaires-details em {
     color: var(--primary-dark);
     font-size: 14px;
-}
-
-/* Styles communs pour les sections */
-.mentions, .contact, .horaires {
-    text-align: center;
-    padding-top: 120px;
-    transition: 1s;
 }
 
 .section-block {
@@ -895,12 +951,34 @@ body::-webkit-scrollbar {
     margin-left: 10px; /* Espacement à droite du logo */
 }
 
-.sidebar-footer {
-    position: absolute; /* Positionner le footer en bas de la sidebar */
-    bottom: 20px; /* Espacement du bas */
-    left: 0;
-    right: 0; /* Prendre toute la largeur */
-    text-align: center; /* Centrer le texte */
-    color: var(--primary-color); /* Optionnel : couleur du texte */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 85%;
+        padding: 1rem;
+    }
+    
+    .sidebar-item {
+        width: 95%;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar {
+        width: 90%;
+        padding: 0.8rem;
+    }
+    
+    .sidebar-item {
+        width: 98%;
+        padding: 0.7rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .sidebar-item > i {
+        margin-right: 8px;
+        font-size: 0.9rem;
+    }
 }
 

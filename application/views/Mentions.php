@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <body>  
-    <section class="mentions">
-        <div class="container">
+<section id="connexion_et_inscription" class="connexion_et_inscription">
+
             <h2>Mentions légales</h2>
             
             <div class="section-block">
@@ -25,5 +25,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <p>Ils sont la propriété exclusive de la Criée. Toute reproduction ou représentation totale ou partielle du site ou de son contenu, par quelque procédé que ce soit, sans l'autorisation préalable de la Criée est interdite et constituerait une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété.</p>
             </div>
         </div>
-    </section> 
+
 </body>
