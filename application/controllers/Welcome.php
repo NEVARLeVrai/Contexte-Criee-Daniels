@@ -37,47 +37,49 @@ class Welcome extends CI_Controller {
 	}
     public function contenu($id) 
     {
-        $this->load->view('Menu1'); // Chargement de la vue du menu
-    
+        $data = array();
+        
         switch($id) {
             case "Accueil":
-                $this->load->view('Accueil');
+                $data['page_title'] = "Accueil - Criée de Poulgoazec";
                 break;
             case "Mentions":
-                $this->load->view('Mentions');
+                $data['page_title'] = "Mentions légales - Criée de Poulgoazec";
                 break;
             case "Contact":
-                $this->load->view('Contact');
+                $data['page_title'] = "Contact - Criée de Poulgoazec";
                 break;
             case "Connexion":
-                $this->load->view('Connexion');
+                $data['page_title'] = "Connexion - Criée de Poulgoazec";
                 break;
             case "Inscription":
-                $this->load->view('Inscription');
+                $data['page_title'] = "Inscription - Criée de Poulgoazec";
                 break;
             case "Deconnexion":
-                $this->load->view('Deconnexion');
+                $data['page_title'] = "Déconnexion - Criée de Poulgoazec";
                 break;
             case "Horaires":
-                $this->load->view('Horaires');
+                $data['page_title'] = "Horaires - Criée de Poulgoazec";
                 break;
             case "Annonces":
-                $this->load->view('Annonces');
+                $data['page_title'] = "Enchères - Criée de Poulgoazec";
                 break;
             case "Lots":
-                $this->load->view('Lots');
+                $data['page_title'] = "Lots - Criée de Poulgoazec";
                 break;
             case "LotsCreation":
-                $this->load->view('LotsCreation');
+                $data['page_title'] = "Création de lots - Criée de Poulgoazec";
                 break;
             case "Annonces_Creation":
-                $this->load->view('Annonces_Creation');
+                $data['page_title'] = "Création d'enchère - Criée de Poulgoazec";
                 break;
             case "Annonces_Encherir":
-                $this->load->view('Annonces_Encherir');
+                $data['page_title'] = "Enchérir - Criée de Poulgoazec";
                 break;
         }
-    
+
+        $this->load->view('Menu1', $data); // Passer le titre à la vue Menu1
+        $this->load->view($id); // Charger la vue correspondante
     }
     
     public function traitement_inscription() {

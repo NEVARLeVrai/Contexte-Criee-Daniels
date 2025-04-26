@@ -19,6 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
         <h1>Découvrez notre sélection de ventes de poissons</h1>
+        <br>        <br>
     </section>  
 
     <section id="features" class="features">
@@ -50,13 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <h2>Rejoignez-nous</h2>
             <p>Créez votre compte pour participer aux enchères</p>
             <div class="cta-buttons">
-                <a href="<?php echo site_url('welcome/contenu/Connexion'); ?>" class="btn btn-primary">Se connecter</a>
+                <a href="<?php echo site_url('welcome/contenu/Connexion'); ?>" class="btn btn-secondary">Se connecter</a>
                 <a href="<?php echo site_url('welcome/contenu/Inscription'); ?>" class="btn btn-secondary">S'inscrire</a>
             </div>
         </div>
     </section>
     <?php endif; ?>
 
+    <?php if (isset($_SESSION['identifiant'])) : ?>
     <section id="latest" class="latest">
         <div class="container">
             <h2>Dernières Enchères</h2>
@@ -74,20 +76,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $stmt->execute();
                 $latest_auctions = $stmt->fetchAll();
 
-                foreach ($latest_auctions as $auction) :
-                ?>
-                <div class="auction-card">
-                    <img src="<?php echo base_url('assets/' . $auction['idImage']); ?>" alt="<?php echo htmlspecialchars($auction['titreAnnonce']); ?>">
-                    <div class="auction-info">
-                        <h3><?php echo htmlspecialchars($auction['titreAnnonce']); ?></h3>
-                        <p class="price">Prix actuel : <?php echo number_format($auction['prixEnchere'], 2); ?> €</p>
-                        <p class="time">Fin : <?php echo date('d/m/Y H:i', strtotime($auction['dateFinEnchere'])); ?></p>
+                if (empty($latest_auctions)) {
+                    echo '<div class="no-auctions">Aucune enchère disponible pour le moment.</div>';
+                } else {
+                    foreach ($latest_auctions as $auction) :
+                    ?>
+                    <div class="auction-card">
+                        <img src="<?php echo base_url('assets/' . $auction['idImage']); ?>" alt="<?php echo htmlspecialchars($auction['titreAnnonce']); ?>">
+                        <div class="auction-info">
+                            <h3><?php echo htmlspecialchars($auction['titreAnnonce']); ?></h3>
+                            <p class="price">Prix actuel : <?php echo number_format($auction['prixEnchere'], 2); ?> €</p>
+                            <p class="time">Fin : <?php echo date('d/m/Y H:i', strtotime($auction['dateFinEnchere'])); ?></p>
+                        </div>
                     </div>
-                </div>
-                <?php endforeach; ?>
+                    <?php endforeach;
+                }
+                ?>
             </div>
             <div class="view-all">
                 <a href="<?php echo site_url('welcome/contenu/Annonces'); ?>" class="btn">Voir toutes les enchères</a>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <section id="info-contact" class="info-contact">
+        <div class="container">
+            <h2>Vous souhaitez nous contacter ou avoir plus d'informations ?</h2>
+            <div class="info-buttons">
+                <a href="<?php echo site_url('welcome/contenu/Contact'); ?>" class="btn btn-info">Contact</a>
+                <a href="<?php echo site_url('welcome/contenu/Mentions'); ?>" class="btn btn-info">Mentions légales</a>
+                <a href="<?php echo site_url('welcome/contenu/Horaires'); ?>" class="btn btn-info">Horaires</a>
             </div>
         </div>
     </section>
