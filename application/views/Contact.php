@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <body>  
-    <section class="contact">
-        <div class="container">
+<section id="connexion_et_inscription" class="connexion_et_inscription">
+
             <h2>Contactez nous</h2>
             
             <div class="section-block">
@@ -25,6 +25,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 allowfullscreen="" 
                 loading="lazy">
             </iframe>
-        </div>
+
     </section>
 </body>

@@ -15,7 +15,7 @@ session_start();
         <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil1.png');?>">
         <link rel="icon" href="<?php echo base_url('assets/img/Accueil1.png');?>">
         <title>Criée de Poulgoazec</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee1.css');?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee2.css');?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <script src="<?php echo base_url('assets/js/Criee.js');?>"></script>
     </head>
@@ -33,7 +33,7 @@ session_start();
 
 
                 <a href="<?php echo site_url('welcome/contenu/Accueil');?>">
-                    <button class="sidebar-item deco-button" style="margin-top: 80px;">
+                    <button class="sidebar-item deco-button">
                         <i class="fas fa-home"></i> <span>Accueil</span>
                     </button>
                 </a>

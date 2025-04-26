@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <body>  
-    <section id="accueil" class="accueil">
+<section id="connexion_et_inscription" class="connexion_et_inscription">
 	<img src="<?php echo base_url('assets/img/Accueil1.png');?>" class="Noir">
         <div class="card">
             <div class="loader">
