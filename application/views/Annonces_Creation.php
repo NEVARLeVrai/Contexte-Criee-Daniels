@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <select id="idLot" name="idLot" required onchange="updateLotInfo(this.value)"><br>
             <?php	
             include "application/config/database.php";    
-                $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax 
+                $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax, l.DateEnchere 
                              FROM LOT l 
                              ORDER BY l.idLot";                
                 $stmt = $pdo->prepare($selectLots);
@@ -29,7 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             data-date-peche="'.$row['datePeche'].'"
                             data-prix-depart="'.$row['prixDepart'].'"
                             data-prix-plancher="'.$row['prixPlancher'].'"
-                            data-prix-max="'.$row['prixEncheresMax'].'">'.
+                            data-prix-max="'.$row['prixEncheresMax'].'"
+                            data-date-enchere="'.$row['DateEnchere'].'">'.
                             $row['idLot'].' : '.$row['idBateau'].
                          '</option>';
                 }                
@@ -80,7 +81,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<br>
             <button type="submit" class="btn">Valider</button>
-			<button type='reset' class='btn'>Effacer</button> 
         </form>      
 
         <script>
@@ -101,6 +101,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
             // Mettre à jour le prix initial de l'enchère avec le prix de départ du lot
             document.getElementById('prixEnchere').value = option.dataset.prixDepart;
+
+            // Pré-remplir la date d'enchère avec celle du lot si elle existe
+            if (option.dataset.dateEnchere) {
+                document.getElementById('DateEnchere').value = option.dataset.dateEnchere.slice(0, 16); // Format pour datetime-local
+            }
         }
 
         // Appeler updateLotInfo au chargement de la page pour initialiser les valeurs

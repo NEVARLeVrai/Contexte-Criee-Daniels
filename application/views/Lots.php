@@ -9,6 +9,14 @@ include "application/config/database.php";
         <br>
             
         <?php
+            // Afficher les messages de succès ou d'erreur
+            if (isset($_SESSION['message'])) {
+                echo '<div class="alert '.($_SESSION['message'] === "Le lot a été supprimé avec succès." ? 'alert-success' : 'alert-danger').'">';
+                echo $_SESSION['message'];
+                echo '</div>';
+                unset($_SESSION['message']); // Effacer le message après l'avoir affiché
+            }
+
             // Vérifier si l'utilisateur est connecté
             if (isset($_SESSION['identifiant'])) {
                 // Récupérer le type de compte de l'utilisateur
@@ -26,18 +34,12 @@ include "application/config/database.php";
                             <br><button type="submit" class="btn">Se reconnecter</button>
                           </form>';
                 } else {
-                    // Si les informations sont trouvées, vérifier le type de compte
-                    if ($row['typeCompte'] === 'vendeur') {
-                        // Afficher le bouton de création de lot pour les vendeurs
-                        echo '<form method="POST" action="' . site_url('welcome/contenu/LotsCreation') . '">
-                            <button type="submit" class="btn">Créer un lot</button>
-                          </form><br>';
-                    }
+
 
                     // Afficher les lots
                     $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, e.nomEspece, t.specification, p.libelle as presentation, 
                                  b.tare, q.libelle as qualite, l.poidsBrutLot, l.prixPlancher, l.prixDepart, l.prixEncheresMax, 
-                                 l.DateEnchere, l.codeEtat, l.idFacture
+                                 l.DateEnchere, l.codeEtat, l.idFacture, l.idCompteV
                                  FROM LOT l
                                  JOIN ESPECE e ON l.idEspece = e.idEspece
                                  JOIN TAILLE t ON l.idTaille = t.idTaille
@@ -51,6 +53,15 @@ include "application/config/database.php";
                     $rows = $stmt->fetchAll();
                     
                     if(count($rows) > 0) {
+
+                                            // Si les informations sont trouvées, vérifier le type de compte
+                        if ($row['typeCompte'] === 'vendeur') {
+                            // Afficher le bouton de création de lot pour les vendeurs
+                            echo '<form method="POST" action="' . site_url('welcome/contenu/LotsCreation') . '">
+                                <button type="submit" class="btn">Créer un lot</button>
+                            </form><br>';
+                        }
+
                         echo '<table>
                             <thead>
                                 <tr>
@@ -69,11 +80,46 @@ include "application/config/database.php";
                                     <th scope="col">Date enchère</th>
                                     <th scope="col">État</th>
                                     <th scope="col">Facture</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>';
 
                         foreach ($rows as $row) {
+                            // Si le bouton Supprimer a été cliqué
+                            if(isset($_GET['action']) && $_GET['action'] === 'supprimer' 
+                               && isset($_GET['idLot']) && $_GET['idLot'] === $row['idLot']
+                               && isset($_GET['idBateau']) && $_GET['idBateau'] === $row['idBateau']
+                               && isset($_GET['datePeche']) && $_GET['datePeche'] === $row['datePeche']) {
+                                
+                                // Vérifier d'abord s'il existe une annonce pour ce lot
+                                $checkAnnonce = "SELECT COUNT(*) FROM ANNONCE WHERE idLot = :idLot AND idBateau = :idBateau AND datePeche = :datePeche";
+                                $stmt = $pdo->prepare($checkAnnonce);
+                                $stmt->bindParam(':idLot', $row['idLot'], PDO::PARAM_INT);
+                                $stmt->bindParam(':idBateau', $row['idBateau'], PDO::PARAM_STR);
+                                $stmt->bindParam(':datePeche', $row['datePeche'], PDO::PARAM_STR);
+                                $stmt->execute();
+                                $annonceExists = $stmt->fetchColumn();
+
+                                if($annonceExists > 0) {
+                                    $_SESSION['message'] = "Impossible de supprimer ce lot car il est lié à une annonce.";
+                                    echo '<script>window.location.href = "'.site_url('welcome/contenu/Lots').'";</script>';
+                                    exit;
+                                }
+
+                                $deleteLot = "DELETE FROM LOT WHERE idLot = :idLot AND idBateau = :idBateau AND datePeche = :datePeche";
+                                $stmt = $pdo->prepare($deleteLot);
+                                $stmt->bindParam(':idLot', $row['idLot'], PDO::PARAM_INT);
+                                $stmt->bindParam(':idBateau', $row['idBateau'], PDO::PARAM_STR);
+                                $stmt->bindParam(':datePeche', $row['datePeche'], PDO::PARAM_STR);
+                                
+                                if($stmt->execute()) {
+                                    $_SESSION['message'] = "Le lot a été supprimé avec succès.";
+                                    echo '<script>window.location.href = "'.site_url('welcome/contenu/Lots').'";</script>';
+                                    exit;
+                                }
+                            }
+
                             echo '<tr>';
                             echo '<td>'.$row['idLot'].'</td>';
                             echo '<td>'.$row['idBateau'].'</td>';
@@ -90,11 +136,25 @@ include "application/config/database.php";
                             echo '<td>'.$row['DateEnchere'].'</td>';
                             echo '<td>'.$row['codeEtat'].'</td>';
                             echo '<td>'.$row['idFacture'].'</td>';
+                            echo '<td>';
+                            // Ajouter le bouton Supprimer si l'utilisateur est le vendeur du lot
+                            if (isset($_SESSION['identifiant']) && $row['idCompteV'] === $_SESSION['identifiant']) {
+                                $urlSuppression = site_url('welcome/contenu/Lots').'?action=supprimer&idLot='.$row['idLot'].'&idBateau='.$row['idBateau'].'&datePeche='.urlencode($row['datePeche']);
+                                echo '<a onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer ce lot ?\')" href="'.$urlSuppression.'" class="btn">Supprimer</a>';
+                            }
+                            else{
+                                echo 'Vous n\'êtes pas le vendeur de ce lot';
+                            }
+                            echo '</td>';
                             echo '</tr>';
                         }
                         echo '</tbody></table>';
                     } else {
                         echo "Aucun lot n'est disponible pour le moment.";
+                        echo '<form method="POST" action="' . site_url('welcome/contenu/LotsCreation') . '">
+                        <button type="submit" class="btn">Créer un lot</button>
+                      </form><br>';
+           
                     }
                 }
             } else {
