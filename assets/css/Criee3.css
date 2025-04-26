@@ -982,3 +982,128 @@ table::-webkit-scrollbar-thumb:hover {
     }
 }
 
+
+.features {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.cta {
+    background: #1a237e;
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.cta-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.latest {
+    padding: 4rem 0;
+}
+
+.auction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.auction-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.auction-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.auction-info {
+    padding: 1.5rem;
+}
+
+.price {
+    color: #1a237e;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.time {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.view-all {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #1a237e;
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+

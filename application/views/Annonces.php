@@ -29,13 +29,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         // Si les informations sont trouvées, continuer la logique existante
                         if ($row['typeCompte'] === 'acheteur') {
                             // Si l'utilisateur est un acheteur, afficher les annonces
-                            $selectAnnonces = "SELECT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
+                            $selectAnnonces = "SELECT DISTINCT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
                                              a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
                                              a.dateDerniereEnchere, a.dateFinEnchere,
                                              l.prixPlancher, l.prixEncheresMax
                                              FROM ANNONCE a
-                                             JOIN LOT l ON a.idLot = l.idLot
-                                             ORDER BY a.idLot";
+                                             JOIN LOT l ON a.idLot = l.idLot AND a.idBateau = l.idBateau AND a.datePeche = l.datePeche
+                                             GROUP BY a.idBateau, a.datePeche, a.idLot
+                                             ORDER BY a.dateFinEnchere DESC";
                             $stmt = $pdo->prepare($selectAnnonces);
                             $stmt->execute();
                             $rows = $stmt->fetchAll();
@@ -92,14 +93,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             }
                         } elseif ($row['typeCompte'] === 'vendeur') {
                             // Si l'utilisateur est un vendeur, afficher les annonces
-                            $selectAnnonces = "SELECT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
+                            $selectAnnonces = "SELECT DISTINCT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
                                              a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
                                              a.dateDerniereEnchere, a.dateFinEnchere,
                                              l.prixPlancher, l.prixEncheresMax
                                              FROM ANNONCE a
-                                             JOIN LOT l ON a.idLot = l.idLot
-                                             ORDER BY a.idLot";
+                                             JOIN LOT l ON a.idLot = l.idLot AND a.idBateau = l.idBateau AND a.datePeche = l.datePeche
+                                             WHERE a.idCompteV = :idCompte
+                                             GROUP BY a.idBateau, a.datePeche, a.idLot
+                                             ORDER BY a.dateFinEnchere DESC";
                             $stmt = $pdo->prepare($selectAnnonces);
+                            $stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
                             $stmt->execute();
                             $rows = $stmt->fetchAll();
                             

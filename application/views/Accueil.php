@@ -20,4 +20,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <h1>Découvrez notre sélection de ventes de poissons</h1>
     </section>  
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-fish"></i>
+                    <h3>Vente aux Enchères</h3>
+                    <p>Participez à nos ventes aux enchères en ligne de produits frais de la mer</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-ship"></i>
+                    <h3>Pêche Locale</h3>
+                    <p>Des produits issus directement des bateaux de pêche locaux</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Qualité Garantie</h3>
+                    <p>Une sélection rigoureuse des meilleurs produits de la mer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php if (!isset($_SESSION['identifiant'])) : ?>
+    <section id="cta" class="cta">
+        <div class="container">
+            <h2>Rejoignez-nous</h2>
+            <p>Créez votre compte pour participer aux enchères</p>
+            <div class="cta-buttons">
+                <a href="<?php echo site_url('welcome/contenu/Connexion'); ?>" class="btn btn-primary">Se connecter</a>
+                <a href="<?php echo site_url('welcome/contenu/Inscription'); ?>" class="btn btn-secondary">S'inscrire</a>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <section id="latest" class="latest">
+        <div class="container">
+            <h2>Dernières Enchères</h2>
+            <div class="auction-grid">
+                <?php
+                include "application/config/database.php";
+                
+                $query = "SELECT DISTINCT a.idImage, a.idBateau, a.titreAnnonce, a.prixEnchere, a.dateFinEnchere
+                         FROM ANNONCE a
+                         WHERE a.dateFinEnchere > NOW()
+                         ORDER BY a.dateFinEnchere ASC
+                         LIMIT 3";
+                
+                $stmt = $pdo->prepare($query);
+                $stmt->execute();
+                $latest_auctions = $stmt->fetchAll();
+
+                foreach ($latest_auctions as $auction) :
+                ?>
+                <div class="auction-card">
+                    <img src="<?php echo base_url('assets/' . $auction['idImage']); ?>" alt="<?php echo htmlspecialchars($auction['titreAnnonce']); ?>">
+                    <div class="auction-info">
+                        <h3><?php echo htmlspecialchars($auction['titreAnnonce']); ?></h3>
+                        <p class="price">Prix actuel : <?php echo number_format($auction['prixEnchere'], 2); ?> €</p>
+                        <p class="time">Fin : <?php echo date('d/m/Y H:i', strtotime($auction['dateFinEnchere'])); ?></p>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="view-all">
+                <a href="<?php echo site_url('welcome/contenu/Annonces'); ?>" class="btn">Voir toutes les enchères</a>
+            </div>
+        </div>
+    </section>
 </body>

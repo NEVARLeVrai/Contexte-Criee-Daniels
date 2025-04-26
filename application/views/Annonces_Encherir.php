@@ -12,27 +12,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <form method="POST" action="<?php echo site_url('welcome/traitement_annonces'); ?>">
             <label for="idAnnonce">Annonce :</label><br>
             <select id="idAnnonce" name="idAnnonce" required onchange="updateLotInfo(this.value)">
+                <option value="">Sélectionnez une annonce</option>
             <?php	
                 include "application/config/database.php";    
 
-                $selectAnnonces = "SELECT a.idAnnonce, a.titreAnnonce, a.prixEnchere, a.idCompteA, 
-                                 l.prixPlancher, l.prixEncheresMax
-                                 FROM ANNONCE a
-                                 JOIN LOT l ON a.idLot = l.idLot
-                                 ORDER BY a.idAnnonce";                
-                $stmt = $pdo->prepare($selectAnnonces);
-                $stmt->execute();
-                $rows = $stmt->fetchAll();        
+                $selectAnnonces = "SELECT DISTINCT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
+                                             a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
+                                             a.dateDerniereEnchere, a.dateFinEnchere,
+                                             l.prixPlancher, l.prixEncheresMax
+                                             FROM ANNONCE a
+                                             JOIN LOT l ON a.idLot = l.idLot AND a.idBateau = l.idBateau AND a.datePeche = l.datePeche
+                                             WHERE a.dateFinEnchere > NOW()
+                                             AND a.idCompteV != :idCompte
+                                             AND (a.idCompteA IS NULL OR a.idCompteA != :idCompte)
+                                             GROUP BY a.idBateau, a.datePeche, a.idLot
+                                             ORDER BY a.dateFinEnchere DESC";
 
+                
+                $stmt = $pdo->prepare($selectAnnonces);
+                $stmt->bindParam(':idCompte', $_SESSION['identifiant'], PDO::PARAM_STR);
+                $stmt->execute();
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                
                 foreach ($rows as $row) {
-                    echo '<option value="'.$row['idAnnonce'].'" 
+                    // On utilise la combinaison idBateau + datePeche + idLot comme identifiant unique
+                    $annonceId = $row['idBateau'] . '_' . $row['datePeche'] . '_' . $row['idLot'];
+                    echo '<option value="'.$annonceId.'" 
                             data-prix-actuel="'.$row['prixEnchere'].'"
                             data-prix-plancher="'.$row['prixPlancher'].'"
-                            data-prix-max="'.$row['prixEncheresMax'].'">'.
-                            $row['idAnnonce'].' : '.$row['titreAnnonce'].
-                         '</option>';
+                            data-prix-max="'.$row['prixEncheresMax'].'">
+                            Lot '.$row['idLot'].' - Bateau '.$row['idBateau'].' - '.$row['titreAnnonce'].' 
+                            (Prix actuel: '.$row['prixEnchere'].'€)
+                          </option>';
                 }
-                $pdo=null;
             ?>
             </select><br><br>
 
@@ -47,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <br>
             <button type="submit" class="btn">Valider</button>
-            <button type='reset' class='btn'>Effacer</button> 
+            <button type="reset" class="btn">Effacer</button> 
         </form>      
 
         <script>
@@ -55,30 +68,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             const select = document.getElementById('idAnnonce');
             const option = select.options[select.selectedIndex];
             
-            document.getElementById('prixActuel').textContent = option.dataset.prixActuel;
-            document.getElementById('prixPlancher').textContent = option.dataset.prixPlancher;
+            document.getElementById('prixActuel').textContent = option.dataset.prixActuel || '-';
+            document.getElementById('prixPlancher').textContent = option.dataset.prixPlancher || '-';
             document.getElementById('prixMax').textContent = option.dataset.prixMax || 'Non défini';
             
             // Mettre à jour les limites du champ prixEnchere
             const prixEnchereInput = document.getElementById('prixEnchere');
-            prixEnchereInput.min = parseFloat(option.dataset.prixActuel) + 0.01;
+            if (option.dataset.prixActuel) {
+                prixEnchereInput.min = parseFloat(option.dataset.prixActuel) + 0.01;
+                prixEnchereInput.value = parseFloat(option.dataset.prixActuel) + 0.01;
+            }
             if (option.dataset.prixMax) {
                 prixEnchereInput.max = parseFloat(option.dataset.prixMax);
             }
         }
 
-        // Vérifier le prix lors de la soumission du formulaire
-        document.querySelector('form').addEventListener('submit', function(e) {
+        // Initialiser les informations au chargement
+        window.onload = function() {
             const select = document.getElementById('idAnnonce');
-            const option = select.options[select.selectedIndex];
-            const prixEnchere = parseFloat(document.getElementById('prixEnchere').value);
-            const prixMax = parseFloat(option.dataset.prixMax);
-
-            if (prixMax && prixEnchere > prixMax) {
-                e.preventDefault();
-                alert('Le prix de votre enchère ne peut pas dépasser le prix maximum de ' + prixMax + ' €');
+            if (select.value) {
+                updateLotInfo(select.value);
             }
-        });
+        }
         </script>
     </section>
 </body>
