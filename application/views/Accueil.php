@@ -66,10 +66,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php
                 include "application/config/database.php";
                 
-                $query = "SELECT DISTINCT a.idImage, a.idBateau, a.titreAnnonce, a.prixEnchere, a.dateFinEnchere
+                // Définir le fuseau horaire à Paris
+                date_default_timezone_set('Europe/Paris');
+                
+                $query = "SELECT DISTINCT a.idImage, a.idBateau, a.titreAnnonce, a.prixEnchere, a.dateFinEnchere, a.DateEnchere
                          FROM ANNONCE a
-                         WHERE a.dateFinEnchere > NOW()
-                         ORDER BY a.dateFinEnchere ASC
+                         WHERE a.DateEnchere > NOW() OR (a.DateEnchere <= NOW() AND a.dateFinEnchere > NOW())
+                         ORDER BY a.DateEnchere ASC
                          LIMIT 3";
                 
                 $stmt = $pdo->prepare($query);
@@ -77,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $latest_auctions = $stmt->fetchAll();
 
                 if (empty($latest_auctions)) {
-                    echo '<div class="no-auctions">Aucune enchère disponible pour le moment.</div>';
+                    echo '<div class="no-auctions">Aucune enchère n\'est disponible pour le moment.<br>Revenez plus tard pour de nouvelles enchères !</div>';
                 } else {
                     foreach ($latest_auctions as $auction) :
                     ?>
@@ -86,7 +89,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="auction-info">
                             <h3><?php echo htmlspecialchars($auction['titreAnnonce']); ?></h3>
                             <p class="price">Prix actuel : <?php echo number_format($auction['prixEnchere'], 2); ?> €</p>
-                            <p class="time">Fin : <?php echo date('d/m/Y H:i', strtotime($auction['dateFinEnchere'])); ?></p>
+                            <?php 
+                            $maintenant = time();
+                            $dateEnchere = strtotime($auction['DateEnchere']);
+                            $dateFinEnchere = strtotime($auction['dateFinEnchere']);
+                            
+                            if ($maintenant < $dateEnchere) : ?>
+                                <p class="time">Début : <?php echo date('d/m/Y H:i', $dateEnchere); ?></p>
+                                <p class="status" style="color: orange;">À venir</p>
+                            <?php elseif ($maintenant > $dateFinEnchere) : ?>
+                                <p class="time">Terminée le : <?php echo date('d/m/Y H:i', $dateFinEnchere); ?></p>
+                                <p class="status" style="color: red;">Enchère terminée</p>
+                            <?php else : ?>
+                                <p class="time">Fin : <?php echo date('d/m/Y H:i', $dateFinEnchere); ?></p>
+                                <p class="status" style="color: green;">En cours</p>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?php endforeach;

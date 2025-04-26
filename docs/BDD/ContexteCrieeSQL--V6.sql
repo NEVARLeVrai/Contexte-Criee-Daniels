@@ -188,7 +188,8 @@ CREATE TABLE `LOT` (
   `prixEncheresMax` decimal(15,2) DEFAULT NULL,
   `DateEnchere` datetime DEFAULT NULL,
   `codeEtat` varchar(50) DEFAULT NULL,
-  `idFacture` varchar(50) NOT NULL
+  `idFacture` varchar(50) NOT NULL,
+  `idCompteV` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

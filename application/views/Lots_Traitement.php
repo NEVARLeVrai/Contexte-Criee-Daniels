@@ -70,8 +70,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
 
                 // Insérer le nouveau lot
-                $insertLot = "INSERT INTO LOT (idBateau, datePeche, idLot, idEspece, idTaille, idPresentation, idBac, idCompte, idQualite, poidsBrutLot, prixPlancher, prixDepart, prixEncheresMax, DateEnchere, codeEtat, idFacture) 
-                               VALUES (:idBateau, :datePeche, :idLot, :idEspece, :idTaille, :idPresentation, :idBac, :idCompte, :idQualite, :poidsBrutLot, :prixPlancher, :prixDepart, :prixEncheresMax, :DateEnchere, :codeEtat, :idFacture)";
+                $insertLot = "INSERT INTO LOT (idBateau, datePeche, idLot, idEspece, idTaille, idPresentation, idBac, idCompte, idQualite, poidsBrutLot, prixPlancher, prixDepart, prixEncheresMax, DateEnchere, codeEtat, idFacture, idCompteV) 
+                               VALUES (:idBateau, :datePeche, :idLot, :idEspece, :idTaille, :idPresentation, :idBac, :idCompte, :idQualite, :poidsBrutLot, :prixPlancher, :prixDepart, :prixEncheresMax, :DateEnchere, :codeEtat, :idFacture, :idCompteV)";
                 
                 $stmt = $pdo->prepare($insertLot);
                 $stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
@@ -90,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $stmt->bindParam(':DateEnchere', $dateEnchere, PDO::PARAM_STR);
                 $stmt->bindParam(':codeEtat', $codeEtat, PDO::PARAM_STR);
                 $stmt->bindParam(':idFacture', $idFacture, PDO::PARAM_STR);
+                $stmt->bindParam(':idCompteV', $idCompte, PDO::PARAM_STR);
 
                 if ($stmt->execute()) {
                     echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>

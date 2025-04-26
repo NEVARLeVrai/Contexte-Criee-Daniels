@@ -277,17 +277,6 @@
     font-size: 0.9rem;
 }
 
-.connexion_et_inscription .btn-outside {
-    display: block;
-    margin: 24px auto 0 auto;
-    text-align: center;
-}
-
-.connexion_et_inscription .btn {
-    margin: 20px 10px;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-}
 
 @media screen and (max-width: 900px) {
     .connexion_et_inscription form {
