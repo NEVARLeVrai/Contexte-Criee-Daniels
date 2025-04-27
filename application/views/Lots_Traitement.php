@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// Définir le fuseau horaire à Paris
+date_default_timezone_set('Europe/Paris');
 ?>
 
 <html>
@@ -38,7 +40,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $prixPlancher = $_POST['prixPlancher'];
                 $prixDepart = $_POST['prixDepart'];
                 $prixEncheresMax = isset($_POST['prixEncheresMax']) ? $_POST['prixEncheresMax'] : null;
-                $dateEnchere = $_POST['DateEnchere'];
                 $codeEtat = isset($_POST['codeEtat']) ? $_POST['codeEtat'] : 'ok';
                 $idFacture = $_POST['idFacture'];
                 $idCompte = $_SESSION['identifiant'];
@@ -70,8 +71,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 }
 
                 // Insérer le nouveau lot
-                $insertLot = "INSERT INTO LOT (idBateau, datePeche, idLot, idEspece, idTaille, idPresentation, idBac, idCompte, idQualite, poidsBrutLot, prixPlancher, prixDepart, prixEncheresMax, DateEnchere, codeEtat, idFacture, idCompteV) 
-                               VALUES (:idBateau, :datePeche, :idLot, :idEspece, :idTaille, :idPresentation, :idBac, :idCompte, :idQualite, :poidsBrutLot, :prixPlancher, :prixDepart, :prixEncheresMax, :DateEnchere, :codeEtat, :idFacture, :idCompteV)";
+                $insertLot = "INSERT INTO LOT (idBateau, datePeche, idLot, idEspece, idTaille, idPresentation, idBac, idCompte, idQualite, poidsBrutLot, prixPlancher, prixDepart, prixEncheresMax, codeEtat, idFacture, idCompteV) 
+                               VALUES (:idBateau, :datePeche, :idLot, :idEspece, :idTaille, :idPresentation, :idBac, :idCompte, :idQualite, :poidsBrutLot, :prixPlancher, :prixDepart, :prixEncheresMax, :codeEtat, :idFacture, :idCompteV)";
                 
                 $stmt = $pdo->prepare($insertLot);
                 $stmt->bindParam(':idBateau', $idBateau, PDO::PARAM_STR);
@@ -87,7 +88,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $stmt->bindParam(':prixPlancher', $prixPlancher, PDO::PARAM_STR);
                 $stmt->bindParam(':prixDepart', $prixDepart, PDO::PARAM_STR);
                 $stmt->bindParam(':prixEncheresMax', $prixEncheresMax, PDO::PARAM_STR);
-                $stmt->bindParam(':DateEnchere', $dateEnchere, PDO::PARAM_STR);
                 $stmt->bindParam(':codeEtat', $codeEtat, PDO::PARAM_STR);
                 $stmt->bindParam(':idFacture', $idFacture, PDO::PARAM_STR);
                 $stmt->bindParam(':idCompteV', $idCompte, PDO::PARAM_STR);
