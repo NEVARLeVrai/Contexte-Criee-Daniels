@@ -59,7 +59,7 @@ date_default_timezone_set('Europe/Paris');
                                             // Si les informations sont trouvées, vérifier le type de compte
                         if ($row['typeCompte'] === 'vendeur') {
                             // Afficher le bouton de création de lot pour les vendeurs
-                            echo '<form method="POST" action="' . site_url('welcome/contenu/LotsCreation') . '">
+                            echo '<form method="POST" action="' . site_url('welcome/contenu/Lots_Creation') . '">
                                 <button type="submit" class="btn">Créer un lot</button>
                             </form><br>';
                         }
@@ -151,7 +151,7 @@ date_default_timezone_set('Europe/Paris');
                         echo '</tbody></table>';
                     } elseif ($row['typeCompte'] === 'vendeur') {    
                         echo "Aucun lot n'est disponible pour le moment.";
-                        echo '<form method="POST" action="' . site_url('welcome/contenu/LotsCreation') . '">
+                        echo '<form method="POST" action="' . site_url('welcome/contenu/Lots_Creation') . '">
                         <button type="submit" class="btn">Créer un lot</button>
                       </form><br>';
            
