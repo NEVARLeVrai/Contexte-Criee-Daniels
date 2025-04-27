@@ -426,7 +426,7 @@ td:nth-child(7) /* Prix max */ {
 .btn {
     background-color: var(--primary-color);
     color: var(--white);
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     border-radius: 8px;
     font-size: 1.1rem;
     transition: all 0.3s ease;
@@ -467,7 +467,7 @@ td:nth-child(7) /* Prix max */ {
 
 @media screen and (max-width: 768px) {
     .btn {
-        padding: 0.8rem 1.5rem;
+        padding: 0.8rem 0.8rem;
         font-size: 1rem;
     }
 }
@@ -1093,19 +1093,6 @@ h2 {
     margin-bottom: 2rem;
 }
 
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.btn-secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-}
 
 .btn:hover {
     transform: translateY(-2px);

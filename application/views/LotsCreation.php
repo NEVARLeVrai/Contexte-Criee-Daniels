@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include "application/config/database.php";
+// Définir le fuseau horaire à Paris
+date_default_timezone_set('Europe/Paris');
 ?>
 
 <body>
@@ -144,9 +146,6 @@ include "application/config/database.php";
 
                     <label for="prixEncheresMax">Prix d'enchères maximum (€) :</label><br>
                     <input type="number" min="0" step="any" id="prixEncheresMax" name="prixEncheresMax"><br><br>
-
-                    <label for="DateEnchere">Date et heure d'enchère :</label><br>
-                    <input type="datetime-local" id="DateEnchere" name="DateEnchere" required><br><br>
 
                     <label for="codeEtat">État :</label><br>
                     <input type="text" id="codeEtat" name="codeEtat" placeholder="ex: ok" value="ok"><br><br>

@@ -1,5 +1,7 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+    defined('BASEPATH') OR exit('No direct script access allowed');
+    // Définir le fuseau horaire à Paris
+    date_default_timezone_set('Europe/Paris');
 ?>
 
 <body>
@@ -16,7 +18,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <select id="idLot" name="idLot" required onchange="updateLotInfo(this.value)"><br>
             <?php	
             include "application/config/database.php";    
-                $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax, l.DateEnchere 
+                $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax
                              FROM LOT l 
                              ORDER BY l.idLot";                
                 $stmt = $pdo->prepare($selectLots);

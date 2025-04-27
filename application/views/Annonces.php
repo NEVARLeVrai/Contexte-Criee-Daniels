@@ -41,13 +41,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         if ($row['typeCompte'] === 'acheteur') {
                             // Si l'utilisateur est un acheteur, afficher les annonces
                             $selectAnnonces = "SELECT DISTINCT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
-                                             l.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
+                                             a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
                                              a.dateDerniereEnchere, a.dateFinEnchere,
                                              l.prixPlancher, l.prixEncheresMax
                                              FROM ANNONCE a
                                              JOIN LOT l ON a.idLot = l.idLot AND a.idBateau = l.idBateau AND a.datePeche = l.datePeche
                                              GROUP BY a.idBateau, a.datePeche, a.idLot
-                                             ORDER BY l.DateEnchere DESC";
+                                             ORDER BY a.DateEnchere DESC";
                             $stmt = $pdo->prepare($selectAnnonces);
                             $stmt->execute();
                             $rows = $stmt->fetchAll();
@@ -108,12 +108,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     // 3. L'utilisateur est le gagnant
                                     if ($dateEnchere < $maintenant && 
                                         $maintenant < $limitePaiement && 
-                                        $row['idCompteA'] === $_SESSION['identifiant']) {
+                                        $row['idCompteA'] === $_SESSION['identifiant'] &&
+                                        $dateFinEnchere < $maintenant) {
                                         $urlPaiement = site_url('welcome/contenu/Paiement').'?idLot='.$row['idLot'].'&idBateau='.$row['idBateau'].'&datePeche='.urlencode($row['datePeche']);
                                         echo '<a href="'.$urlPaiement.'" class="btn btn-success">Payer</a>';
                                     }
-                                    elseif  ($row['idCompteA'] === $_SESSION['identifiant']){
-                                        echo 'Enchère pas encore commencée ou délai de paiement dépassé';
+                                    elseif ($row['idCompteA'] !== $_SESSION['identifiant']) {
+                                        echo 'Vous n\'êtes pas le gagnant de cette enchère';
+                                    }
+                                    elseif ($maintenant < $dateEnchere) {
+                                        echo 'L\'enchère n\'a pas encore commencé';
+                                    }
+                                    elseif ($maintenant > $limitePaiement) {
+                                        echo 'Le délai de paiement est dépassé';
+                                    }
+                                    elseif ($maintenant < $dateFinEnchere) {
+                                        echo 'L\'enchère est encore en cours';
                                     }
 
                                     // Ajouter le bouton Supprimer si l'utilisateur est le vendeur
@@ -156,14 +166,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     // Colonne Infos Paiement
                                     echo '<td style="text-align: left; font-size: 0.8em;">';
                                     if ($row['idCompteA'] === $_SESSION['identifiant']) {
-                                        if ($maintenant < $dateEnchere) {
-                                            echo 'Enchère pas encore commencée';
+                                        if ($maintenant < $dateFinEnchere) {
+                                            echo 'Paiement disponible après la fin de l\'enchère<br><br>';
+                                            echo 'Fin de l\'enchère : ' . $dateFinEnchere->format('d/m/Y H:i:s') . '<br>';
+                                            echo 'Paiement disponible jusqu\'au : ' . $limitePaiement->format('d/m/Y H:i:s');
                                         } elseif ($maintenant > $limitePaiement) {
-                                            echo 'Délai de paiement dépassé';
+                                            echo 'Délai de paiement dépassé<br>';
+                                            echo 'Limite dépassée le : ' . $limitePaiement->format('d/m/Y H:i:s');
                                         } else {
                                             echo 'Temps restant pour payer : ';
                                             $tempsRestant = $maintenant->diff($limitePaiement);
                                             echo $tempsRestant->format('%i min %s sec');
+                                        }
+                                    } else {
+                                        if ($maintenant < $dateFinEnchere) {
+                                            echo 'Enchère en cours jusqu\'au :<br>' . $dateFinEnchere->format('d/m/Y H:i:s');
+                                        } elseif ($maintenant > $limitePaiement) {
+                                            echo 'Enchère terminée';
+                                        } else {
+                                            echo 'En attente de paiement';
                                         }
                                     }
                                     echo '</td>';
@@ -186,14 +207,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         } elseif ($row['typeCompte'] === 'vendeur') {
                             // Si l'utilisateur est un vendeur, afficher les annonces
                             $selectAnnonces = "SELECT DISTINCT a.idImage, a.idBateau, a.datePeche, a.idLot, a.prixEnchere, 
-                                             l.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
+                                             a.DateEnchere, a.titreAnnonce, a.idCompteV, a.idCompteA, 
                                              a.dateDerniereEnchere, a.dateFinEnchere,
                                              l.prixPlancher, l.prixEncheresMax
                                              FROM ANNONCE a
                                              JOIN LOT l ON a.idLot = l.idLot AND a.idBateau = l.idBateau AND a.datePeche = l.datePeche
                                              WHERE a.idCompteV = :idCompte
                                              GROUP BY a.idBateau, a.datePeche, a.idLot
-                                             ORDER BY l.DateEnchere DESC";
+                                             ORDER BY a.DateEnchere DESC";
                             $stmt = $pdo->prepare($selectAnnonces);
                             $stmt->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
                             $stmt->execute();
@@ -260,12 +281,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     // 3. L'utilisateur est le gagnant
                                     if ($dateEnchere < $maintenant && 
                                         $maintenant < $limitePaiement && 
-                                        $row['idCompteA'] === $_SESSION['identifiant']) {
+                                        $row['idCompteA'] === $_SESSION['identifiant'] &&
+                                        $dateFinEnchere < $maintenant) {
                                         $urlPaiement = site_url('welcome/contenu/Paiement').'?idLot='.$row['idLot'].'&idBateau='.$row['idBateau'].'&datePeche='.urlencode($row['datePeche']);
                                         echo '<a href="'.$urlPaiement.'" class="btn btn-success">Payer</a>';
                                     }
-                                    elseif  ($row['idCompteA'] === $_SESSION['identifiant']){
-                                        echo 'Enchère pas encore commencée ou délai de paiement dépassé';
+                                    elseif ($row['idCompteV'] == $_SESSION['identifiant']) {
+                                        echo '';
+                                    }
+                                    elseif ($row['idCompteA'] !== $_SESSION['identifiant']) {
+                                        echo 'Vous n\'êtes pas le gagnant de cette enchère';
+                                    }
+ 
+                                    elseif ($maintenant < $dateEnchere) {
+                                        echo 'L\'enchère n\'a pas encore commencé';
+                                    }   
+                                    elseif ($maintenant > $limitePaiement) {
+                                        echo 'Le délai de paiement est dépassé';
                                     }
 
                                     // Ajouter le bouton Supprimer si l'utilisateur est le vendeur
@@ -302,26 +334,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         // Afficher le bouton Supprimer
                                         $urlSuppression = site_url('welcome/contenu/Annonces').'?action=supprimer&idLot='.$row['idLot'].'&idBateau='.$row['idBateau'].'&datePeche='.urlencode($row['datePeche']);
                                         echo '<a onclick="return confirm(\'Êtes-vous sûr de vouloir supprimer cette annonce ?\')" href="'.$urlSuppression.'" class="btn">Supprimer</a>';
-
-                                        
                                     }
                                     echo '</td>';
                                     
                                     // Colonne Infos Paiement
                                     echo '<td style="text-align: left; font-size: 0.8em;">';
                                     if ($row['idCompteA'] === $_SESSION['identifiant']) {
-                                        if ($maintenant < $dateEnchere) {
-                                            echo 'Enchère pas encore commencée';
+                                        if ($maintenant < $dateFinEnchere) {
+                                            echo 'Paiement disponible après la fin de l\'enchère<br><br>';
+                                            echo 'Fin de l\'enchère : ' . $dateFinEnchere->format('d/m/Y H:i:s') . '<br>';
+                                            echo 'Paiement disponible jusqu\'au : ' . $limitePaiement->format('d/m/Y H:i:s');
+
                                         } elseif ($maintenant > $limitePaiement) {
-                                            echo 'Délai de paiement dépassé';
+                                            echo 'Délai de paiement dépassé<br>';
+                                            echo 'Limite dépassée le : ' . $limitePaiement->format('d/m/Y H:i:s');
                                         } else {
                                             echo 'Temps restant pour payer : ';
                                             $tempsRestant = $maintenant->diff($limitePaiement);
                                             echo $tempsRestant->format('%i min %s sec');
                                         }
-                                    }
-                                    else if ($row['idCompteV'] === $_SESSION['identifiant']) {
-                                        echo 'Pas de paiement';
+                                    } else {
+                                        if ($maintenant < $dateFinEnchere) {
+                                            echo 'Enchère en cours jusqu\'au :<br>' . $dateFinEnchere->format('d/m/Y H:i:s');
+                                        } elseif ($maintenant > $limitePaiement) {
+                                            echo 'Enchère terminée';
+                                        } else {
+                                            echo 'En attente de paiement';
+                                        }
                                     }
                                     echo '</td>';
                                     
