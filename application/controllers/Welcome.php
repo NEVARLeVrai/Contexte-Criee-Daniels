@@ -11,12 +11,12 @@ class Welcome extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('form');
         
-        // Session déjà démarrée dans Menu1.php
+        // Session déjà démarrée dans Menu.php
 	}
 	
 	public function index()
 	{
-		$this->load->view('Menu1'); // créer un fichier menu.php dans le répertoire views
+		$this->load->view('Menu'); // créer un fichier menu.php dans le répertoire views
 		$this->load->view('Accueil'); // créer affichage.php dans le répertoire views
 		$data['clients']= $this->requetes->getClients(); 
 	}
@@ -52,7 +52,7 @@ class Welcome extends CI_Controller {
             case "Lots":
                 $data['page_title'] = "Lots - Criée de Poulgoazec";
                 break;
-            case "LotsCreation":
+            case "Lots_Creation":
                 $data['page_title'] = "Création de lots - Criée de Poulgoazec";
                 break;
             case "Annonces_Creation":
@@ -61,15 +61,18 @@ class Welcome extends CI_Controller {
             case "Annonces_Encherir":
                 $data['page_title'] = "Enchérir - Criée de Poulgoazec";
                 break;
+            case "Paiement":
+                $data['page_title'] = "Paiement - Criée de Poulgoazec";
+                break;
         }
 
-        $this->load->view('Menu1', $data); // Passer le titre à la vue Menu1
+        $this->load->view('Menu', $data); // Passer le titre à la vue Menu
         $this->load->view($id); // Charger la vue correspondante
     }
     
     public function traitement_inscription() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Menu'); // Chargement de la vue du menu
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
         $typeCompte = $this->input->post('typeCompte');
@@ -85,7 +88,7 @@ class Welcome extends CI_Controller {
     
     public function traitement_connexion() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Menu'); // Chargement de la vue du menu
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
     
@@ -100,7 +103,7 @@ class Welcome extends CI_Controller {
 
     public function traitement_Compte() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Menu'); // Chargement de la vue du menu
         $idCompte = $this->input->post('idCompte');
         $mdpCompte = $this->input->post('mdpCompte');
         $typeCompte = $this->input->post('typeCompte');
@@ -116,7 +119,7 @@ class Welcome extends CI_Controller {
 
     public function traitement_annonces() {
         // Récupérer les données du formulaire
-        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Menu'); // Chargement de la vue du menu
         
         // Récupérer les données de l'enchère
         $idLot = $this->input->post('idLot');
@@ -130,12 +133,12 @@ class Welcome extends CI_Controller {
     }
 
     public function creation_lots() {
-        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Menu'); // Chargement de la vue du menu
         $this->load->view('Lots_Creation'); // Chargement de la vue pour la création de lots
     }
 
     public function traitement_lots() {
-        $this->load->view('Menu1'); // Chargement de la vue du menu
+        $this->load->view('Menu'); // Chargement de la vue du menu
         $this->load->view('Lots_Traitement'); // Chargement de la vue pour le traitement des lots
     }
 
