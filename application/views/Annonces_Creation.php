@@ -101,8 +101,32 @@
             // Mettre à jour la date de pêche
             document.getElementById('datePeche').value = option.dataset.datePeche;
             
-            // Mettre à jour le prix initial de l'enchère avec le prix de départ du lot
-            document.getElementById('prixEnchere').value = option.dataset.prixDepart;
+            // Mettre à jour le champ prixEnchere avec les validations
+            const prixEnchereInput = document.getElementById('prixEnchere');
+            const prixDepart = parseFloat(option.dataset.prixDepart);
+            const prixPlancher = parseFloat(option.dataset.prixPlancher);
+            const prixMax = parseFloat(option.dataset.prixMax);
+
+            // Le prix plancher est le minimum
+            prixEnchereInput.min = prixPlancher;
+            prixEnchereInput.value = prixPlancher;
+
+            // Définir le prix maximum si disponible
+            if (!isNaN(prixMax)) {
+                prixEnchereInput.max = prixMax;
+            }
+
+            // Ajouter une validation lors de la saisie
+            prixEnchereInput.oninput = function() {
+                const valeur = parseFloat(this.value);
+                if (valeur < prixPlancher) {
+                    this.setCustomValidity(`Le prix initial doit être d'au moins ${prixPlancher}€ (prix plancher)`);
+                } else if (!isNaN(prixMax) && valeur > prixMax) {
+                    this.setCustomValidity(`Le prix initial ne peut pas dépasser ${prixMax}€`);
+                } else {
+                    this.setCustomValidity('');
+                }
+            };
 
             // Pré-remplir la date d'enchère avec celle du lot si elle existe
             if (option.dataset.dateEnchere) {

@@ -167,9 +167,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     echo '<td style="text-align: left; font-size: 0.8em;">';
                                     if ($row['idCompteA'] === $_SESSION['identifiant']) {
                                         if ($maintenant < $dateFinEnchere) {
-                                            echo 'Paiement disponible après la fin de l\'enchère<br><br>';
+                                            echo 'Disponible après la fin de l\'enchère<br><br>';
                                             echo 'Fin de l\'enchère : ' . $dateFinEnchere->format('d/m/Y H:i:s') . '<br>';
-                                            echo 'Paiement disponible jusqu\'au : ' . $limitePaiement->format('d/m/Y H:i:s');
+                                            echo 'Disponible jusqu\'au : ' . $limitePaiement->format('d/m/Y H:i:s');
                                         } elseif ($maintenant > $limitePaiement) {
                                             echo 'Délai de paiement dépassé<br>';
                                             echo 'Limite dépassée le : ' . $limitePaiement->format('d/m/Y H:i:s');
@@ -341,9 +341,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     echo '<td style="text-align: left; font-size: 0.8em;">';
                                     if ($row['idCompteA'] === $_SESSION['identifiant']) {
                                         if ($maintenant < $dateFinEnchere) {
-                                            echo 'Paiement disponible après la fin de l\'enchère<br><br>';
+                                            echo 'Disponible après la fin de l\'enchère<br><br>';
                                             echo 'Fin de l\'enchère : ' . $dateFinEnchere->format('d/m/Y H:i:s') . '<br>';
-                                            echo 'Paiement disponible jusqu\'au : ' . $limitePaiement->format('d/m/Y H:i:s');
+                                            echo 'Disponible jusqu\'au : ' . $limitePaiement->format('d/m/Y H:i:s');
 
                                         } elseif ($maintenant > $limitePaiement) {
                                             echo 'Délai de paiement dépassé<br>';
