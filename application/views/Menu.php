@@ -12,10 +12,10 @@ session_start();
         <meta property="og:title" content="&#x26CA; Criée de Poulgoazec">
         <meta property="og:description" content="Criée de Poulgoazec">
         <meta property="og:url" content="https://www.lyceecassin-strasbourg.eu/">
-        <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil1.png');?>">
-        <link rel="icon" href="<?php echo base_url('assets/img/Accueil1.png');?>">
+        <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil.webp');?>">
+        <link rel="icon" href="<?php echo base_url('assets/img/Accueil.webp');?>">
         <title><?php echo isset($page_title) ? $page_title : 'Criée de Poulgoazec'; ?></title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee7.css');?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee9.css');?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <script src="<?php echo base_url('assets/js/Criee.js');?>"></script>
     </head>
@@ -31,20 +31,21 @@ session_start();
             </div>
             <nav class="sidebar-nav">
 
-
+                <!-- Bouton Accueil -->
                 <a href="<?php echo site_url('welcome/contenu/Accueil');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-home"></i> <span>Accueil</span>
                     </button>
                 </a>
 
-                
+                <!-- Bouton Connexion -->
                 <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                         <button class="sidebar-item deco-button">
                             <i class="fas fa-user"></i> <span>Compte</span>
                     </button>
                 </a>
 
+                <!-- Bouton Déconnexion -->
                 <?php if (isset($_SESSION) && isset($_SESSION["identifiant"])): ?>
                 <a href="<?php echo site_url('welcome/contenu/Deconnexion');?>">
                     <button class="sidebar-item deco-button" style="margin-bottom: 50px;">
@@ -53,33 +54,35 @@ session_start();
                 </a>
                 <?php endif; ?>
 
-
+                <!-- Bouton Lots -->
                 <a href="<?php echo site_url('welcome/contenu/Lots');?>">
                     <button class="sidebar-item deco-button" style=" margin-top: 50px; margin-bottom: 50px;">
                         <i class="fas fa-box"></i> <span>Lots</span>
                     </button>
                 </a>
 
+                <!-- Bouton Annonces -->
                 <a href="<?php echo site_url('welcome/contenu/Annonces');?>">
                     <button class="sidebar-item deco-button" style="margin-top: 50px; margin-bottom: 50px;">
                         <i class="fas fa-bullhorn"></i> <span>Annonces</span>
                     </button>
                 </a>
 
-
-
+                <!-- Bouton Mentions -->
                 <a href="<?php echo site_url('welcome/contenu/Mentions');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-file-alt"></i> <span>Mentions</span>
                     </button>
                 </a>
 
+                <!-- Bouton Contact -->
                 <a href="<?php echo site_url('welcome/contenu/Contact');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-envelope"></i> <span>Contact</span>
                     </button>
                 </a>
 
+                <!-- Bouton Horaires -->
                 <a href="<?php echo site_url('welcome/contenu/Horaires');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-clock"></i> <span>Horaires</span>
@@ -99,7 +102,7 @@ session_start();
                         Menu
                     </button>
                     <a href="<?php echo site_url('welcome/contenu/Accueil'); ?>">
-                        <img src="<?php echo base_url('assets/img/Accueil.png'); ?>" alt="Logo" />
+                        <img src="<?php echo base_url('assets/img/Accueil.webp'); ?>" alt="Logo" />
                     </a>
                 </form>
             </nav>   

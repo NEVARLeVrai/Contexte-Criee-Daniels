@@ -1,7 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// Définir le fuseau horaire à Paris
-date_default_timezone_set('Europe/Paris');
 ?>
 
 <html>

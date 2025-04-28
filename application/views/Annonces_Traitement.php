@@ -1,7 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-// Définir le fuseau horaire à Paris
-date_default_timezone_set('Europe/Paris');
 ?>
 
 <html>
@@ -34,16 +32,16 @@ date_default_timezone_set('Europe/Paris');
 
 					if ($annonceExists > 0) {
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-							<h2>Erreur lors de la création de l'annonce</h2>
-							<p>Une annonce existe déjà pour ce lot.</p>
-							<br>
-							<form>
-								<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
-									<button type='button' class='btn'>Réessayer</button>
-								</a>
-							</form>
+						<h2>Erreur lors de la création de l'annonce</h2>
+						<p>Une annonce existe déjà pour ce lot.</p>
+						<br>
+						<form>
+							<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+								<button type='button' class='btn'>Réessayer</button>
+							</a>
+						</form>
 						</section>";
-						exit;
+						return;
 					}
 
 					// Vérifier si le lot existe dans la table PECHE
@@ -56,16 +54,17 @@ date_default_timezone_set('Europe/Paris');
 
 					if ($pecheExists == 0) {
 						echo "<section id='connexion_et_inscription' class='connexion_et_inscription'>
-							<h2>Erreur lors de la création de l'annonce</h2>
-							<p>Le lot n'existe pas dans la table PECHE.</p>
-							<br>
-							<form>
-								<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
-									<button type='button' class='btn'>Réessayer</button>
-								</a>
-							</form>
+						<h2>Erreur lors de la création de l'annonce</h2>
+						<p>Le lot n'existe pas dans la table PECHE.</p>
+						<br>
+						<form>
+							<a href='" . site_url('welcome/contenu/Annonces_Creation') . "'>
+								<button type='button' class='btn'>Réessayer</button>
+							</a>
+						</form>
 						</section>";
-						exit;
+
+						return;
 					}
 
 					// Traitement de l'image

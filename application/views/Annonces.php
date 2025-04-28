@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <body>  
 <section id="connexion_et_inscription" class="connexion_et_inscription">
-            <h2><i class="fas fa-bullhorn"></i> Les Annonces de la Criée de Poulgoazec</h2>
+
             
             <?php
                 // Définir le fuseau horaire à Paris
@@ -53,7 +53,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $rows = $stmt->fetchAll();
                             
                             if(count($rows) > 0) {
-                                echo '<table>
+                                echo '
+                                            <h2><i class="fas fa-bullhorn"></i> Les Annonces de la Criée de Poulgoazec</h2>
+                                <table>
                                     <thead>
                                         <tr>
                                             <th scope="col">Image</th>                                        
@@ -202,7 +204,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </p>';
 
                             } else {
-                                echo "Aucune annonce n'est disponible pour le moment.";
+                                echo "
+                                <h2><i class='fas fa-bullhorn'></i> Les Annonces de la Criée de Poulgoazec</h2>
+                                Aucune annonce n'est disponible pour le moment.";
                             }
                         } elseif ($row['typeCompte'] === 'vendeur') {
                             // Si l'utilisateur est un vendeur, afficher les annonces
@@ -221,7 +225,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             $rows = $stmt->fetchAll();
                             
                             if(count($rows) > 0) {
-                                echo '<br>
+                                echo '
+                                            <h2><i class="fas fa-bullhorn"></i> Mes Annonces de la Criée de Poulgoazec</h2>
+                                <br>
                                 <form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
                                 <button type="submit" class="btn">Créer une annonce</button>
                                 </form>';
@@ -369,7 +375,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 echo '</tbody></table>';
                             } else {
                                 echo "<br>
-                                Aucune annonce n'est disponible pour le moment.";
+                                <h2><i class='fas fa-bullhorn'></i> Mes Annonces de la Criée de Poulgoazec</h2>
+                                Aucune de vos annonce n'est disponible pour le moment.";
                                 echo '
                                 <form method="POST" action="' . site_url('welcome/contenu/Annonces_Creation') . '">
                                 <button type="submit" class="btn">Créer une annonce</button>
@@ -379,6 +386,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     }
                 } else {
                     echo '<br>
+                    <h2><i class="fas fa-bullhorn"></i> Les Annonces de la Criée de Poulgoazec</h2>
                     Veuillez vous connecter pour voir les annonces ou créer une annonce.
                     <form method="POST" action="' . site_url('welcome/contenu/Connexion') . '">
                         <br><button type="submit" class="btn">Connexion</button>

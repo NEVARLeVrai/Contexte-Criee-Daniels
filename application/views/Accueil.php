@@ -1,9 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee8.css');?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
 <body>  
 <section id="connexion_et_inscription" class="connexion_et_inscription">
-	<img src="<?php echo base_url('assets/img/Accueil1.png');?>" class="Noir">
+	<img src="<?php echo base_url('assets/img/Accueil1.webp');?>" class="Noir">
         <div class="card">
             <div class="loader">
                 <div class="words">
@@ -19,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
         <h1>Découvrez notre sélection de ventes de poissons</h1>
-        <br>        <br>
+        <br><br>
     </section>  
 
     <section id="features" class="features">
@@ -69,6 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 // Définir le fuseau horaire à Paris
                 date_default_timezone_set('Europe/Paris');
                 
+                // Affiche les 3 dernières annonces enchéries 
                 $query = "SELECT DISTINCT a.idImage, a.idBateau, a.titreAnnonce, a.prixEnchere, a.dateFinEnchere, a.DateEnchere
                          FROM ANNONCE a
                          WHERE a.DateEnchere > NOW() OR (a.DateEnchere <= NOW() AND a.dateFinEnchere > NOW())
@@ -127,4 +137,74 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </section>
+
+    <script>
+        let clickCount = 0;
+        const logo = document.querySelector('.Noir');
+        const audio = new Audio('<?php echo base_url("assets/audio/Poule.mp3"); ?>');
+        const audio1 = new Audio('<?php echo base_url("assets/audio/Terre.mp3"); ?>');
+        audio1.volume = 0.7; // Réduire le volume de Terre.mp3 à 30%
+        
+        // Préchargement des fichiers audio
+        audio.load();
+        audio1.load();
+        
+        // Gestion des erreurs de chargement
+        audio.addEventListener('error', function(e) {
+            console.error('Erreur lors du chargement du fichier audio Poule.mp3:', e);
+        });
+        
+        audio1.addEventListener('error', function(e) {
+            console.error('Erreur lors du chargement du fichier audio Terre.mp3:', e);
+        });
+
+        logo.addEventListener('click', function() {
+            clickCount++;
+            
+            if (clickCount === 5) {
+                // Activer l'effet
+                document.body.classList.add('shake');
+                
+                // Jouer les sons avec gestion des erreurs
+                try {
+                    audio.currentTime = 0; // Réinitialiser le son
+                    audio.play().catch(function(error) {
+                        console.error('Erreur lors de la lecture de Poule.mp3:', error);
+                    });
+                    
+                    audio1.currentTime = 0; // Réinitialiser le son
+                    audio1.play().catch(function(error) {
+                        console.error('Erreur lors de la lecture de Terre.mp3:', error);
+                    });
+                } catch (error) {
+                    console.error('Erreur lors de la lecture des sons:', error);
+                }
+                
+                // Créer la pluie de logos
+                for (let i = 0; i < 100; i++) {
+                    const fallingLogo = document.createElement('img');
+                    fallingLogo.src = "<?php echo base_url('assets/img/Accueil.webp'); ?>";
+                    fallingLogo.className = 'logo-rain';
+                    fallingLogo.style.left = Math.random() * window.innerWidth + 'px';
+                    fallingLogo.style.top = -100 + 'px';
+                    fallingLogo.style.width = Math.random() * 100 + 50 + 'px';
+                    fallingLogo.style.animationDuration = Math.random() * 2 + 2 + 's';
+                    fallingLogo.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(fallingLogo);
+                    
+                    // Supprimer le logo après l'animation
+                    setTimeout(() => {
+                        fallingLogo.remove();
+                    }, 5000);
+                }
+                
+                // Réinitialiser le compteur après 10 secondes
+                setTimeout(() => {
+                    clickCount = 0;
+                    document.body.classList.remove('shake');
+                }, 10000);
+            }
+        });
+    </script>
 </body>
+</html>
