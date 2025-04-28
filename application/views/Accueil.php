@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <body>  
 <section id="connexion_et_inscription" class="connexion_et_inscription">
-	<img src="<?php echo base_url('assets/img/Accueil1.png');?>" class="Noir">
+	<img src="<?php echo base_url('assets/img/Accueil1.webp');?>" class="Noir">
         <div class="card">
             <div class="loader">
                 <div class="words">
