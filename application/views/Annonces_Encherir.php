@@ -1,8 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-// Définir le fuseau horaire à Paris
-date_default_timezone_set('Europe/Paris');
 ?>
 
 <body>
@@ -25,7 +22,7 @@ date_default_timezone_set('Europe/Paris');
                                              l.prixPlancher, l.prixEncheresMax
                                              FROM ANNONCE a
                                              JOIN LOT l ON a.idLot = l.idLot AND a.idBateau = l.idBateau AND a.datePeche = l.datePeche
-                                             WHERE a.dateFinEnchere > NOW()
+                                             WHERE a.dateFinEnchere > NOW() OR a.DateEnchere < NOW()
                                              AND a.idCompteV != :idCompte
                                              AND (a.idCompteA IS NULL OR a.idCompteA != :idCompte)
                                              GROUP BY a.idBateau, a.datePeche, a.idLot
