@@ -1,6 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee8.css');?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+</head>
 <body>  
 <section id="connexion_et_inscription" class="connexion_et_inscription">
 	<img src="<?php echo base_url('assets/img/Accueil1.webp');?>" class="Noir">
@@ -128,4 +137,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </section>
+
+    <script>
+        let clickCount = 0;
+        const logo = document.querySelector('.Noir');
+        const audio = new Audio('<?php echo base_url("assets/sounds/Poule.mp3"); ?>');
+
+        logo.addEventListener('click', function() {
+            clickCount++;
+            
+            if (clickCount === 5) {
+                // Activer l'effet
+                document.body.classList.add('shake');
+                audio.play();
+                
+                // Créer la pluie de logos
+                for (let i = 0; i < 100; i++) {
+                    const fallingLogo = document.createElement('img');
+                    fallingLogo.src = "<?php echo base_url('assets/img/Accueil.webp'); ?>";
+                    fallingLogo.className = 'logo-rain';
+                    fallingLogo.style.left = Math.random() * window.innerWidth + 'px';
+                    fallingLogo.style.top = -100 + 'px';
+                    fallingLogo.style.width = Math.random() * 100 + 50 + 'px';
+                    fallingLogo.style.animationDuration = Math.random() * 2 + 2 + 's';
+                    fallingLogo.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(fallingLogo);
+                    
+                    // Supprimer le logo après l'animation
+                    setTimeout(() => {
+                        fallingLogo.remove();
+                    }, 5000);
+                }
+                
+                // Réinitialiser le compteur après 10 secondes
+                setTimeout(() => {
+                    clickCount = 0;
+                    document.body.classList.remove('shake');
+                }, 10000);
+            }
+        });
+    </script>
 </body>
+</html>

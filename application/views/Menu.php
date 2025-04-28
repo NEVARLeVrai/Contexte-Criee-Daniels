@@ -15,7 +15,7 @@ session_start();
         <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil.webp');?>">
         <link rel="icon" href="<?php echo base_url('assets/img/Accueil.webp');?>">
         <title><?php echo isset($page_title) ? $page_title : 'Criée de Poulgoazec'; ?></title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee8.css');?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee9.css');?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <script src="<?php echo base_url('assets/js/Criee.js');?>"></script>
     </head>
