@@ -142,8 +142,8 @@ $typeCompte = $_POST["typeCompte"];
 										<label for='ville'>Ville :</label><br>
 										<input type='text' id='ville' name='ville' required><br>
 
-										<label for='cp'>Code Postal :</label><br>
-										<input type='text' id='cp' name='cp' required><br>
+										<label for='codePostal'>Code Postal :</label><br>
+										<input type='text' id='codePostal' name='codePostal' required><br>
 										
 										<label for='numHabilitation'>Numéro d'Habilitation :</label><br>
 										<input type='text' id='numHabilitation' name='numHabilitation' required><br>";
