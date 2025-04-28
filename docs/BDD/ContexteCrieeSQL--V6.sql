@@ -44,16 +44,6 @@ CREATE TABLE `ACHETEUR` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ADMIN`
---
-
-CREATE TABLE `ADMIN` (
-  `idCompte` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `ANNONCE`
 --
 
@@ -300,12 +290,6 @@ ALTER TABLE `ACHETEUR`
   ADD PRIMARY KEY (`idCompte`);
 
 --
--- Index pour la table `ADMIN`
---
-ALTER TABLE `ADMIN`
-  ADD PRIMARY KEY (`idCompte`);
-
---
 -- Index pour la table `ANNONCE`
 --
 ALTER TABLE `ANNONCE`
@@ -390,12 +374,6 @@ ALTER TABLE `VENDEUR`
 -- Contraintes pour les tables déchargées
 --
 
---
--- Contraintes pour la table `ADMIN`
---
-ALTER TABLE `ADMIN`
-  ADD CONSTRAINT `fk_admin_compte` FOREIGN KEY (`idCompte`) REFERENCES `COMPTE` (`idCompte`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

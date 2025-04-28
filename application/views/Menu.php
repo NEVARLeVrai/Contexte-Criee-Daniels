@@ -12,10 +12,10 @@ session_start();
         <meta property="og:title" content="&#x26CA; Criée de Poulgoazec">
         <meta property="og:description" content="Criée de Poulgoazec">
         <meta property="og:url" content="https://www.lyceecassin-strasbourg.eu/">
-        <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil1.png');?>">
-        <link rel="icon" href="<?php echo base_url('assets/img/Accueil1.png');?>">
+        <meta property="og:image:url" href="<?php echo base_url('assets/img/Accueil.webp');?>">
+        <link rel="icon" href="<?php echo base_url('assets/img/Accueil.webp');?>">
         <title><?php echo isset($page_title) ? $page_title : 'Criée de Poulgoazec'; ?></title>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee7.css');?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/Criee8.css');?>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <script src="<?php echo base_url('assets/js/Criee.js');?>"></script>
     </head>
@@ -102,7 +102,7 @@ session_start();
                         Menu
                     </button>
                     <a href="<?php echo site_url('welcome/contenu/Accueil'); ?>">
-                        <img src="<?php echo base_url('assets/img/Accueil.png'); ?>" alt="Logo" />
+                        <img src="<?php echo base_url('assets/img/Accueil.webp'); ?>" alt="Logo" />
                     </a>
                 </form>
             </nav>   
