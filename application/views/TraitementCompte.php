@@ -36,9 +36,10 @@ $typeCompte = $_POST["typeCompte"];
 				$stmtUpdateAcheteur->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
 				$stmtUpdateAcheteur->execute();
 				
-			} elseif ($typeCompte === 'vendeur' && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['locRue']) 
-				&& isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['cp']) 
-				&& isset($_POST['raisonSocialeEntreprise'])) {
+			} elseif ($typeCompte === 'vendeur' && isset($_POST['nom']) && isset($_POST['prenom']) 
+				&& isset($_POST['locRue']) && isset($_POST['rue']) && isset($_POST['ville']) 
+				&& isset($_POST['codePostal']) && isset($_POST['raisonSocialeEntreprise']) 
+				&& isset($_POST['numHabilitation'])) {
 				
 				// Mettre à jour la table VENDEUR avec les informations complémentaires
 				$updateVendeur = "UPDATE VENDEUR SET 
@@ -47,8 +48,9 @@ $typeCompte = $_POST["typeCompte"];
 					locRue = :locRue,
 					rue = :rue,
 					ville = :ville,
-					cp = :cp,
-					raisonSocialeEntreprise = :raisonSocialeEntreprise
+					codePostal = :codePostal,
+					raisonSocialeEntreprise = :raisonSocialeEntreprise,
+					numHabilitation = :numHabilitation
 					WHERE idCompte = :idCompte";
 				
 				$stmtUpdateVendeur = $pdo->prepare($updateVendeur);
@@ -57,8 +59,9 @@ $typeCompte = $_POST["typeCompte"];
 				$stmtUpdateVendeur->bindParam(':locRue', $_POST['locRue'], PDO::PARAM_STR);
 				$stmtUpdateVendeur->bindParam(':rue', $_POST['rue'], PDO::PARAM_STR);
 				$stmtUpdateVendeur->bindParam(':ville', $_POST['ville'], PDO::PARAM_STR);
-				$stmtUpdateVendeur->bindParam(':cp', $_POST['cp'], PDO::PARAM_STR);
+				$stmtUpdateVendeur->bindParam(':codePostal', $_POST['codePostal'], PDO::PARAM_STR);
 				$stmtUpdateVendeur->bindParam(':raisonSocialeEntreprise', $_POST['raisonSocialeEntreprise'], PDO::PARAM_STR);
+				$stmtUpdateVendeur->bindParam(':numHabilitation', $_POST['numHabilitation'], PDO::PARAM_STR);
 				$stmtUpdateVendeur->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
 				$stmtUpdateVendeur->execute();
 			}
