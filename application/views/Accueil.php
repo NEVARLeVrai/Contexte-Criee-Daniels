@@ -141,7 +141,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script>
         let clickCount = 0;
         const logo = document.querySelector('.Noir');
-        const audio = new Audio('<?php echo base_url("assets/sounds/Poule.mp3"); ?>');
+        const audio = new Audio('<?php echo base_url("assets/audio/Poule.mp3"); ?>');
+        const audio1 = new Audio('<?php echo base_url("assets/audio/Terre.mp3"); ?>');
+        audio1.volume = 0.7; // Réduire le volume de Terre.mp3 à 30%
+        
+        // Préchargement des fichiers audio
+        audio.load();
+        audio1.load();
+        
+        // Gestion des erreurs de chargement
+        audio.addEventListener('error', function(e) {
+            console.error('Erreur lors du chargement du fichier audio Poule.mp3:', e);
+        });
+        
+        audio1.addEventListener('error', function(e) {
+            console.error('Erreur lors du chargement du fichier audio Terre.mp3:', e);
+        });
 
         logo.addEventListener('click', function() {
             clickCount++;
@@ -149,7 +164,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             if (clickCount === 5) {
                 // Activer l'effet
                 document.body.classList.add('shake');
-                audio.play();
+                
+                // Jouer les sons avec gestion des erreurs
+                try {
+                    audio.currentTime = 0; // Réinitialiser le son
+                    audio.play().catch(function(error) {
+                        console.error('Erreur lors de la lecture de Poule.mp3:', error);
+                    });
+                    
+                    audio1.currentTime = 0; // Réinitialiser le son
+                    audio1.play().catch(function(error) {
+                        console.error('Erreur lors de la lecture de Terre.mp3:', error);
+                    });
+                } catch (error) {
+                    console.error('Erreur lors de la lecture des sons:', error);
+                }
                 
                 // Créer la pluie de logos
                 for (let i = 0; i < 100; i++) {
