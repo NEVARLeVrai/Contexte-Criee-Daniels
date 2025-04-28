@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
         <h1>Découvrez notre sélection de ventes de poissons</h1>
-        <br>        <br>
+        <br><br>
     </section>  
 
     <section id="features" class="features">
@@ -69,6 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 // Définir le fuseau horaire à Paris
                 date_default_timezone_set('Europe/Paris');
                 
+                // Affiche les 3 dernières annonces enchéries 
                 $query = "SELECT DISTINCT a.idImage, a.idBateau, a.titreAnnonce, a.prixEnchere, a.dateFinEnchere, a.DateEnchere
                          FROM ANNONCE a
                          WHERE a.DateEnchere > NOW() OR (a.DateEnchere <= NOW() AND a.dateFinEnchere > NOW())

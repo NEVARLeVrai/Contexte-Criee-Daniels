@@ -31,20 +31,21 @@ session_start();
             </div>
             <nav class="sidebar-nav">
 
-
+                <!-- Bouton Accueil -->
                 <a href="<?php echo site_url('welcome/contenu/Accueil');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-home"></i> <span>Accueil</span>
                     </button>
                 </a>
 
-                
+                <!-- Bouton Connexion -->
                 <a href="<?php echo site_url('welcome/contenu/Connexion');?>">
                         <button class="sidebar-item deco-button">
                             <i class="fas fa-user"></i> <span>Compte</span>
                     </button>
                 </a>
 
+                <!-- Bouton Déconnexion -->
                 <?php if (isset($_SESSION) && isset($_SESSION["identifiant"])): ?>
                 <a href="<?php echo site_url('welcome/contenu/Deconnexion');?>">
                     <button class="sidebar-item deco-button" style="margin-bottom: 50px;">
@@ -53,33 +54,35 @@ session_start();
                 </a>
                 <?php endif; ?>
 
-
+                <!-- Bouton Lots -->
                 <a href="<?php echo site_url('welcome/contenu/Lots');?>">
                     <button class="sidebar-item deco-button" style=" margin-top: 50px; margin-bottom: 50px;">
                         <i class="fas fa-box"></i> <span>Lots</span>
                     </button>
                 </a>
 
+                <!-- Bouton Annonces -->
                 <a href="<?php echo site_url('welcome/contenu/Annonces');?>">
                     <button class="sidebar-item deco-button" style="margin-top: 50px; margin-bottom: 50px;">
                         <i class="fas fa-bullhorn"></i> <span>Annonces</span>
                     </button>
                 </a>
 
-
-
+                <!-- Bouton Mentions -->
                 <a href="<?php echo site_url('welcome/contenu/Mentions');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-file-alt"></i> <span>Mentions</span>
                     </button>
                 </a>
 
+                <!-- Bouton Contact -->
                 <a href="<?php echo site_url('welcome/contenu/Contact');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-envelope"></i> <span>Contact</span>
                     </button>
                 </a>
 
+                <!-- Bouton Horaires -->
                 <a href="<?php echo site_url('welcome/contenu/Horaires');?>">
                     <button class="sidebar-item deco-button">
                         <i class="fas fa-clock"></i> <span>Horaires</span>
