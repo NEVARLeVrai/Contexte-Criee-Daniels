@@ -16,9 +16,12 @@
             <select id="idLot" name="idLot" required onchange="updateLotInfo(this.value)"><br>
             <?php	
             include "application/config/database.php";    
-                $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax
-                             FROM LOT l 
-                             ORDER BY l.idLot";                
+                $selectLots = "SELECT l.idLot, l.idBateau, l.datePeche, l.prixDepart, l.prixPlancher, l.prixEncheresMax, e.nomCommun 
+                FROM LOT l 
+                INNER JOIN ESPECE e 
+                WHERE l.idEspece = e.idEspece 
+                ORDER BY l.idLot";         
+
                 $stmt = $pdo->prepare($selectLots);
                 $stmt->execute();
                 $rows = $stmt->fetchAll();        
@@ -31,28 +34,14 @@
                             data-prix-plancher="'.$row['prixPlancher'].'"
                             data-prix-max="'.$row['prixEncheresMax'].'"
                             data-date-enchere="'.$row['DateEnchere'].'">'.
-                            $row['idLot'].' : '.$row['idBateau'].
+                            $row['idLot'].' : '.$row['idBateau'] .' - '.$row['nomCommun'].
                          '</option>';
                 }                
             ?>
             </select><br><br>
 
             <label for="idBateau">Bateau :</label><br>
-            <select id="idBateau" name="idBateau" required>
-            <?php	
-                
-                include "application/config/database.php";    
-                $selectBateaux = "SELECT idBateau, immatriculation FROM BATEAU";                
-                $stmt = $pdo->prepare($selectBateaux);
-                $stmt->execute();
-                $rows = $stmt->fetchAll();        
-
-                foreach ($rows as $row) {
-                    echo '<option value='.$row['idBateau'].'>'.$row['idBateau'].' - '.$row['immatriculation'].'</option>';
-                }
-            ?>
-            </select><br><br> 
-
+            <input id="idBateau" name="idBateau" required readonly>
             <label for="datePeche">Date de pêche:</label><br>
             <input type="date" id="datePeche" name="datePeche" readonly required><br>
 
