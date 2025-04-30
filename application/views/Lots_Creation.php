@@ -141,13 +141,15 @@ $pdo->exec("SET time_zone = 'Europe/Paris'");
                     <input type="number" min="0" step="any" id="poidsBrutLot" name="poidsBrutLot" required><br><br>
 
                     <label for="prixPlancher">Prix plancher (€) :</label><br>
-                    <input type="number" min="0" step="any" id="prixPlancher" name="prixPlancher" required><br><br>
+                    <input type="number" min="0" step="any" id="prixPlancher" name="prixPlancher" required onchange="VerifPrix()"><br><br>
 
                     <label for="prixDepart">Prix de départ (€) :</label><br>
-                    <input type="number" min="0" step="any" id="prixDepart" name="prixDepart" required><br><br>
+                    <input type="number" min="0" step="any" id="prixDepart" name="prixDepart" required onchange="VerifPrix()"><br><br>
 
                     <label for="prixEncheresMax">Prix d'enchères maximum (€) :</label><br>
-                    <input type="number" min="0" step="any" id="prixEncheresMax" name="prixEncheresMax" required><br><br>
+                    <input type="number" min="0" step="any" id="prixEncheresMax" name="prixEncheresMax" required onchange="VerifPrix()"><br><br>
+
+                    <div id="prixValidation" style="display: none; color: red; margin-bottom: 10px;"></div>
 
                     <label for="codeEtat">État :</label><br>
                     <input type="text" id="codeEtat" name="codeEtat" placeholder="ex: ok" value="ok" required><br><br>
@@ -166,7 +168,7 @@ $pdo->exec("SET time_zone = 'Europe/Paris'");
                     </select><br><br>
 
                     <br>
-                    <button type="submit" class="btn">Valider</button>
+                    <button type="submit" class="btn" id="submitButton">Valider</button>
                     <button type="reset" class="btn">Effacer</button> 
                 </form>
                 <?php
@@ -186,4 +188,42 @@ $pdo->exec("SET time_zone = 'Europe/Paris'");
         }
         ?>
     </section> 
+
+<script>
+function VerifPrix() {
+    const prixPlancher = parseFloat(document.getElementById('prixPlancher').value);
+    const prixDepart = parseFloat(document.getElementById('prixDepart').value);
+    const prixMax = parseFloat(document.getElementById('prixEncheresMax').value);
+    const validationMessage = document.getElementById('prixValidation');
+    const submitButton = document.getElementById('submitButton');
+
+    // Réinitialiser le message
+    validationMessage.style.display = 'none';
+    validationMessage.textContent = '';
+
+    // Vérifier que les prix sont valides
+    if (prixPlancher >= prixDepart) {
+        validationMessage.style.display = 'block';
+        validationMessage.textContent = 'Le prix plancher doit être inférieur au prix de départ';
+        submitButton.disabled = true;
+        return false;
+    }
+
+    if (prixDepart >= prixMax) {
+        validationMessage.style.display = 'block';
+        validationMessage.textContent = 'Le prix de départ doit être inférieur au prix maximum';
+        submitButton.disabled = true;
+        return false;
+    }
+
+    // Si tout est valide, activer le bouton
+    submitButton.disabled = false;
+    return true;
+}
+
+// Initialiser la validation au chargement
+window.onload = function() {
+    VerifPrix   ();
+}
+</script>
 </body>
