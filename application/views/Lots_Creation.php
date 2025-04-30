@@ -143,10 +143,10 @@ include "application/config/database.php";
                     <input type="number" min="0" step="any" id="prixDepart" name="prixDepart" required><br><br>
 
                     <label for="prixEncheresMax">Prix d'enchères maximum (€) :</label><br>
-                    <input type="number" min="0" step="any" id="prixEncheresMax" name="prixEncheresMax"><br><br>
+                    <input type="number" min="0" step="any" id="prixEncheresMax" name="prixEncheresMax" required><br><br>
 
                     <label for="codeEtat">État :</label><br>
-                    <input type="text" id="codeEtat" name="codeEtat" placeholder="ex: ok" value="ok"><br><br>
+                    <input type="text" id="codeEtat" name="codeEtat" placeholder="ex: ok" value="ok" required><br><br>
 
                     <label for="idFacture">Facture :</label><br>
                     <select id="idFacture" name="idFacture" required>
