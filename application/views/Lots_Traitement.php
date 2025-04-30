@@ -2,13 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
+
+
 <html>
     <body>
         <?php
             include "application/config/database.php";
 
-            // Définir le fuseau horaire à Paris
-            date_default_timezone_set('Europe/Paris');
+            // Définir le fuseau horaire
+            $pdo->exec("SET time_zone = 'Europe/Paris'");
 
             // Vérifier si l'utilisateur est connecté
             if (!isset($_SESSION['identifiant'])) {

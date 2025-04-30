@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include "application/config/database.php";
+
+// Définir le fuseau horaire
+$pdo->exec("SET time_zone = 'Europe/Paris'");
+
 ?>
 
 <body>
