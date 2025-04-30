@@ -100,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <button type='button' class='btn'>Voir les lots</button>
                             </a>
                                                         <br>                            <br>
-                            <a href='" . site_url('welcome/contenu/LotsCreation') . "'>
+                            <a href='" . site_url('welcome/contenu/Lots_Creation') . "'>
                                 <button type='button' class='btn'>Créer un autre lot</button>
                             </a>
                                                         <br>                            <br>
